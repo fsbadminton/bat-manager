@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0f30e173-bcbf-4620-beca-ecd44bb890c7" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2xOBnoONHeqnv1vzDha50ksBxdC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.BatManagerApplication (1).executor": "Run",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/12202/OneDrive/Desktop/java/Last/BatManager",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.fsb.service" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.BatManagerApplication (1)">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BatManagerApplicationTests.add" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="BatManager" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fsb.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.fsb" />
+      <option name="MAIN_CLASS_NAME" value="com.fsb.BatManagerApplicationTests" />
+      <option name="METHOD_NAME" value="add" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BatManagerApplicationTests.brandList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="BatManager" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fsb.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.fsb" />
+      <option name="MAIN_CLASS_NAME" value="com.fsb.BatManagerApplicationTests" />
+      <option name="METHOD_NAME" value="brandList" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BatManagerApplicationTests.findAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="BatManager" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fsb.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.fsb" />
+      <option name="MAIN_CLASS_NAME" value="com.fsb.BatManagerApplicationTests" />
+      <option name="METHOD_NAME" value="findAll" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BatManagerApplicationTests.racketList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="BatManager" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fsb.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.fsb" />
+      <option name="MAIN_CLASS_NAME" value="com.fsb.BatManagerApplicationTests" />
+      <option name="METHOD_NAME" value="racketList" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BatManagerApplicationTests.update" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="BatManager" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fsb.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.fsb" />
+      <option name="MAIN_CLASS_NAME" value="com.fsb.BatManagerApplicationTests" />
+      <option name="METHOD_NAME" value="update" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BatManagerApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
+      <module name="BatManager" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.fsb.BatManagerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BatManagerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="BatManager" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.fsb.batmanager.BatManagerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.BatManagerApplication (1)" />
+        <item itemvalue="JUnit.BatManagerApplicationTests.findAll" />
+        <item itemvalue="JUnit.BatManagerApplicationTests.brandList" />
+        <item itemvalue="JUnit.BatManagerApplicationTests.update" />
+        <item itemvalue="JUnit.BatManagerApplicationTests.add" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0f30e173-bcbf-4620-beca-ecd44bb890c7" name="Default Changelist" comment="" />
+      <created>1747799411264</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1747799411264</updated>
+      <workItem from="1747799413018" duration="4111000" />
+      <workItem from="1747820720074" duration="9041000" />
+      <workItem from="1747836860792" duration="289000" />
+      <workItem from="1747837227805" duration="346000" />
+      <workItem from="1747837655515" duration="16443000" />
+      <workItem from="1747929827374" duration="1229000" />
+      <workItem from="1747931116239" duration="1644000" />
+      <workItem from="1747932825469" duration="29647000" />
+      <workItem from="1748069794645" duration="18616000" />
+      <workItem from="1748193831294" duration="2357000" />
+      <workItem from="1748953378752" duration="1019000" />
+      <workItem from="1749434209133" duration="1204000" />
+      <workItem from="1749561824695" duration="24000" />
+      <workItem from="1749648663698" duration="6682000" />
+      <workItem from="1749714678867" duration="1826000" />
+      <workItem from="1749776014531" duration="15105000" />
+      <workItem from="1750087717102" duration="687000" />
+      <workItem from="1750122102338" duration="18184000" />
+      <workItem from="1750206753817" duration="4518000" />
+      <workItem from="1750258873747" duration="711000" />
+      <workItem from="1750259699582" duration="11070000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

@@ -1,0 +1,307 @@
+<changelist name="在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]" date="1763105055438" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="在进行更新之前于 2025/11/14 15:24 取消提交了更改 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/entity/OrderItem.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/CustomerService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/CustomerService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/CustomerService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/BrandService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/RacketSupplierServiceImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/RacketSupplierServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/RacketSupplierServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/OrderItemServiceImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/OrderItemServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/OrderItemServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/SupplierMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/SupplierMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/SupplierMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/sys.zb4BAA.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/OrderMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/OrderMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/OrderMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/OrderService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/OrderService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/OrderService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/BatSystem/SystemWindow.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/BatSystem/SystemWindow.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/SystemWindow.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/RacketServImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/RacketServImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/RacketServImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/BatManagerApplication.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/db1.c4MBAA.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/BrandServiceImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/BrandServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/BrandServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/SupplierService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/SupplierService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/SupplierService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/RacketMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/RacketMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/RacketMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/BatSystem/SystemWindow.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/entity/Racket.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/BrandService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/BrandService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/BrandService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/SupplierServiceImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/SupplierServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/SupplierServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/OrderItemService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/OrderItemService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/OrderItemService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/impl/BrandServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/impl/RacketServImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/impl/RacketSupplierServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/ReviewService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/ReviewService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/ReviewService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/mapper/OrderItemMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/RacketSupplierService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/mapper/BrandMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/OrderItemMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/OrderItemMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/OrderItemMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/bank.PAYuAA.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/mapper/RacketMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/CustomerMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/CustomerMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/CustomerMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/test-classes/com/fsb/BatManagerApplicationTests.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/entity/Inventory.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/RacketSupplierMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/RacketSupplierMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/RacketSupplierMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/mapper/CustomerMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/InventoryServiceImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/InventoryServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/InventoryServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/mapper/OrderMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/entity/Order.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/mapper/RacketSupplierMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/OrderService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/.gitattributes" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/ReviewService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/mapper/ReviewMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/entity/Customer.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/RacketSupplierService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/RacketSupplierService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/RacketSupplierService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/SupplierService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/batnew.aznIrA.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/RacketService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/OrderItemService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/RacketService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/RacketService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/RacketService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/entity/Brand.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/sys.zb4BAA.zip" />
+    <option name="AFTER_PATH" value=".idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/sys.zb4BAA.zip" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/sys.zb4BAA.zip" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/information_schema.FNRwLQ.zip" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/sys.zb4BAA.zip" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/impl/ReviewServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/entity/Review.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/CustomerService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/impl/OrderServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/OrderServiceImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/OrderServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/OrderServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/BatManagerApplication.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/BatManagerApplication.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/BatManagerApplication.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/mapper/SupplierMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/impl/OrderItemServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/InventoryService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/InventoryService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/InventoryService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/impl/InventoryServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/mapper/InventoryMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/ReviewServiceImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/ReviewServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/ReviewServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/ReviewMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/ReviewMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/ReviewMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/CustomerServiceImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/CustomerServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/CustomerServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/entity/Supplier.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/mysql.osA4Bg.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/InventoryService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/entity/RacketSupplier.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/impl/SupplierServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/InventoryMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/InventoryMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/InventoryMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/BrandMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/BrandMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/BrandMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/bat.FXwBAA.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/information_schema.FNRwLQ.zip" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BatManager/target/classes/com/fsb/service/impl/CustomerServiceImpl.class" />
+  </binary>
+</changelist>

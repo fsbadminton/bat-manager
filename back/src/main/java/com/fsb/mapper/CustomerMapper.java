@@ -1,6 +1,6 @@
-package com.fsb.mapper;
+package com.fsb.Mapper;
 
-import com.fsb.entity.Customer;
+import com.fsb.pojo.entity.Customer;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

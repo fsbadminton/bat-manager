@@ -1,41 +1,85 @@
-package com.fsb.service.impl;
+package com.fsb.Service.impl;
 
 
-import com.fsb.entity.Brand;
-import com.fsb.mapper.BrandMapper;
-import com.fsb.service.BrandService;
+import com.fsb.pojo.DTO.BrandDTO;
+import com.fsb.pojo.DTO.BrandPageQueryDTO;
+import com.fsb.pojo.DTO.ProductPageQueryDTO;
+import com.fsb.pojo.entity.Brand;
+import com.fsb.Mapper.BrandMapper;
+import com.fsb.Service.BrandService;
+import com.fsb.result.PageResult;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class BrandServiceImpl implements BrandService {
 
+
     @Autowired
     private BrandMapper brandMapper;
+
+
     @Override
-    public List<Brand> findAll() {
-        return brandMapper.findAll();
+    public List<String> findBrandNames() {
+        List<String> brandNamesList = brandMapper.findBrandNames();
+        return brandNamesList;
     }
 
     @Override
-    public boolean add(Brand brand) {
-        return brandMapper.add(brand)>0;
+    public PageResult pageQuery(BrandPageQueryDTO brandPageQueryDTO) {
+        PageHelper.startPage(brandPageQueryDTO.getPageNum(), brandPageQueryDTO.getPageSize());
+        Page<Brand> page = brandMapper.pageQuery(brandPageQueryDTO);
+        return new PageResult(page.getTotal(), page.getResult());
     }
 
+
+    /**
+     * 添加品牌
+     * @param brandDTO
+     */
     @Override
-    public boolean update(Brand brand) {
-        return brandMapper.update(brand)>0;
+    public void add(BrandDTO brandDTO) {
+        Brand brand = new Brand();
+        BeanUtils.copyProperties(brandDTO, brand);
+        brand.setCreateTime(LocalDateTime.now());
+        brandMapper.add(brand);
     }
 
+    /**
+     * 修改品牌
+     * @param brandDTO
+     */
     @Override
-    public boolean delete(int id) {
-        return brandMapper.delete(id)>0;
+    public void update(BrandDTO brandDTO) {
+        Brand brand = new Brand();
+        BeanUtils.copyProperties(brandDTO, brand);
+        brand.setUpdateTime(LocalDateTime.now());
+        brandMapper.update(brand);
     }
 
+    /**
+     * 删除品牌
+     * @param id
+     */
     @Override
-    public boolean exists(int brandID) {
-        return brandMapper.countBrandById(brandID) > 0;
+    public void delete(Long id) {
+        brandMapper.delete(id);
     }
+
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
+    @Override
+    public Brand getById(Long id) {
+        return brandMapper.getById(id);
+    }
+
 }

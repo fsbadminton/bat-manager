@@ -1,6 +1,6 @@
-package com.fsb.service;
+package com.fsb.Service;
 
-import com.fsb.entity.Racket;
+import com.fsb.pojo.entity.Racket;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;

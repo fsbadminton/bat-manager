@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fsb.Mapper.ReviewMapper">
+
+
+    <insert id="insert" parameterType="com.fsb.pojo.entity.Review" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO review
+        (order_id, product_id, member_username, content, star, create_time, update_time, is_deleted)
+        VALUES
+            (#{orderId}, #{productId}, #{memberUsername}, #{content}, #{star}, #{createTime}, #{updateTime}, 0)
+    </insert>
+    <update id="updateByIdAndMemberUsername">
+        update review
+        <set>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="star != null">
+                star = #{star},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="memberUsername!=null">
+                member_username = #{memberUsername},
+            </if>
+        </set>
+        where id = #{id} and member_username = #{memberUsername} and is_deleted = 0
+    </update>
+    <select id="list" resultType="com.fsb.pojo.entity.Review">
+        SELECT r.*
+        FROM review r
+        LEFT JOIN product p ON r.product_id = p.product_id
+        <where>
+            <if test="productId != null">
+                and r.product_id = #{productId}
+            </if>
+            <if test="username != null">
+                and r.member_username = #{username}
+            </if>
+            <if test="productName != null and productName != ''">
+                AND p.name LIKE CONCAT('%', #{productName}, '%')
+            </if>
+            and r.is_deleted = 0
+        </where>
+        ORDER BY r.create_time DESC
+    </select>
+
+</mapper>

@@ -1,8 +1,8 @@
-package com.fsb.service.impl;
+package com.fsb.Service.impl;
 
-import com.fsb.entity.Customer;
-import com.fsb.mapper.CustomerMapper;
-import com.fsb.service.CustomerService;
+import com.fsb.pojo.entity.Customer;
+import com.fsb.Mapper.CustomerMapper;
+import com.fsb.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

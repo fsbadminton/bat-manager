@@ -1,12 +1,12 @@
 package com.fsb;
 
-import com.fsb.entity.Brand;
-import com.fsb.entity.Racket;
-import com.fsb.entity.Review;
-import com.fsb.service.BrandService;
-import com.fsb.service.RacketService;
-import com.fsb.service.ReviewService;
-import com.fsb.service.SupplierService;
+import com.fsb.pojo.entity.Brand;
+import com.fsb.pojo.entity.Racket;
+import com.fsb.pojo.entity.Review;
+import com.fsb.Service.BrandService;
+import com.fsb.Service.RacketService;
+import com.fsb.Service.ReviewService;
+import com.fsb.Service.SupplierService;
 import com.github.pagehelper.PageInfo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

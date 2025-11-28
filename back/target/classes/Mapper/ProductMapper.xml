@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fsb.Mapper.ProductMapper">
+    <insert id="add">
+        insert into product (category,brand_name,name, country, product_sn,price, is_deleted, image_url,logo_url,stock, description, create_time, update_time)
+        values (#{category},#{brandName},#{name},#{country},#{productSn},#{price},#{isDeleted},#{imageUrl},#{logoUrl},#{stock},#{description},#{createTime},#{updateTime})
+    </insert>
+    <update id="update">
+        update product
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="country != null">
+                country = #{country},
+            </if>
+            <if test="website != null">
+                website = #{website},
+            </if>
+            <if test="logoUrl != null">
+                logo_url = #{logoUrl},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted},
+            </if>
+            <if test="newStatus != null">
+                new_status = #{newStatus},
+            </if>
+            <if test="publishStatus != null">
+                publish_status = #{publishStatus},
+            </if>
+            <if test="recommendStatus!=null">
+                recommend_status = #{recommendStatus},
+            </if>
+            <if test="sale != null">
+                sale = #{sale},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="productSn != null">
+                product_sn = #{productSn},
+            </if>
+            <if test="category != null">
+                category = #{category},
+            </if>
+            <if test="auditStatus != null">
+                audit_status = #{auditStatus},
+            </if>
+            <if test="brandName !=null">
+                brand_name = #{brandName},
+            </if>
+            <if test="stock != null">
+                stock = #{stock},
+            </if>
+            <if test="imageUrls != null">
+                image_urls = #{imageUrls},
+            </if>
+            <if test="imageUrl != null">
+                image_url = #{imageUrl},
+            </if>
+        </set>
+        where product_id = #{productId} and is_deleted = 0
+    </update>
+
+
+    <select id="pageQuery" resultType="com.fsb.pojo.entity.Product">
+        select * from product
+        <where>
+            AND is_deleted = 0
+            <if test="name != null">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="country != null">
+                and country like concat('%', #{country}, '%')
+            </if>
+            <if test="brandName !=null">
+                and brand_name = #{brandName}
+            </if>
+            <if test="productSn">
+                and product_sn like concat('%', #{productSn}, '%')
+            </if>
+            <if test="publishStatus != null">
+                and publish_status = #{publishStatus}
+            </if>
+            <if test="categoryId != null">
+                and category = #{categoryId}
+            </if>
+            <if test="auditStatus != null">
+                and audit_status = #{auditStatus}
+            </if>
+
+        </where>
+        order by create_time desc
+    </select>
+    <select id="pageQueryByUser" resultType="com.fsb.pojo.entity.Product">
+        select * from product
+        <where>
+            AND is_deleted = 0
+            and publish_status = 1
+            <if test="name != null">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="country != null">
+                and country like concat('%', #{country}, '%')
+            </if>
+            <if test="brandName !=null">
+                and brand_name = #{brandName}
+            </if>
+            <if test="productSn">
+                and product_sn like concat('%', #{productSn}, '%')
+            </if>
+            <if test="categoryId != null">
+                and category = #{categoryId}
+            </if>
+            <if test="auditStatus != null">
+                and audit_status = #{auditStatus}
+            </if>
+
+        </where>
+        order by create_time desc
+    </select>
+
+</mapper>

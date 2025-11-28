@@ -1,18 +1,27 @@
-package com.fsb.service;
+package com.fsb.Service;
 
-import com.fsb.entity.Brand;
+import com.fsb.pojo.DTO.BrandDTO;
+import com.fsb.pojo.DTO.BrandPageQueryDTO;
+import com.fsb.pojo.DTO.ProductPageQueryDTO;
+import com.fsb.pojo.entity.Brand;
+import com.fsb.result.PageResult;
 
 import java.util.List;
 
 public interface BrandService {
-    //  查询所有品牌
-    List<Brand> findAll();
-    //  添加品牌信息
-    boolean add(Brand brand);
-    //  修改品牌信息
-    boolean update(Brand brand);
-    //  删除品牌信息
-    boolean delete(int id);
 
-    boolean exists(int brandID);
+
+    List<String> findBrandNames();
+
+
+
+    PageResult pageQuery(BrandPageQueryDTO brandPageQueryDTO);
+
+    void add(BrandDTO brandDTO);
+
+    void update(BrandDTO brandDTO);
+
+    void delete(Long id);
+
+    Brand getById(Long id);
 }

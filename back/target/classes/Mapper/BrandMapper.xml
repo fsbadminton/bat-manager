@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fsb.Mapper.BrandMapper">
+    <update id="update">
+        update brand
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <select id="pageQuery" resultType="com.fsb.pojo.entity.Brand">
+        SELECT
+        b.*,
+        (SELECT COUNT(*)
+        FROM product p
+        WHERE p.brand_name = b.name AND p.is_deleted = 0) AS productCount,
+        (SELECT COUNT(*)
+        FROM review r
+        LEFT JOIN product p2 ON r.product_id = p2.product_id
+        WHERE p2.brand_name = b.name
+        AND r.is_deleted = 0
+        ) AS reviewCount
+        FROM brand b
+        <where>
+            <if test="name != null">
+                and name like concat('%',#{name},'%')
+            </if>
+        </where>
+        ORDER BY b.id DESC
+    </select>
+</mapper>

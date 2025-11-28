@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fsb.Mapper.OrderMapper">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into `order` (order_sn,  member_username, total_amount, pay_type, source_type, status, order_type, receiver_name, receiver_phone, receiver_post_code, address,receiver_province, receiver_city, receiver_region, receiver_detail_address, note, delivery_company, delivery_sn, create_time, update_time)
+        values (#{orderSn},  #{memberUsername}, #{totalAmount}, #{payType}, #{sourceType}, #{status}, #{orderType}, #{receiverName}, #{receiverPhone}, #{receiverPostCode}, #{address},#{receiverProvince},#{receiverCity},#{receiverRegion},#{receiverDetailAddress},#{note},#{deliveryCompany},#{deliverySn},#{createTime},#{updateTime})
+    </insert>
+    <update id="updateById">
+        update `order`
+        <set>
+            <if test="orderSn != null">
+                order_sn = #{orderSn},
+            </if>
+            <if test="memberUsername != null">
+                member_username = #{memberUsername},
+            </if>
+            <if test="totalAmount != null">
+                total_amount = #{totalAmount},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType},
+            </if>
+            <if test="sourceType != null">
+                source_type = #{sourceType},
+            </if>
+            <if test="receiverName!=null">
+                receiver_name = #{receiverName},
+            </if>
+            <if test="receiverPhone != null">
+                receiver_phone = #{receiverPhone},
+            </if>
+            <if test="address!=null">
+                address = #{address},
+            </if>
+            <if test="updateTime!=null">
+                update_time = #{updateTime},
+            </if>
+            <if test="adminNote!=null">
+                admin_note = #{adminNote},
+            </if>
+            <if test="status!=null">
+                status = #{status},
+            </if>
+            <if test="orderType!=null">
+                order_type = #{orderType},
+            </if>
+            <if test="deliveryCompany!=null">
+                delivery_company = #{deliveryCompany},
+            </if>
+            <if test="deliverySn!=null">
+                delivery_sn = #{deliverySn},
+            </if>
+            <if test="deliveryTime!=null">
+                delivery_time = #{deliveryTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="pageQuery" resultType="com.fsb.pojo.entity.Order" >
+        select * from `order`
+        <where>
+            <if test="orderSn != null">
+                and order_sn like concat('%',#{orderSn},'%')
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="orderType != null">
+                and order_type = #{orderType}
+            </if>
+            <if test="sourceType != null">
+                and source_type = #{sourceType}
+            </if>
+            <if test="createTime != null">
+                and create_time >= #{createTime}
+            </if>
+            <if test="receiverKeyword != null">
+                and (receiver_name like concat('%',#{receiverKeyword},'%') or receiver_phone like concat('%',#{receiverKeyword},'%'))
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,6 +1,6 @@
-package com.fsb.mapper;
+package com.fsb.Mapper;
 
-import com.fsb.entity.RacketSupplier;
+import com.fsb.pojo.entity.RacketSupplier;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

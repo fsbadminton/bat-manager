@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fsb.Mapper.OrderItemMapper">
+
+
+    <insert id="insert">
+            insert into  order_item (order_id, order_sn, product_id, product_name, product_pic, brand_name, product_price, product_quantity, product_total, create_time, update_time)
+            values (#{orderId}, #{orderSn}, #{productId}, #{productName}, #{productPic}, #{brandName}, #{productPrice}, #{productQuantity}, #{productTotal}, #{createTime}, #{updateTime})
+    </insert>
+</mapper>

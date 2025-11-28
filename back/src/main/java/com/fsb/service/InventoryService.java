@@ -1,6 +1,6 @@
-package com.fsb.service;
+package com.fsb.Service;
 
-import com.fsb.entity.Inventory;
+import com.fsb.pojo.entity.Inventory;
 
 import java.util.List;
 

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fsb.Mapper.OmsReturnApplyMapper">
+    <update id="updateById">
+        update return_apply
+        <set>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="handleMan != null">
+                handle_man = #{handleMan},
+            </if>
+            <if test="handleNote != null">
+                handle_note = #{handleNote},
+            </if>
+            <if test="handleTime != null">
+                handle_time = #{handleTime},
+            </if>
+            <if test="receiveMan != null">
+                receive_man = #{receiveMan},
+            </if>
+            <if test="receiveTime != null">
+                receive_time = #{receiveTime},
+            </if>
+            <if test="companyAddress!=null">
+                company_address = #{companyAddress},
+            </if>
+        </set>
+        where id = #{id}
+        order by  handle_time desc
+    </update>
+
+    <select id="pageQuery" resultType="com.fsb.pojo.entity.OmsReturnApply">
+        select ra.* ,oi.product_price as productRealPrice,oi.product_quantity as productCount
+        from return_apply ra
+        left join order_item oi on ra.order_id = oi.order_sn
+        <where>
+            <if test="id != null">
+                and ra.id = #{id}
+            </if>
+            <if test="status != null">
+                and ra.status = #{status}
+            </if>
+            <if test="handleMan != null">
+                and ra.handle_man = #{handleMan}
+            </if>
+            <if test="returnName != null">
+                and ra.return_name = #{returnName}
+            </if>
+            <if test="endTime != null">
+                and ra.handle_time &lt;= #{endTime}
+            </if>
+            <if test="startTime != null">
+                and ra.handle_time &gt;= #{startTime}
+            </if>
+            <if test="endTime != null">
+                and ra.create_time &lt;= #{endTime}
+            </if>
+            <if test="startTime != null">
+                and ra.create_time &gt;= #{startTime}
+            </if>
+            <if test="endTime1 != null">
+                and ra.handle_time &lt;= #{endTime1}
+            </if>
+            <if test="startTime1 != null">
+                and ra.handle_time &gt;= #{startTime1}
+            </if>
+        </where>
+        order by  create_time desc
+    </select>
+</mapper>

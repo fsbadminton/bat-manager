@@ -1,6 +1,6 @@
-package com.fsb.service;
+package com.fsb.Service;
 
-import com.fsb.entity.Customer;
+import com.fsb.pojo.entity.Customer;
 
 import java.util.List;
 

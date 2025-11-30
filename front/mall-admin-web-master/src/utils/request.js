@@ -57,11 +57,17 @@ service.interceptors.response.use(
     const silent = response.config && response.config.silent
     if (res.code !== 1) {
       if (!silent) {
-        Message({
-          message: res.msg || res.message,
-          type: 'error',
-          duration: 3 * 1000
-        })
+        const _msg = res.msg || res.message || '';
+        if (_msg) {
+          Message({
+            message: _msg,
+            type: 'error',
+            duration: 3 * 1000
+          })
+        } else {
+          // 后端返回了非 1 的 code 但没有 message，打印到控制台以便排查
+          console.warn('请求返回非成功 code，但 msg 为空：', response);
+        }
       }
 
       // 401:未登录;

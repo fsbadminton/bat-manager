@@ -25,11 +25,13 @@ export const constantRouterMap = [
     path: '',
     component: Layout,
     redirect: '/home',
+    hidden: true,
     meta: {title: '首页', icon: 'home'},
     children: [{
       path: 'home',
       name: 'home',
       component: () => import('@/views/home/index'),
+      hidden: true,
       meta: {title: '仪表盘', icon: 'dashboard'}
     }
     ]
@@ -170,7 +172,7 @@ export const asyncRouterMap = [
         path: 'comments',
         name: 'userComments',
         component: () => import('@/views/user/userComments'),
-        meta: {title: '我的评论'}
+        meta: {title: '评论'}
       }
     ]
   },

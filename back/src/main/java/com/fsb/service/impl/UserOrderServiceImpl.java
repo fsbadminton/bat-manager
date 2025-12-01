@@ -6,6 +6,7 @@ import com.fsb.Mapper.ProductMapper;
 import com.fsb.Service.UserOrderService;
 import com.fsb.pojo.DTO.OrderPageQueryDTO;
 import com.fsb.pojo.DTO.UserOrderCreateDTO;
+import com.fsb.pojo.DTO.UserOrderUpdateDTO;
 import com.fsb.pojo.entity.Order;
 import com.fsb.pojo.entity.OrderItem;
 import com.fsb.pojo.entity.Product;
@@ -115,6 +116,41 @@ public class UserOrderServiceImpl implements UserOrderService {
 
         return new PageResult(page.getTotal(), orders);
 
+    }
+
+    @Override
+    public void updateUserOrder(UserOrderUpdateDTO dto) {
+        // 1. 查询订单
+        Order order = orderMapper.getById(dto.getId());
+        if (order == null) {
+            throw new RuntimeException("订单不存在");
+        }
+
+        // 2. 更新基本信息
+        if (dto.getReceiverName() != null) order.setReceiverName(dto.getReceiverName());
+        if (dto.getReceiverPhone() != null) order.setReceiverPhone(dto.getReceiverPhone());
+        if (dto.getAddress() != null) order.setAddress(dto.getAddress());
+        if (dto.getNote() != null) order.setNote(dto.getNote());
+
+        // 3. 更新订单数量和金额（假设只有单商品订单）
+        if (dto.getQuantity() != null && dto.getQuantity() > 0) {
+            List<OrderItem> items = orderItemMapper.getOrderItemsByOrderId(String.valueOf(order.getId()));
+            if (items != null && !items.isEmpty()) {
+                OrderItem item = items.get(0); // 假设单商品订单
+
+                item.setProductQuantity(dto.getQuantity());
+                item.setProductTotal(item.getProductPrice().multiply(BigDecimal.valueOf(dto.getQuantity())));
+                item.setUpdateTime(LocalDateTime.now());
+                orderItemMapper.update(item); // 调用自定义 XML 中的 update 方法
+
+                // 更新订单总金额
+                order.setTotalAmount(item.getProductTotal());
+            }
+        }
+
+        // 更新时间并保存订单
+        order.setUpdateTime(LocalDateTime.now());
+        orderMapper.updateById(order); // 调用自定义 XML 中的 update 方法
     }
 
     // 生成订单编号

@@ -80,6 +80,7 @@ public class UserOrderServiceImpl implements UserOrderService {
         item.setOrderId(order.getId());
         item.setProductId(product.getProductId());
         item.setProductName(product.getName());
+        item.setProductPic(product.getImageUrl());
         item.setProductPrice(BigDecimal.valueOf(product.getPrice()));
         item.setProductQuantity(dto.getQuantity());
         item.setProductTotal(totalAmount);

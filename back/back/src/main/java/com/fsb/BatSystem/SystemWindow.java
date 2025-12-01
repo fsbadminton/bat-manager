@@ -1,7 +1,7 @@
 package com.fsb.BatSystem;
 
 import com.fsb.entity.*;
-import com.fsb.service.*;
+import com.fsb.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,15 +1,15 @@
-package com.fsb.service.impl;
+package com.fsb.Service.impl;
 
 import com.fsb.entity.Customer;
 import com.fsb.entity.Order;
 import com.fsb.entity.OrderItem;
 import com.fsb.entity.Racket;
-import com.fsb.mapper.InventoryMapper;
-import com.fsb.mapper.OrderItemMapper;
-import com.fsb.mapper.OrderMapper;
-import com.fsb.mapper.RacketMapper;
-import com.fsb.service.OrderService;
-import com.fsb.service.RacketService;
+import com.fsb.Mapper.InventoryMapper;
+import com.fsb.Mapper.OrderItemMapper;
+import com.fsb.Mapper.OrderMapper;
+import com.fsb.Mapper.RacketMapper;
+import com.fsb.Service.OrderService;
+import com.fsb.Service.RacketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

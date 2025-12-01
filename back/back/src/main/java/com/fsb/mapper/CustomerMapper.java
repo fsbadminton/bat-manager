@@ -1,4 +1,4 @@
-package com.fsb.mapper;
+package com.fsb.Mapper;
 
 import com.fsb.entity.Customer;
 import org.apache.ibatis.annotations.*;

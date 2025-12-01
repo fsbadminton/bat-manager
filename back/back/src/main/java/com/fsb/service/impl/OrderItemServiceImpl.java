@@ -1,8 +1,8 @@
-package com.fsb.service.impl;
+package com.fsb.Service.impl;
 
 import com.fsb.entity.OrderItem;
-import com.fsb.mapper.OrderItemMapper;
-import com.fsb.service.OrderItemService;
+import com.fsb.Mapper.OrderItemMapper;
+import com.fsb.Service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,9 @@
-package com.fsb.service.impl;
+package com.fsb.Service.impl;
 
 
 import com.fsb.entity.Brand;
-import com.fsb.mapper.BrandMapper;
-import com.fsb.service.BrandService;
+import com.fsb.Mapper.BrandMapper;
+import com.fsb.Service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

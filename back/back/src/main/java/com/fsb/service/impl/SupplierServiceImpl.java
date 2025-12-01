@@ -1,8 +1,8 @@
-package com.fsb.service.impl;
+package com.fsb.Service.impl;
 
 import com.fsb.entity.Supplier;
-import com.fsb.mapper.SupplierMapper;
-import com.fsb.service.SupplierService;
+import com.fsb.Mapper.SupplierMapper;
+import com.fsb.Service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

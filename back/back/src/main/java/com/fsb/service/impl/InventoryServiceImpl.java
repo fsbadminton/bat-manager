@@ -1,8 +1,8 @@
-package com.fsb.service.impl;
+package com.fsb.Service.impl;
 
 import com.fsb.entity.Inventory;
-import com.fsb.mapper.InventoryMapper;
-import com.fsb.service.InventoryService;
+import com.fsb.Mapper.InventoryMapper;
+import com.fsb.Service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

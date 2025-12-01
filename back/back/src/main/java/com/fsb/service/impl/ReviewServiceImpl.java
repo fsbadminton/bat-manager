@@ -1,8 +1,8 @@
-package com.fsb.service.impl;
+package com.fsb.Service.impl;
 
 import com.fsb.entity.Review;
-import com.fsb.mapper.ReviewMapper;
-import com.fsb.service.ReviewService;
+import com.fsb.Mapper.ReviewMapper;
+import com.fsb.Service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

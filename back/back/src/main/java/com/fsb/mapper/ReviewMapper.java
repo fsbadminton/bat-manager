@@ -1,4 +1,4 @@
-package com.fsb.mapper;
+package com.fsb.Mapper;
 
 import com.fsb.entity.Review;
 import org.apache.ibatis.annotations.*;

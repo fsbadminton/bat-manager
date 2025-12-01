@@ -20,6 +20,7 @@ public class OrderItem {
     private String productSn;
     private String productName;
     private String productPic;
+    private String imageUrl;
     private String brandName;
 
     private BigDecimal productPrice;

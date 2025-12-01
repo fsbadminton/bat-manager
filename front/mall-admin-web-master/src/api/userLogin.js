@@ -53,7 +53,7 @@ export function getUserOrderDetail(orderId) {
 export function updateUserOrder(data) {
   return request({
     url: '/user/order/update',
-    method: 'put',
+    method: 'post',
     data
   })
 }

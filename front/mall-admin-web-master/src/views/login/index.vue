@@ -149,11 +149,12 @@
               const role = typeof roleRaw === 'string' ? roleRaw.toLowerCase() : roleRaw;
               const token = payload.token;
               let dest = '/';
-              if(role==='admin') dest = '/';
-              else if(role==='user') dest = '/user';
-              else if(token==='admin-token') dest = '/';
-              else if(token==='user-token') dest = '/user';
-              else if(this.loginForm.username==='admin') dest = '/';
+              // 管理员直接跳转到球拍列表页（管理端常用入口）
+              if (role === 'admin') dest = '/pms/product';
+              else if (role === 'user') dest = '/user';
+              else if (token === 'admin-token') dest = '/pms/product';
+              else if (token === 'user-token') dest = '/user';
+              else if (this.loginForm.username === 'admin') dest = '/pms/product';
               else dest = '/user';
 
               const roleUpper = (role && typeof role==='string') ? role.toUpperCase() : (this.loginForm.username.toLowerCase()==='admin' ? 'ADMIN' : 'USER');

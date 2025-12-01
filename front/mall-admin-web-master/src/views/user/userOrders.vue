@@ -62,7 +62,7 @@
       </el-dialog>
 
       <el-dialog title="修改订单" :visible.sync="orderEditDialogVisible" width="500px">
-        <el-form :model="orderEditForm" label-width="100px">
+        <el-form ref="orderEditFormRef" :model="orderEditForm" :rules="orderRules" label-width="100px">
           <el-form-item label="订单号">
             <el-input v-model="orderEditForm.id" disabled/>
           </el-form-item>
@@ -72,7 +72,7 @@
           <el-form-item label="收货人">
             <el-input v-model="orderEditForm.receiver" placeholder="请输入收货人姓名" />
           </el-form-item>
-          <el-form-item label="手机号">
+          <el-form-item label="手机号" prop="phone">
             <el-input v-model="orderEditForm.phone" placeholder="请输入手机号" />
           </el-form-item>
           <el-form-item label="收货地址">
@@ -104,6 +104,16 @@ export default {
       loadingOrders: false,
       orderEditDialogVisible: false,
       orderEditForm: { id: null, quantity: 1, receiver: '', phone: '', address: '' },
+      orderRules: {
+        phone: [
+          { validator: (rule, value, callback) => {
+              if (!value) return callback(new Error('请输入手机号'));
+              const v = String(value).trim();
+              if (!/^\d{11}$/.test(v)) return callback(new Error('手机号必须为11位数字'));
+              callback();
+            }, trigger: 'blur' }
+        ]
+      },
       returnDialogVisible: false,
       returnForm: { orderId: null, reason: '', customReason: '' },
       returnReasonList: [],
@@ -206,18 +216,36 @@ export default {
       this.orderEditDialogVisible = true
     },
     submitEditOrder() {
-      const payload = {
-        id: this.orderEditForm.id,
-        quantity: this.orderEditForm.quantity,
-        receiver: this.orderEditForm.receiver,
-        phone: this.orderEditForm.phone,
-        address: this.orderEditForm.address
+      if (this.$refs.orderEditFormRef) {
+        this.$refs.orderEditFormRef.validate(valid => {
+          if (!valid) return;
+          const payload = {
+            id: this.orderEditForm.id,
+            quantity: this.orderEditForm.quantity,
+            receiver: this.orderEditForm.receiver,
+            phone: this.orderEditForm.phone,
+            address: this.orderEditForm.address
+          }
+          updateUserOrder(payload).then(() => {
+            this.$message({ type: 'success', message: '修改成功', duration: 1000 })
+            this.orderEditDialogVisible = false
+            this.getOrders()
+          })
+        })
+      } else {
+        const payload = {
+          id: this.orderEditForm.id,
+          quantity: this.orderEditForm.quantity,
+          receiver: this.orderEditForm.receiver,
+          phone: this.orderEditForm.phone,
+          address: this.orderEditForm.address
+        }
+        updateUserOrder(payload).then(() => {
+          this.$message({ type: 'success', message: '修改成功', duration: 1000 })
+          this.orderEditDialogVisible = false
+          this.getOrders()
+        })
       }
-      updateUserOrder(payload).then(() => {
-        this.$message({ type: 'success', message: '修改成功', duration: 1000 })
-        this.orderEditDialogVisible = false
-        this.getOrders()
-      })
     },
     openCommentDialog(row) {
       const item = row.orderItems[0]

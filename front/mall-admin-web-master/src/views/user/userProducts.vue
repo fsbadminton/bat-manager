@@ -56,7 +56,7 @@
         <el-pagination background @size-change="handleProductSizeChange" @current-change="handleProductCurrentChange" layout="total, sizes, prev, pager, next, jumper" :page-size="listQuery.pageSize" :page-sizes="[5,10,15]" :current-page.sync="listQuery.pageNum" :total="totalProducts" />
       </div>
       <el-dialog title="下单购买" :visible.sync="orderDialogVisible" width="500px">
-        <el-form :model="orderForm" label-width="100px">
+        <el-form ref="orderFormRef" :model="orderForm" :rules="orderRules" label-width="100px">
           <el-form-item label="球拍ID">
             <el-input v-model="orderForm.productId" disabled/>
           </el-form-item>
@@ -66,7 +66,7 @@
           <el-form-item label="收货人">
             <el-input v-model="orderForm.receiverName" placeholder="请输入收货人姓名" />
           </el-form-item>
-          <el-form-item label="手机号">
+          <el-form-item label="手机号" prop="receiverPhone">
             <el-input v-model="orderForm.receiverPhone" placeholder="请输入手机号" />
           </el-form-item>
           <el-form-item label="收货地址">
@@ -100,7 +100,17 @@ export default {
       brandOptions: [],
       productCateOptions: [],
       orderDialogVisible: false,
-      orderForm: { productId: null, quantity: 1, receiverName: '', receiverPhone: '', address: '', note: '' }
+      orderForm: { productId: null, quantity: 1, receiverName: '', receiverPhone: '', address: '', note: '' },
+      orderRules: {
+        receiverPhone: [
+          { validator: (rule, value, callback) => {
+              if (!value) return callback(new Error('请输入手机号'));
+              const v = String(value).trim();
+              if (!/^\d{11}$/.test(v)) return callback(new Error('手机号必须为11位数字'));
+              callback();
+            }, trigger: 'blur' }
+        ]
+      }
     }
   },
   created() {
@@ -175,6 +185,17 @@ export default {
       this.orderDialogVisible = true
     },
     submitOrder() {
+      // 校验表单
+      if (this.$refs.orderFormRef) {
+        this.$refs.orderFormRef.validate(valid => {
+          if (!valid) return;
+          this._doSubmitOrder();
+        });
+      } else {
+        this._doSubmitOrder();
+      }
+    },
+    _doSubmitOrder() {
       const payload = {
         productId: this.orderForm.productId,
         quantity: this.orderForm.quantity,
@@ -185,20 +206,17 @@ export default {
       }
       createUserOrder(payload)
     .then(res => {
-      // 判断后端自定义 code
-      if(res.code !== 1){ // 假设 code=1表示成功
+      if(res.code !== 1){
         this.$message({ type: 'warning', message: res.msg || res.message || '下单失败', duration: 4000 });
         return;
       }
       this.$message({ type: 'success', message: '下单成功', duration: 1000 });
       this.orderDialogVisible = false;
-      this.getProducts(); // 刷新库存
+      this.getProducts();
     })
     .catch(err => {
-      // 网络或服务器异常，或被拦截器转发的业务错误
       let errorMessage = '服务器内部错误(500)，请检查后端日志';
       try {
-        // err 可能是拦截器传来的完整响应对象 {code:0, msg:'...'}
         if(err && err.msg) {
           errorMessage = err.msg;
         } else if(err && err.message) {

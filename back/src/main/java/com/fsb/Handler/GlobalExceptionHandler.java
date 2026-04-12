@@ -1,11 +1,17 @@
 package com.fsb.Handler;
 
+import com.fsb.exception.AuthException;
 import com.fsb.result.Result;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(AuthException.class)
+    public Result<?> handleAuthException(AuthException ex) {
+        return Result.fail(ex.getCode(), ex.getMessage());
+    }
 
     @ExceptionHandler(RuntimeException.class)
     public Result<?> handleRuntimeException(RuntimeException ex) {
@@ -14,6 +20,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public Result<?> handleException(Exception ex) {
-        return Result.error("服务器内部错误");
+        return Result.error("Internal server error");
     }
 }

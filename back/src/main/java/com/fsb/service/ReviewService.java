@@ -32,7 +32,7 @@ public interface ReviewService {
 
     PageResult list(UserReviewPageQueryDTO dto, String username);
 
-    void delete(Long id);
+    void delete(Long id, String memberUsername);
 
-    void updateReview(UserReviewUpdateDTO dto);
+    void updateReview(UserReviewUpdateDTO dto, String memberUsername);
 }

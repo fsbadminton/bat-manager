@@ -1,12 +1,26 @@
 import { login, userLogin, logout, getInfo } from '@/api/login'
-import { getToken, setToken, removeToken, setUserRole, setUsername, getUserRole, getUsername } from '@/utils/auth'
+import {
+  getToken,
+  setToken,
+  removeToken,
+  setUserRole,
+  setUsername,
+  removeUserRole,
+  removeUsername,
+  getUserRole,
+  getUsername,
+  getPermissions,
+  setPermissions,
+  removePermissions
+} from '@/utils/auth'
 
 const user = {
   state: {
     token: getToken(),
     name: '',
     avatar: '',
-    roles: []
+    roles: [],
+    permissions: getPermissions()
   },
 
   mutations: {
@@ -21,6 +35,9 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
+    },
+    SET_PERMISSIONS: (state, permissions) => {
+      state.permissions = permissions
     }
   },
 
@@ -43,6 +60,9 @@ const user = {
             commit('SET_ROLES', [role])
             setUserRole(role)
           }
+          const permissions = Array.isArray(payload.permissions) ? payload.permissions : []
+          commit('SET_PERMISSIONS', permissions)
+          setPermissions(permissions)
           if (payload.username) {
             commit('SET_NAME', payload.username)
             setUsername(payload.username)
@@ -57,7 +77,7 @@ const user = {
     // 获取用户信息
     GetInfo({ commit, state }) {
       return new Promise((resolve) => {
-        getInfo().then(response => {
+        getInfo(getUserRole()).then(response => {
           const outer = response && response.data ? response.data : response
           const payload = (outer && outer.data) ? outer.data : outer
           if (payload.roles && payload.roles.length > 0) {
@@ -73,13 +93,24 @@ const user = {
             const name = getUsername()
             if (name) commit('SET_NAME', name)
           }
-          resolve({ data: { menus: payload.menus || [], username: payload.username || getUsername() } })
+          const permissions = Array.isArray(payload.permissions) ? payload.permissions : getPermissions()
+          commit('SET_PERMISSIONS', permissions)
+          setPermissions(permissions)
+          resolve({
+            data: {
+              menus: payload.menus || [],
+              username: payload.username || getUsername(),
+              permissions
+            }
+          })
         }).catch(() => {
           const role = getUserRole()
           const name = getUsername()
+          const permissions = getPermissions()
           if (role) commit('SET_ROLES', [role])
           if (name) commit('SET_NAME', name)
-          resolve({ data: { menus: [], username: name } })
+          commit('SET_PERMISSIONS', permissions)
+          resolve({ data: { menus: [], username: name, permissions } })
         })
       })
     },
@@ -89,8 +120,13 @@ const user = {
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')
+          commit('SET_NAME', '')
           commit('SET_ROLES', [])
+          commit('SET_PERMISSIONS', [])
           removeToken()
+          removeUserRole()
+          removeUsername()
+          removePermissions()
           resolve()
         }).catch(error => {
           reject(error)
@@ -102,7 +138,13 @@ const user = {
     FedLogOut({ commit }) {
       return new Promise(resolve => {
         commit('SET_TOKEN', '')
+        commit('SET_NAME', '')
+        commit('SET_ROLES', [])
+        commit('SET_PERMISSIONS', [])
         removeToken()
+        removeUserRole()
+        removeUsername()
+        removePermissions()
         resolve()
       })
     }

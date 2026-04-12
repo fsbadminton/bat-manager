@@ -22,6 +22,4 @@ public interface OrderItemMapper {
 
     @Select("SELECT order_id FROM order_item WHERE id = #{id}")
     Long getOrderId(Long id);
-
-    void update(OrderItem item);
 }

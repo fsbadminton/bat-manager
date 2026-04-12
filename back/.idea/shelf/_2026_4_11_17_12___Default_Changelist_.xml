@@ -1,0 +1,863 @@
+<changelist name="在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]" date="1775898741292" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="在进行更新之前于 2026/4/11 17:12 取消提交了更改 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/UserMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/InventoryMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/SupplierServiceImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/SupplierServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/SupplierServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/AdminLoginDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/User.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/CustomerService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/RacketService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-money-mouth.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/OrderMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/CustomerMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/OrderChartDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/fonts/tinymce-small.ttf" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/OrderItem.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/RacketSupplierService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/result/PageResult.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/ReviewVO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/RacketService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/RacketService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/RacketService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/BrandVO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/OrderItemMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/UserOrderServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/OrderVO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/ReturnReasonController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/UserDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/RacketSupplierMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/OmsReturnApplyService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/SupplierService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/InventoryService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/InventoryService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/InventoryService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/InventoryServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/BrandService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-embarassed.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/RacketServImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Brand$BrandBuilder.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/DeliveryOrderDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/RacketMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/bat.FXwBAA.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/src/assets/images/gif_404.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/CustomerService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/CustomerService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/CustomerService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/RacketSupplier.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-wink.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/ReviewServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Racket.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/CommonController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/Customer.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/ProductMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/BrandDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/RacketSupplier.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/AdminController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/src/assets/images/home_yesterday_amount.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/batnew.aznIrA.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/db1.c4MBAA.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/UserOrderCreateDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/OrderMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/RacketSupplierServiceImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/RacketSupplierServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/RacketSupplierServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/ReturnReasonDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/fonts/tinymce-small.eot" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Category.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-undecided.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/ReviewServiceImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/ReviewServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/ReviewServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/CustomerServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/fonts/tinymce.ttf" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/fonts/tinymce-small.woff" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/Supplier.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Handler/GlobalExceptionHandler.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/BrandController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/BatManagerApplication.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/properties/AliOssProperties.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/fonts/tinymce.eot" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/img/anchor.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/OmsReturnApplyDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/RacketService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/src/assets/images/home_order.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/UserReviewUpdateDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Product.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/db1.c4MBAA.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/ReturnReasonServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/Inventory.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/OrderItemDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/ReturnApplyMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-laughing.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/Brand.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/BrandPageQueryDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-sealed.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-kiss.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/RacketSupplierMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/CategoryController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/UserVO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/RacketSupplier.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/OrderDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/AdminLoginVO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/BatManagerApplication.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/BatManagerApplication.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/BatManagerApplication.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/OrderItemService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/OrderItemService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/OrderItemService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/OmsReturnApplyController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/UserLoginVO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Admin.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/batnew.aznIrA.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/test-classes/com/fsb/BatManagerApplicationTests.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/UserService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/src/assets/images/404_cloud.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/OrderItemService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/ReviewService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/ReviewService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/ReviewService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/CategoryPageQueryDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/ReturnReasonVO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-frown.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/Racket.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/src/assets/images/login_center_bg.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/sys.zb4BAA.zip" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/Review.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/CategoryServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/OrderItemService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/SupplierMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/SupplierMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/SupplierMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/ReviewService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/ReturnApplyServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/BatSystem/SystemWindow.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/ReviewService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/OmsReturnApplyMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/Customer.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/InventoryService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/OrderService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/OrderService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/OrderService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/img/loader.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/user/UserReviewController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/BrandServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/ReturnApplyService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/sys.zb4BAA.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/.gitattributes" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/src/assets/images/home_today_amount.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/Brand.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/InventoryService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/UserServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Review.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/RacketMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/RacketMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/RacketMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/Order.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/OrderService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/OrderServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/user/UserProductController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/OrderItemServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/Review.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/mysql.osA4Bg.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/OmsReturnApplyServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/UserBrandServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/OmsReturnApply.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/RacketServImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/RacketServImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/RacketServImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/Order.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/ReturnReasonMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/test-classes/com/fsb/BatManagerApplicationTests.class" />
+    <option name="AFTER_PATH" value="target/test-classes/com/fsb/BatManagerApplicationTests.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/BatManagerApplicationTests.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-smile.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/UserLoginVO$UserLoginVOBuilder.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/ReviewServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/SupplierMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/DashboardMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Customer.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/AdminLoginVO$AdminLoginVOBuilder.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/Supplier.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/AdminServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/CategoryDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/SupplierService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/SupplierService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/SupplierService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/user/UserReturnApplyController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/BrandMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/CustomerServiceImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/CustomerServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/CustomerServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/utils/AliOssUtil.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/SupplierService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/DashboardService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/.gitattributes" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/ProductPageQueryDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/OrderServiceImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/OrderServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/OrderServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/ProductServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/CustomerMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/CustomerMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/CustomerMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/user/UserBrandController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/RacketMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/OmsReturnApplyVO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/OrderItemServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/InventoryServiceImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/InventoryServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/InventoryServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/InventoryMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/InventoryMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/InventoryMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/user/UserController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/BrandServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/RacketSupplierServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/ReturnReasonService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/RacketSupplierService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/RacketSupplierService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/RacketSupplierService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/fonts/tinymce-mobile.woff" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/SupplierServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/img/trans.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-surprised.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/OrderMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/OrderMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/OrderMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/mysql.osA4Bg.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/InventoryMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/UserReviewPageQueryDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/CustomerService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/RacketServImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/BatManagerApplication.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Product$ProductBuilder.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/.gitkeep" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/BrandMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/BrandMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/BrandMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Supplier.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/UserOrderUpdateDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/src/assets/images/404.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/UserReviewServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/img/object.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/result/Result.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/CustomerMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/bat.FXwBAA.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/OrderItemMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/OrderItemMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/OrderItemMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/AdminMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/Racket.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/OmsReturnApplyPageQueryDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/config/OssConfiguration.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/OrderService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/SupplierMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/OrderPageQueryDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/LICENSE" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/sys.zb4BAA.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/BrandService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/DashboardController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/OrderItem.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-tongue-out.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/BrandService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/BrandService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/BrandService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/ReturnReasonPageQueryDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/sys.zb4BAA.zip" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/CategoryMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/ProductDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/bank.PAYuAA.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/OrderItemServiceImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/OrderItemServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/OrderItemServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/DashboardServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/RacketSupplierServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/test-classes/com/fsb/BatManagerApplicationTests.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/UserReviewCreateDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/ReviewMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/ReviewMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/ReviewMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/ReviewMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/UserLoginDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-yell.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/user/UserOrderController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/ProductController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-cool.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/OrderItemMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/ProductVO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Brand.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/information_schema.FNRwLQ.zip" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/information_schema.FNRwLQ.zip" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/ProductService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/OrderItemVO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Inventory.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Order.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/OrderItem.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/OrderController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/BrandMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/fonts/tinymce.woff" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/ReviewMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-cry.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/CustomerServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/Inventory.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/build/logo.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-foot-in-mouth.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/BrandServiceImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/service/impl/BrandServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/BrandServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/CategoryService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-innocent.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/RacketSupplierService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/CategoryVO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/AdminService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/InventoryServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/bank.PAYuAA.meta" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/ReturnReason.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/UserOrderService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/SupplierServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/OrderServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/RacketSupplierMapper.class" />
+    <option name="AFTER_PATH" value="target/classes/com/fsb/mapper/RacketSupplierMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2026_4_11_17_12_取消提交了更改_[Default_Changelist]/RacketSupplierMapper.class" />
+  </binary>
+</changelist>

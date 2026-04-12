@@ -1,16 +1,26 @@
 package com.fsb.Controller.admin;
 
-
 import com.fsb.Service.AdminService;
+import com.fsb.auth.AuthContext;
+import com.fsb.auth.AuthUser;
+import com.fsb.auth.RolePermissionService;
 import com.fsb.pojo.DTO.AdminLoginDTO;
 import com.fsb.pojo.VO.AdminLoginVO;
 import com.fsb.pojo.entity.Admin;
 import com.fsb.result.Result;
+import com.fsb.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/admin")
@@ -20,53 +30,53 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private JwtUtil jwtUtil;
 
-    /**
-     * 管理员登录
-     * @param adminLoginDTO
-     * @return
-     */
+    @Autowired
+    private RolePermissionService rolePermissionService;
+
     @PostMapping("/login")
     public Result<AdminLoginVO> login(@RequestBody AdminLoginDTO adminLoginDTO) throws Exception {
-        log.info("管理员登录:{}", adminLoginDTO);
+        log.info("管理员登录: {}", adminLoginDTO.getUsername());
         Admin admin = adminService.login(adminLoginDTO);
+
+        String role = rolePermissionService.normalizeRole(admin.getRole());
+        List<String> permissions = rolePermissionService.resolvePermissions(role);
+
+        AuthUser authUser = AuthUser.builder()
+                .userId(admin.getId())
+                .username(admin.getUsername())
+                .role(role)
+                .permissions(permissions)
+                .build();
+
+        String token = jwtUtil.generateToken(authUser);
+
         AdminLoginVO adminLoginVO = AdminLoginVO.builder()
                 .id(admin.getId())
                 .username(admin.getUsername())
                 .name(admin.getName())
-                .role(admin.getRole())
-                .token("admin-token")
+                .role(role)
+                .token(token)
+                .permissions(permissions)
                 .build();
         return Result.success(adminLoginVO);
     }
 
-
     @GetMapping("/info")
-    public Map<String, Object> info() {
-        Map<String, Object> res = new HashMap<>();
-
+    public Result<Map<String, Object>> info() {
+        AuthUser authUser = AuthContext.getCurrentUser();
         Map<String, Object> data = new HashMap<>();
-        data.put("username", "admin");
-        data.put("roles", Arrays.asList("admin"));
+        data.put("username", authUser.getUsername());
+        data.put("roles", List.of(authUser.getRole()));
+        data.put("permissions", authUser.getPermissions());
         data.put("menus", new ArrayList<>());
-
-        res.put("code", 1);
-        res.put("msg", null);
-        res.put("data", data);
-
-        return res;
+        return Result.success(data);
     }
 
     @PostMapping("/logout")
-    public Map<String, Object> logout() {
-        Map<String, Object> res = new HashMap<>();
-
-        res.put("code", 1);
-        res.put("msg", null);
-        res.put("data", null);
-
-        return res;
+    public Result<Void> logout() {
+        return Result.success();
     }
-
-
 }

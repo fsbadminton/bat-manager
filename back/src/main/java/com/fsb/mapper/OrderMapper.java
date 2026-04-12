@@ -23,7 +23,7 @@ public interface OrderMapper {
 
 
     @Select("select * from `order` where member_username = #{username}")
-    Page<Order> listUserPageQuery(String username, OrderPageQueryDTO dto);
+    Page<Order> listUserPageQuery(@Param("username") String username, @Param("dto") OrderPageQueryDTO dto);
 
 
     void updateById(Order order);

@@ -1,10 +1,10 @@
-<template>
+﻿<template>
   <div class="app-container">
     <el-card shadow="never">
       <div>
         <el-form :inline="true" :model="listQuery" size="small" label-width="120px">
-          <el-form-item label="关键词">
-            <el-input v-model="listQuery.name" placeholder="球拍名称"></el-input>
+          <el-form-item label="关键字">
+            <el-input v-model="listQuery.name" placeholder="商品名称" />
           </el-form-item>
           <el-form-item label="分类">
             <el-select v-model="listQuery.categoryId" placeholder="请选择分类" clearable style="min-width: 160px">
@@ -22,14 +22,15 @@
           </el-form-item>
         </el-form>
       </div>
+
       <el-table :data="productList" v-loading="loadingProducts" border style="width: 100%">
         <el-table-column label="编号" width="100" align="center">
           <template slot-scope="scope">{{ scope.row.productId }}</template>
         </el-table-column>
-        <el-table-column label="球拍图片" width="120" align="center">
-          <template slot-scope="scope"><img style="height: 80px" :src="scope.row.imageUrl"/></template>
+        <el-table-column label="商品图片" width="120" align="center">
+          <template slot-scope="scope"><img style="height: 80px" :src="scope.row.imageUrl" /></template>
         </el-table-column>
-        <el-table-column label="球拍名称" align="center">
+        <el-table-column label="商品名称" align="center">
           <template slot-scope="scope">
             <p>{{ scope.row.name }}</p>
             <p>品牌：{{ scope.row.brandName }}</p>
@@ -48,17 +49,29 @@
         </el-table-column>
         <el-table-column label="操作" width="180" align="center">
           <template slot-scope="scope">
-            <el-button type="primary" size="mini" @click="openOrderDialog(scope.row)">购买</el-button>
+            <el-button v-if="canCreateOrder" type="primary" size="mini" @click="openOrderDialog(scope.row)">购买</el-button>
+            <el-tag v-else type="info" size="mini">仅查看</el-tag>
           </template>
         </el-table-column>
       </el-table>
+
       <div class="pagination-container">
-        <el-pagination background @size-change="handleProductSizeChange" @current-change="handleProductCurrentChange" layout="total, sizes, prev, pager, next, jumper" :page-size="listQuery.pageSize" :page-sizes="[5,10,15]" :current-page.sync="listQuery.pageNum" :total="totalProducts" />
+        <el-pagination
+          background
+          @size-change="handleProductSizeChange"
+          @current-change="handleProductCurrentChange"
+          layout="total, sizes, prev, pager, next, jumper"
+          :page-size="listQuery.pageSize"
+          :page-sizes="[5, 10, 15]"
+          :current-page.sync="listQuery.pageNum"
+          :total="totalProducts"
+        />
       </div>
+
       <el-dialog title="下单购买" :visible.sync="orderDialogVisible" width="500px">
         <el-form ref="orderFormRef" :model="orderForm" :rules="orderRules" label-width="100px">
           <el-form-item label="球拍ID">
-            <el-input v-model="orderForm.productId" disabled/>
+            <el-input v-model="orderForm.productId" disabled />
           </el-form-item>
           <el-form-item label="数量">
             <el-input v-model.number="orderForm.quantity" type="number" min="1" />
@@ -77,8 +90,8 @@
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button @click="orderDialogVisible=false">取消</el-button>
-          <el-button type="primary" @click="submitOrder">下单</el-button>
+          <el-button @click="orderDialogVisible = false">取消</el-button>
+          <el-button :disabled="!canCreateOrder" type="primary" @click="submitOrder">下单</el-button>
         </span>
       </el-dialog>
     </el-card>
@@ -88,6 +101,7 @@
 <script>
 import { listUserProducts, listUserBrands, createUserOrder } from '@/api/userLogin'
 import { fetchCategoryList } from '@/api/productCate'
+import { hasPermission } from '@/utils/permission'
 
 export default {
   name: 'UserProducts',
@@ -103,12 +117,15 @@ export default {
       orderForm: { productId: null, quantity: 1, receiverName: '', receiverPhone: '', address: '', note: '' },
       orderRules: {
         receiverPhone: [
-          { validator: (rule, value, callback) => {
-              if (!value) return callback(new Error('请输入手机号'));
-              const v = String(value).trim();
-              if (!/^\d{11}$/.test(v)) return callback(new Error('手机号必须为11位数字'));
-              callback();
-            }, trigger: 'blur' }
+          {
+            validator: (rule, value, callback) => {
+              if (!value) return callback(new Error('请输入手机号'))
+              const v = String(value).trim()
+              if (!/^\d{11}$/.test(v)) return callback(new Error('手机号码必须为11位数字'))
+              callback()
+            },
+            trigger: 'blur'
+          }
         ]
       }
     }
@@ -117,6 +134,15 @@ export default {
     this.getProducts()
     this.loadBrandOptions()
     this.loadCategoryOptions()
+  },
+  computed: {
+    isUserAccount() {
+      const roles = this.$store.getters.roles || []
+      return roles.some(r => String(r).toUpperCase() === 'USER')
+    },
+    canCreateOrder() {
+      return hasPermission(this.$store.getters.permissions, 'order:create:own') || this.isUserAccount
+    }
   },
   methods: {
     getProducts() {
@@ -131,12 +157,14 @@ export default {
       listUserProducts(mapped)
         .then(res => {
           this.loadingProducts = false
-          const outer = (res && res.data) ? res.data : res
-          const data = (outer && outer.data) ? outer.data : outer
+          const outer = res && res.data ? res.data : res
+          const data = outer && outer.data ? outer.data : outer
           this.productList = data.records || data.list || data.items || []
           this.totalProducts = data.total || data.totalCount || data.totalElements || 0
         })
-        .catch(() => { this.loadingProducts = false })
+        .catch(() => {
+          this.loadingProducts = false
+        })
     },
     resetProductFilters() {
       this.listQuery = { name: null, pageNum: 1, pageSize: 5, categoryId: null, brandId: null }
@@ -175,24 +203,38 @@ export default {
         this.productCateOptions = []
         for (let i = 0; i < list.length; i++) {
           const item = list[i]
-          if (typeof item === 'number' || typeof item === 'string') this.productCateOptions.push({ label: `分类${item}`, value: Number(item) || item })
-          else this.productCateOptions.push({ label: item.name || item.label, value: item.id || item.value })
+          if (typeof item === 'number' || typeof item === 'string') {
+            this.productCateOptions.push({ label: `分类${item}`, value: Number(item) || item })
+          } else {
+            this.productCateOptions.push({ label: item.name || item.label, value: item.id || item.value })
+          }
         }
       })
     },
     openOrderDialog(row) {
-      this.orderForm = { productId: row.productId || row.id, quantity: 1, receiverName: '', receiverPhone: '', address: '', note: '' }
+      if (!this.canCreateOrder) return
+      this.orderForm = {
+        productId: row.productId || row.id,
+        quantity: 1,
+        receiverName: '',
+        receiverPhone: '',
+        address: '',
+        note: ''
+      }
       this.orderDialogVisible = true
     },
     submitOrder() {
-      // 校验表单
+      if (!this.canCreateOrder) {
+        this.$message({ type: 'warning', message: '当前账号没有下单权限' })
+        return
+      }
       if (this.$refs.orderFormRef) {
         this.$refs.orderFormRef.validate(valid => {
-          if (!valid) return;
-          this._doSubmitOrder();
-        });
+          if (!valid) return
+          this._doSubmitOrder()
+        })
       } else {
-        this._doSubmitOrder();
+        this._doSubmitOrder()
       }
     },
     _doSubmitOrder() {
@@ -205,35 +247,37 @@ export default {
         note: this.orderForm.note
       }
       createUserOrder(payload)
-    .then(res => {
-      if(res.code !== 1){
-        this.$message({ type: 'warning', message: res.msg || res.message || '下单失败', duration: 4000 });
-        return;
-      }
-      this.$message({ type: 'success', message: '下单成功', duration: 1000 });
-      this.orderDialogVisible = false;
-      this.getProducts();
-    })
-    .catch(err => {
-      let errorMessage = '服务器内部错误(500)，请检查后端日志';
-      try {
-        if(err && err.msg) {
-          errorMessage = err.msg;
-        } else if(err && err.message) {
-          errorMessage = err.message;
-        } else if(err && typeof err === 'string') {
-          errorMessage = err;
-        }
-      } catch(e) {
-        console.error('解析错误信息失败', e);
-      }
-      this.$message({ type: 'error', message: errorMessage, duration: 4000 });
-    })
+        .then(res => {
+          if (res.code !== 1) {
+            this.$message({ type: 'warning', message: res.msg || res.message || '下单失败', duration: 4000 })
+            return
+          }
+          this.$message({ type: 'success', message: '下单成功', duration: 1000 })
+          this.orderDialogVisible = false
+          this.getProducts()
+        })
+        .catch(err => {
+          let errorMessage = '服务器内部错误(500)，请检查后端日志'
+          try {
+            if (err && err.msg) {
+              errorMessage = err.msg
+            } else if (err && err.message) {
+              errorMessage = err.message
+            } else if (err && typeof err === 'string') {
+              errorMessage = err
+            }
+          } catch (e) {
+            console.error('解析错误信息失败', e)
+          }
+          this.$message({ type: 'error', message: errorMessage, duration: 4000 })
+        })
     }
   }
 }
 </script>
 
 <style scoped>
-.pagination-container { margin-top: 15px }
+.pagination-container {
+  margin-top: 15px;
+}
 </style>

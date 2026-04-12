@@ -22,9 +22,11 @@ export function userLogin(username, password) {
   })
 }
 
-export function getInfo() {
+export function getInfo(role) {
+  const roleUpper = role ? String(role).toUpperCase() : ''
+  const infoUrl = roleUpper === 'USER' ? '/user/info' : '/admin/info'
   return request({
-    url: '/admin/info',
+    url: infoUrl,
     method: 'get',
   })
 }
@@ -89,4 +91,3 @@ export function allocRole(data) {
     data: data
   })
 }
-

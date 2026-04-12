@@ -36,11 +36,11 @@ public interface ReviewMapper {
 
     Page<Review> list(UserReviewPageQueryDTO dto);
 
-    @Update("update review set is_deleted=1 where id=#{id}")
-    void delete(Long id);
+    @Update("update review set is_deleted=1 where id=#{id} and member_username=#{memberUsername}")
+    int deleteByIdAndMemberUsername(@Param("id") Long id, @Param("memberUsername") String memberUsername);
 
     @Select("select * from review where id= #{id} and member_username=#{memberUsername} and is_deleted=0")
-    Review getByIdAndMemberUsername(Long id, String memberUsername);
+    Review getByIdAndMemberUsername(@Param("id") Long id, @Param("memberUsername") String memberUsername);
 
     void updateByIdAndMemberUsername(Review review);
 }

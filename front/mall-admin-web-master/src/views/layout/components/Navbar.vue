@@ -1,20 +1,18 @@
-<template>
+﻿<template>
   <el-menu class="navbar" mode="horizontal">
-    <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
-    <breadcrumb></breadcrumb>
+    <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened" />
+    <breadcrumb />
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
-        <img class="user-avatar" :src="avatar">
-        <i class="el-icon-caret-bottom"></i>
+        <img class="user-avatar" :src="avatar" />
+        <i class="el-icon-caret-bottom" />
       </div>
       <el-dropdown-menu class="user-dropdown" slot="dropdown">
         <router-link class="inlineBlock" to="/">
-          <el-dropdown-item>
-            首页
-          </el-dropdown-item>
+          <el-dropdown-item>首页</el-dropdown-item>
         </router-link>
         <el-dropdown-item divided>
-          <span @click="logout" style="display:block;">退出</span>
+          <span @click="logout" style="display: block">退出</span>
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
@@ -32,10 +30,7 @@ export default {
     Hamburger
   },
   computed: {
-    ...mapGetters([
-      'sidebar',
-      'avatar'
-    ])
+    ...mapGetters(['sidebar', 'avatar'])
   },
   methods: {
     toggleSideBar() {
@@ -43,7 +38,8 @@ export default {
     },
     logout() {
       this.$store.dispatch('LogOut').then(() => {
-        location.reload() // 为了重新实例化vue-router对象 避免bug
+        // 退出后直接回登录页，避免被另一端 token 干扰跳转
+        this.$router.replace('/login')
       })
     }
   }
@@ -54,33 +50,39 @@ export default {
 .navbar {
   height: 50px;
   line-height: 50px;
-  border-radius: 0px !important;
+  border-radius: 0 !important;
+
   .hamburger-container {
     line-height: 58px;
     height: 50px;
     float: left;
     padding: 0 10px;
   }
+
   .screenfull {
     position: absolute;
     right: 90px;
     top: 16px;
     color: red;
   }
+
   .avatar-container {
     height: 50px;
     display: inline-block;
     position: absolute;
     right: 35px;
+
     .avatar-wrapper {
       cursor: pointer;
       margin-top: 5px;
       position: relative;
+
       .user-avatar {
         width: 40px;
         height: 40px;
         border-radius: 10px;
       }
+
       .el-icon-caret-bottom {
         position: absolute;
         right: -20px;
@@ -91,4 +93,3 @@ export default {
   }
 }
 </style>
-

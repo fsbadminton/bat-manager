@@ -100,7 +100,6 @@
 
 <script>
 import { listUserProducts, listUserBrands, createUserOrder } from '@/api/userLogin'
-import { fetchCategoryList } from '@/api/productCate'
 import { hasPermission } from '@/utils/permission'
 
 export default {
@@ -133,7 +132,6 @@ export default {
   created() {
     this.getProducts()
     this.loadBrandOptions()
-    this.loadCategoryOptions()
   },
   computed: {
     isUserAccount() {
@@ -160,6 +158,8 @@ export default {
           const outer = res && res.data ? res.data : res
           const data = outer && outer.data ? outer.data : outer
           this.productList = data.records || data.list || data.items || []
+          // 用户端不再调用管理员分类接口，避免弹出“重新登录”提示
+          this.rebuildCategoryOptions(this.productList)
           this.totalProducts = data.total || data.totalCount || data.totalElements || 0
         })
         .catch(() => {
@@ -193,23 +193,19 @@ export default {
         }
       })
     },
-    loadCategoryOptions() {
-      fetchCategoryList({ pageNum: 1, pageSize: 100 }).then(response => {
-        let list = []
-        if (response && response.data) {
-          if (Array.isArray(response.data)) list = response.data
-          else list = response.data.records || response.data.list || []
-        } else if (Array.isArray(response)) list = response
-        this.productCateOptions = []
-        for (let i = 0; i < list.length; i++) {
-          const item = list[i]
-          if (typeof item === 'number' || typeof item === 'string') {
-            this.productCateOptions.push({ label: `分类${item}`, value: Number(item) || item })
-          } else {
-            this.productCateOptions.push({ label: item.name || item.label, value: item.id || item.value })
-          }
+    rebuildCategoryOptions(products) {
+      const list = Array.isArray(products) ? products : []
+      const map = new Map()
+      for (let i = 0; i < list.length; i++) {
+        const p = list[i] || {}
+        const value = p.categoryId || p.category || p.categoryName
+        if (value === undefined || value === null || value === '') continue
+        const label = p.categoryName || `分类${value}`
+        if (!map.has(String(value))) {
+          map.set(String(value), { label, value })
         }
-      })
+      }
+      this.productCateOptions = Array.from(map.values())
     },
     openOrderDialog(row) {
       if (!this.canCreateOrder) return

@@ -31,9 +31,11 @@ export function getInfo(role) {
   })
 }
 
-export function logout() {
+export function logout(role) {
+  const roleUpper = role ? String(role).toUpperCase() : ''
+  const logoutUrl = roleUpper === 'USER' ? '/user/logout' : '/admin/logout'
   return request({
-    url: '/admin/logout',
+    url: logoutUrl,
     method: 'post'
   })
 }

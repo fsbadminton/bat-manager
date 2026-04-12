@@ -164,17 +164,8 @@ export default {
               dest = '/user'
             }
 
-            const roleUpper =
-              role && typeof role === 'string'
-                ? role.toUpperCase()
-                : String(this.loginForm.username).toLowerCase() === 'admin'
-                  ? 'ADMIN'
-                  : 'USER'
-
-            this.$store.dispatch('GenerateRoutes', { menus: [], username: this.loginForm.username, roles: [roleUpper] }).then(() => {
-              this.$router.addRoutes(this.$store.getters.addRouters)
-              this.$router.push({ path: dest })
-            })
+            // 登录页只负责确定目标首页，动态路由统一由全局守卫按端身份注入
+            this.$router.push({ path: dest })
           })
           .catch(() => {
             this.loading = false

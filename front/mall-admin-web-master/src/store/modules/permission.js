@@ -1,126 +1,115 @@
-import { asyncRouterMap, constantRouterMap } from '@/router/index';
+﻿import { asyncRouterMap, constantRouterMap } from '@/router/index'
 
-//判断是否有权限访问该菜单
 function hasPermission(menus, route) {
-  if (route.name) {
-    let currMenu = getMenu(route.name, menus);
-    if (currMenu!=null) {
-      //设置菜单的标题、图标和可见性
-      if (currMenu.title != null && currMenu.title !== '') {
-        route.meta.title = currMenu.title;
-      }
-      if (currMenu.icon != null && currMenu.title !== '') {
-        route.meta.icon = currMenu.icon;
-      }
-      if(currMenu.hidden!=null){
-        route.hidden = currMenu.hidden !== 0;
-      }
-      if (currMenu.sort != null && currMenu.sort !== '') {
-        route.sort = currMenu.sort;
-      }
-      return true;
-    } else {
-      route.sort = 0;
-      if (route.hidden !== undefined && route.hidden === true) {
-        route.sort=-1;
-        return true;
-      } else {
-        return false;
-      }
-    }
-  } else {
+  if (!route.name) return true
+  const currMenu = getMenu(route.name, menus)
+  if (currMenu != null) {
+    route.meta = route.meta || {}
+    if (currMenu.title != null && currMenu.title !== '') route.meta.title = currMenu.title
+    if (currMenu.icon != null && currMenu.icon !== '') route.meta.icon = currMenu.icon
+    if (currMenu.hidden != null) route.hidden = currMenu.hidden !== 0
+    if (currMenu.sort != null && currMenu.sort !== '') route.sort = currMenu.sort
     return true
   }
+
+  route.sort = 0
+  if (route.hidden === true) {
+    route.sort = -1
+    return true
+  }
+  return false
 }
 
-//根据路由名称获取菜单
 function getMenu(name, menus) {
   for (let i = 0; i < menus.length; i++) {
-    let menu = menus[i];
-    if (name===menu.name) {
-      return menu;
-    }
+    if (name === menus[i].name) return menus[i]
   }
-  return null;
+  return null
 }
 
-//对菜单进行排序
+function compareBySortDesc(a, b) {
+  return (b.sort || 0) - (a.sort || 0)
+}
+
 function sortRouters(accessedRouters) {
   for (let i = 0; i < accessedRouters.length; i++) {
-    let router = accessedRouters[i];
-    if(router.children && router.children.length > 0){
-      router.children.sort(compare("sort"));
+    const router = accessedRouters[i]
+    if (router.children && router.children.length > 0) {
+      router.children.sort(compareBySortDesc)
     }
   }
-  accessedRouters.sort(compare("sort"));
+  accessedRouters.sort(compareBySortDesc)
 }
 
-//降序比较函数
-function compare(p){
-  return function(m,n){
-    let a = m[p];
-    let b = n[p];
-    return b - a;
+function cloneRoute(route) {
+  const cloned = { ...route }
+  if (route.meta) cloned.meta = { ...route.meta }
+  if (route.children && Array.isArray(route.children)) {
+    cloned.children = route.children.map(child => cloneRoute(child))
   }
+  return cloned
+}
+
+function cloneAsyncRouters() {
+  // 关键：每次生成动态路由都做深拷贝，且保留 component 懒加载函数
+  return asyncRouterMap.map(route => cloneRoute(route))
 }
 
 const permission = {
   state: {
     routers: constantRouterMap,
-    addRouters: []
+    addRouters: [],
+    currentRole: ''
   },
   mutations: {
     SET_ROUTERS: (state, routers) => {
-      state.addRouters = routers;
-      state.routers = constantRouterMap.concat(routers);
+      state.addRouters = routers
+      state.routers = constantRouterMap.concat(routers)
+    },
+    SET_CURRENT_ROLE: (state, role) => {
+      state.currentRole = role
     }
   },
   actions: {
     GenerateRoutes({ commit }, data) {
       return new Promise(resolve => {
-        const { menus } = data;
-        const { username } = data;
-        const { roles } = data || {};
-        const roleUpper = Array.isArray(roles) && roles.length>0 ? String(roles[0]).toUpperCase() : '';
-        const accessedRouters = asyncRouterMap.filter(v => {
+        const menus = (data && data.menus) || []
+        const username = data && data.username
+        const roles = (data && data.roles) || []
+        const roleUpper = Array.isArray(roles) && roles.length > 0 ? String(roles[0]).toUpperCase() : ''
+
+        const sourceRouters = cloneAsyncRouters()
+        const accessedRouters = sourceRouters.filter(v => {
           if (username === 'admin' || roleUpper === 'ADMIN') {
-            // 管理端隐藏营销菜单
-            if (v.name === 'sms') return false;
-            // 管理端user菜单只显示评论
-            if (v.name === 'user') {
-              v.children = v.children.filter(child => child.name === 'userComments');
-              return true;
+            if (v.name === 'sms') return false
+            if (v.name === 'user' && v.children) {
+              // 管理端在 shared user 菜单下仅展示评论入口
+              v.children = v.children.filter(child => child.name === 'userComments')
+              // 仅保留 comments 子路由时，重定向目标也要同步，避免 /user 白屏
+              v.redirect = '/user/comments'
             }
-            return true;
+            return true
           }
+
           if (roleUpper === 'USER') {
-            // 用户端只显示user菜单
-            if (v.name === 'user') return true;
-            return false;
+            // 用户端只保留 user 菜单（保留其完整子路由，避免 /user 重定向到 404）
+            return v.name === 'user'
           }
-          if (hasPermission(menus, v)) {
-            if (v.children && v.children.length > 0) {
-              v.children = v.children.filter(child => {
-                if (hasPermission(menus, child)) {
-                  return child
-                }
-                return false;
-              });
-              return v
-            } else {
-              return v
-            }
+
+          if (!hasPermission(menus, v)) return false
+          if (v.children && v.children.length > 0) {
+            v.children = v.children.filter(child => hasPermission(menus, child))
           }
-          return false;
-        });
-        //对菜单进行排序
-        sortRouters(accessedRouters);
-        commit('SET_ROUTERS', accessedRouters);
-        resolve();
+          return true
+        })
+
+        sortRouters(accessedRouters)
+        commit('SET_ROUTERS', accessedRouters)
+        commit('SET_CURRENT_ROLE', roleUpper || (username === 'admin' ? 'ADMIN' : 'USER'))
+        resolve()
       })
     }
   }
-};
+}
 
-export default permission;
-
+export default permission

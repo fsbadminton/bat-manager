@@ -5,20 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f30e173-bcbf-4620-beca-ecd44bb890c7" name="Default Changelist" comment="管理员登录">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2025_11_14_15_24___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2025_11_14_15_24___Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2026_4_11_17_12___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2026_4_11_17_12___Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fsb/auth/PermissionConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fsb/auth/PermissionConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fsb/auth/RolePermissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fsb/auth/RolePermissionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fsb/mapper/ReviewMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fsb/mapper/ReviewMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fsb/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fsb/service/ReviewService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fsb/service/impl/ReviewServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fsb/service/impl/ReviewServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/mall-admin-web-master/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/mall-admin-web-master/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/mall-admin-web-master/src/store/modules/permission.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/mall-admin-web-master/src/store/modules/permission.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/mall-admin-web-master/src/views/user/userComments.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front/mall-admin-web-master/src/views/user/userComments.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -255,7 +242,7 @@
       <workItem from="1763968673981" duration="88671000" />
       <workItem from="1764347970999" duration="2948000" />
       <workItem from="1775976365456" duration="5029000" />
-      <workItem from="1776691525031" duration="1150000" />
+      <workItem from="1776691525031" duration="1986000" />
     </task>
     <task id="LOCAL-00001" summary="管理员登录">
       <option name="closed" value="true" />

@@ -36,7 +36,8 @@ public class ReviewController {
     @DeleteMapping("/delete/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         AuthUser authUser = requireAuthUser();
-        if (!authUser.hasPermission(PermissionConstants.REVIEW_DELETE_ANY)) {
+        if (!authUser.hasPermission(PermissionConstants.ADMIN_ACCESS)
+                && !authUser.hasPermission(PermissionConstants.REVIEW_DELETE_ANY)) {
             throw new AuthException(403, "Review delete permission required");
         }
         reviewService.deleteAny(id);

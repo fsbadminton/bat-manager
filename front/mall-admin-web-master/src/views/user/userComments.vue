@@ -134,7 +134,7 @@ export default {
       return hasPermission(this.$store.getters.permissions, 'review:delete:own')
     },
     canDeleteAnyReview() {
-      return hasPermission(this.$store.getters.permissions, 'review:delete:any')
+      return this.isAdmin || hasPermission(this.$store.getters.permissions, 'review:delete:any')
     }
   },
   methods: {

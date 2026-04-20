@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f30e173-bcbf-4620-beca-ecd44bb890c7" name="Default Changelist" comment="管理员登录">
-      <change beforePath="$PROJECT_DIR$/../front/mall-admin-web-master/src/api/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/mall-admin-web-master/src/api/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/mall-admin-web-master/src/permission.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/mall-admin-web-master/src/permission.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/mall-admin-web-master/src/store/modules/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/mall-admin-web-master/src/store/modules/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/mall-admin-web-master/src/utils/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/mall-admin-web-master/src/utils/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/mall-admin-web-master/src/utils/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/mall-admin-web-master/src/utils/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/mall-admin-web-master/src/views/user/userProducts.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front/mall-admin-web-master/src/views/user/userProducts.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,7 +235,7 @@
       <workItem from="1763903440668" duration="3487000" />
       <workItem from="1763968673981" duration="88671000" />
       <workItem from="1764347970999" duration="2948000" />
-      <workItem from="1775976365456" duration="1890000" />
+      <workItem from="1775976365456" duration="5029000" />
     </task>
     <task id="LOCAL-00001" summary="管理员登录">
       <option name="closed" value="true" />

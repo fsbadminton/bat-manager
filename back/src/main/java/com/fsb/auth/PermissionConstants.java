@@ -10,6 +10,7 @@ public final class PermissionConstants {
     public static final String REVIEW_CREATE_OWN = "review:create:own";
     public static final String REVIEW_UPDATE_OWN = "review:update:own";
     public static final String REVIEW_DELETE_OWN = "review:delete:own";
+    public static final String REVIEW_DELETE_ANY = "review:delete:any";
 
     public static final String ORDER_CREATE_OWN = "order:create:own";
     public static final String ORDER_READ_OWN = "order:read:own";

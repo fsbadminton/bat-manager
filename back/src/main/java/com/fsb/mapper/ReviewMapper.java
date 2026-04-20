@@ -39,6 +39,9 @@ public interface ReviewMapper {
     @Update("update review set is_deleted=1 where id=#{id} and member_username=#{memberUsername}")
     int deleteByIdAndMemberUsername(@Param("id") Long id, @Param("memberUsername") String memberUsername);
 
+    @Update("update review set is_deleted=1 where id=#{id} and is_deleted=0")
+    int deleteById(@Param("id") Long id);
+
     @Select("select * from review where id= #{id} and member_username=#{memberUsername} and is_deleted=0")
     Review getByIdAndMemberUsername(@Param("id") Long id, @Param("memberUsername") String memberUsername);
 

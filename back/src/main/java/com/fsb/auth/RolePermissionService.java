@@ -16,6 +16,7 @@ public class RolePermissionService {
             List<String> permissions = new ArrayList<>();
             permissions.add(PermissionConstants.ADMIN_ACCESS);
             permissions.add(PermissionConstants.REVIEW_READ_ANY);
+            permissions.add(PermissionConstants.REVIEW_DELETE_ANY);
             permissions.add(PermissionConstants.ORDER_READ_ANY);
             permissions.add(PermissionConstants.ORDER_UPDATE_ANY);
             permissions.add(PermissionConstants.PRODUCT_UPDATE_ANY);
@@ -26,6 +27,7 @@ public class RolePermissionService {
         List<String> permissions = new ArrayList<>();
         permissions.add(PermissionConstants.REVIEW_CREATE_OWN);
         permissions.add(PermissionConstants.REVIEW_READ_OWN);
+        permissions.add(PermissionConstants.REVIEW_READ_ANY);
         permissions.add(PermissionConstants.REVIEW_UPDATE_OWN);
         permissions.add(PermissionConstants.REVIEW_DELETE_OWN);
         permissions.add(PermissionConstants.ORDER_CREATE_OWN);

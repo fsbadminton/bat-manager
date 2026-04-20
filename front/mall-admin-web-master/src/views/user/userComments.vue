@@ -1,9 +1,12 @@
-﻿<template>
+<template>
   <div class="app-container">
     <el-card shadow="never">
       <el-form :inline="true" :model="commentQuery" size="small" label-width="120px">
         <el-form-item label="商品名">
           <el-input v-model="commentQuery.productName" placeholder="输入商品名字" />
+        </el-form-item>
+        <el-form-item v-if="isAdmin" label="评论用户">
+          <el-input v-model="commentQuery.username" placeholder="输入评论用户名" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="getComments">查询</el-button>
@@ -32,6 +35,7 @@
 
       <el-table :data="commentList" v-loading="loadingComments" border style="width: 100%">
         <el-table-column label="评论ID" prop="id" width="120" align="center" />
+        <el-table-column label="评论用户" prop="memberUsername" width="160" align="center" />
         <el-table-column label="评分" prop="star" width="150" align="center">
           <template slot-scope="scope">
             <el-rate :value="scope.row.star" disabled show-score />
@@ -41,8 +45,8 @@
         <el-table-column label="时间" prop="createTime" width="180" align="center" />
         <el-table-column label="操作" width="220" align="center">
           <template slot-scope="scope">
-            <el-button v-if="canUpdateOwnReview" size="mini" @click="openEditComment(scope.row)">修改</el-button>
-            <el-button v-if="canDeleteOwnReview" size="mini" type="danger" @click="deleteComment(scope.row)">删除</el-button>
+            <el-button v-if="canEditRow(scope.row)" size="mini" @click="openEditComment(scope.row)">修改</el-button>
+            <el-button v-if="canDeleteRow(scope.row)" size="mini" type="danger" @click="deleteComment(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -68,6 +72,9 @@
           <el-form-item label="内容">
             <el-input type="textarea" v-model="editingComment.content" />
           </el-form-item>
+          <el-form-item label="评分">
+            <el-rate v-model="editingComment.star" :max="5" show-text />
+          </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="editCommentDialogVisible = false">取消</el-button>
@@ -80,13 +87,14 @@
 
 <script>
 import { listUserReviews, addUserReview, updateUserReview, deleteUserReview, listUserOrders } from '@/api/userLogin'
+import { listAdminReviews, deleteAdminReview } from '@/api/review'
 import { hasPermission } from '@/utils/permission'
 
 export default {
   name: 'UserComments',
   data() {
     return {
-      commentQuery: { productName: null, pageNum: 1, pageSize: 5 },
+      commentQuery: { productName: null, username: null, pageNum: 1, pageSize: 5 },
       commentList: [],
       totalComments: 0,
       loadingComments: false,
@@ -96,14 +104,26 @@ export default {
       selectedCommentProduct: null,
       purchasedProductOptions: [],
       editCommentDialogVisible: false,
-      editingComment: { id: null, content: '' }
+      editingComment: { id: null, content: '', star: 5 }
     }
   },
   created() {
     this.getComments()
-    this.loadPurchasedProducts()
+    if (this.canCreateOwnReview) {
+      this.loadPurchasedProducts()
+    }
   },
   computed: {
+    currentRole() {
+      const role = this.$store.getters.permissionRole || (this.$store.getters.roles && this.$store.getters.roles[0]) || ''
+      return String(role).toUpperCase()
+    },
+    currentUsername() {
+      return this.$store.getters.name || ''
+    },
+    isAdmin() {
+      return this.currentRole === 'ADMIN'
+    },
     canCreateOwnReview() {
       return hasPermission(this.$store.getters.permissions, 'review:create:own')
     },
@@ -112,6 +132,9 @@ export default {
     },
     canDeleteOwnReview() {
       return hasPermission(this.$store.getters.permissions, 'review:delete:own')
+    },
+    canDeleteAnyReview() {
+      return hasPermission(this.$store.getters.permissions, 'review:delete:any')
     }
   },
   methods: {
@@ -121,7 +144,12 @@ export default {
       if (this.commentQuery.productName) {
         params.productName = this.commentQuery.productName
       }
-      listUserReviews(params)
+      if (this.isAdmin && this.commentQuery.username) {
+        params.username = this.commentQuery.username
+      }
+
+      const request = this.isAdmin ? listAdminReviews(params) : listUserReviews(params)
+      request
         .then(res => {
           this.loadingComments = false
           const outer = res && res.data ? res.data : res
@@ -169,6 +197,7 @@ export default {
         })
     },
     loadPurchasedProducts() {
+      if (!this.canCreateOwnReview) return
       listUserOrders({ pageNum: 1, pageSize: 100 })
         .then(res => {
           const outer = res && res.data ? res.data : res
@@ -207,12 +236,16 @@ export default {
       }
     },
     openEditComment(row) {
-      if (!this.canUpdateOwnReview) return
-      this.editingComment = { id: row.id, content: row.content }
+      if (!this.canEditRow(row)) return
+      this.editingComment = { id: row.id, content: row.content, star: row.star || 5 }
       this.editCommentDialogVisible = true
     },
     submitEditComment() {
-      const payload = { id: this.editingComment.id, content: this.editingComment.content }
+      const payload = {
+        id: this.editingComment.id,
+        content: this.editingComment.content,
+        star: this.editingComment.star || 5
+      }
       updateUserReview(payload).then(() => {
         this.$message({ type: 'success', message: '修改成功', duration: 1000 })
         this.editCommentDialogVisible = false
@@ -220,11 +253,22 @@ export default {
       })
     },
     deleteComment(row) {
-      if (!this.canDeleteOwnReview) return
-      deleteUserReview(row.id).then(() => {
+      if (!this.canDeleteRow(row)) return
+      const request = this.canDeleteAnyReview ? deleteAdminReview(row.id) : deleteUserReview(row.id)
+      request.then(() => {
         this.$message({ type: 'success', message: '删除成功', duration: 1000 })
         this.getComments()
       })
+    },
+    canEditRow(row) {
+      return this.canUpdateOwnReview && this.isOwnComment(row)
+    },
+    canDeleteRow(row) {
+      if (this.canDeleteAnyReview) return true
+      return this.canDeleteOwnReview && this.isOwnComment(row)
+    },
+    isOwnComment(row) {
+      return !!row && row.memberUsername === this.currentUsername
     }
   }
 }

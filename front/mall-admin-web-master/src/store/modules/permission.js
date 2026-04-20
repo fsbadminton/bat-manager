@@ -82,12 +82,7 @@ const permission = {
         const accessedRouters = sourceRouters.filter(v => {
           if (username === 'admin' || roleUpper === 'ADMIN') {
             if (v.name === 'sms') return false
-            if (v.name === 'user' && v.children) {
-              // 管理端在 shared user 菜单下仅展示评论入口
-              v.children = v.children.filter(child => child.name === 'userComments')
-              // 仅保留 comments 子路由时，重定向目标也要同步，避免 /user 白屏
-              v.redirect = '/user/comments'
-            }
+            if (v.name === 'user') return false
             return true
           }
 

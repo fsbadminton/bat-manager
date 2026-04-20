@@ -209,6 +209,12 @@ export const asyncRouterMap = [
         component: () => import('@/views/oms/apply/applyDetail'),
         meta: { title: '退货原因详情' },
         hidden: true
+      },
+      {
+        path: 'comments',
+        name: 'reviewManage',
+        component: () => import('@/views/user/userComments'),
+        meta: { title: '评论管理', icon: 'product-comment' }
       }
     ]
   },

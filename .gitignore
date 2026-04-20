@@ -2,3 +2,6 @@
 *.sql
 *.db
 temp/
+
+# 后端本地配置
+back/src/main/resources/application.yml

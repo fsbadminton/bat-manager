@@ -66,6 +66,14 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    public void deleteAny(Long id) {
+        int affectedRows = reviewMapper.deleteById(id);
+        if (affectedRows <= 0) {
+            throw new RuntimeException("评论不存在或已删除");
+        }
+    }
+
+    @Override
     public void updateReview(UserReviewUpdateDTO dto, String memberUsername) {
         Review review = reviewMapper.getByIdAndMemberUsername(dto.getId(), memberUsername);
         if (review == null) {

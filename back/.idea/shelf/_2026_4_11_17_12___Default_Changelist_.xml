@@ -3,9 +3,13 @@
   <option name="DESCRIPTION" value="在进行更新之前于 2026/4/11 17:12 取消提交了更改 [Default Changelist]" />
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/UserMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/InventoryMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/SupplierServiceImpl.class" />
@@ -14,42 +18,68 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/AdminLoginDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/User.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/CustomerService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/RacketService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-money-mouth.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/OrderMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/CustomerMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/OrderChartDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/fonts/tinymce-small.ttf" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/OrderItem.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/RacketSupplierService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/result/PageResult.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/ReviewVO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/RacketService.class" />
@@ -58,30 +88,48 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/BrandVO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/OrderItemMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/UserOrderServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/OrderVO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/ReturnReasonController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/UserDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/RacketSupplierMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/OmsReturnApplyService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/SupplierService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/InventoryService.class" />
@@ -90,30 +138,48 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/InventoryServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/BrandService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-embarassed.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/RacketServImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Brand$BrandBuilder.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/DeliveryOrderDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/RacketMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/bat.FXwBAA.meta" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/src/assets/images/gif_404.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/CustomerService.class" />
@@ -122,51 +188,83 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/RacketSupplier.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-wink.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/ReviewServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Racket.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/CommonController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/Customer.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/ProductMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/BrandDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/RacketSupplier.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/AdminController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/src/assets/images/home_yesterday_amount.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/batnew.aznIrA.meta" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/db1.c4MBAA.meta" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/UserOrderCreateDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/OrderMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/RacketSupplierServiceImpl.class" />
@@ -175,15 +273,23 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/ReturnReasonDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/fonts/tinymce-small.eot" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Category.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-undecided.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/ReviewServiceImpl.class" />
@@ -192,102 +298,168 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/CustomerServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/fonts/tinymce.ttf" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/fonts/tinymce-small.woff" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/Supplier.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Handler/GlobalExceptionHandler.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/BrandController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/BatManagerApplication.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/properties/AliOssProperties.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/fonts/tinymce.eot" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/img/anchor.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/OmsReturnApplyDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/RacketService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/src/assets/images/home_order.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/UserReviewUpdateDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Product.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/db1.c4MBAA.meta" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/ReturnReasonServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/Inventory.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/OrderItemDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/ReturnApplyMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-laughing.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/Brand.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/BrandPageQueryDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-sealed.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-kiss.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/RacketSupplierMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/CategoryController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/UserVO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/RacketSupplier.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/OrderDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/AdminLoginVO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/BatManagerApplication.class" />
@@ -301,27 +473,43 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/OmsReturnApplyController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/UserLoginVO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Admin.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/batnew.aznIrA.meta" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/test-classes/com/fsb/BatManagerApplicationTests.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/UserService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/src/assets/images/404_cloud.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/OrderItemService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/ReviewService.class" />
@@ -330,30 +518,48 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/CategoryPageQueryDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/ReturnReasonVO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-frown.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/Racket.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/src/assets/images/login_center_bg.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/sys.zb4BAA.zip" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/Review.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/CategoryServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/OrderItemService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/SupplierMapper.class" />
@@ -362,24 +568,38 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/ReviewService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/ReturnApplyServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/BatSystem/SystemWindow.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/ReviewService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/OmsReturnApplyMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/Customer.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/InventoryService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/OrderService.class" />
@@ -388,36 +608,58 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/img/loader.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/user/UserReviewController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/BrandServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/ReturnApplyService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/sys.zb4BAA.meta" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/.gitattributes" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/src/assets/images/home_today_amount.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/Brand.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/InventoryService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/UserServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Review.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/RacketMapper.class" />
@@ -426,33 +668,53 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/Order.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/OrderService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/OrderServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/user/UserProductController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/OrderItemServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/Review.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/mysql.osA4Bg.meta" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/OmsReturnApplyServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/UserBrandServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/OmsReturnApply.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/RacketServImpl.class" />
@@ -461,9 +723,13 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/Order.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/ReturnReasonMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/test-classes/com/fsb/BatManagerApplicationTests.class" />
@@ -472,33 +738,53 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-smile.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/UserLoginVO$UserLoginVOBuilder.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/ReviewServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/SupplierMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/DashboardMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Customer.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/AdminLoginVO$AdminLoginVOBuilder.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/Supplier.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/AdminServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/CategoryDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/SupplierService.class" />
@@ -507,9 +793,13 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/user/UserReturnApplyController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/BrandMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/CustomerServiceImpl.class" />
@@ -518,18 +808,28 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/utils/AliOssUtil.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/SupplierService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/DashboardService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/.gitattributes" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/ProductPageQueryDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/OrderServiceImpl.class" />
@@ -538,6 +838,8 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/ProductServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/CustomerMapper.class" />
@@ -546,15 +848,23 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/user/UserBrandController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/RacketMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/OmsReturnApplyVO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/OrderItemServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/InventoryServiceImpl.class" />
@@ -568,15 +878,23 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/user/UserController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/BrandServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/RacketSupplierServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/ReturnReasonService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/RacketSupplierService.class" />
@@ -585,18 +903,28 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/fonts/tinymce-mobile.woff" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/SupplierServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/img/trans.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-surprised.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/OrderMapper.class" />
@@ -605,27 +933,43 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/mysql.osA4Bg.meta" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/InventoryMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/UserReviewPageQueryDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/CustomerService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/RacketServImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/BatManagerApplication.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Product$ProductBuilder.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/.gitkeep" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/BrandMapper.class" />
@@ -634,27 +978,43 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Supplier.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/UserOrderUpdateDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/src/assets/images/404.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/UserReviewServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/img/object.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/result/Result.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/CustomerMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/bat.FXwBAA.meta" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/OrderItemMapper.class" />
@@ -663,42 +1023,68 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/AdminMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/entity/Racket.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/OmsReturnApplyPageQueryDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/config/OssConfiguration.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/OrderService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/SupplierMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/OrderPageQueryDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/LICENSE" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/sys.zb4BAA.meta" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/BrandService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/DashboardController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/OrderItem.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-tongue-out.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/BrandService.class" />
@@ -707,18 +1093,28 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/ReturnReasonPageQueryDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/.idea/shelf/在进行更新之前于_2025_11_14_15_24_取消提交了更改_[Default_Changelist]/sys.zb4BAA.zip" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/CategoryMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/ProductDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/bank.PAYuAA.meta" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/OrderItemServiceImpl.class" />
@@ -727,18 +1123,28 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/DashboardServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/RacketSupplierServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/test-classes/com/fsb/BatManagerApplicationTests.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/UserReviewCreateDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/ReviewMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/ReviewMapper.class" />
@@ -747,75 +1153,123 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/DTO/UserLoginDTO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-yell.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/user/UserOrderController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/ProductController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-cool.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/OrderItemMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/ProductVO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Brand.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/information_schema.FNRwLQ.zip" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/information_schema.FNRwLQ.zip" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/ProductService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/OrderItemVO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Inventory.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/Order.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/OrderItem.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/Controller/admin/OrderController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/mapper/BrandMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/skins/lightgray/fonts/tinymce.woff" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/mapper/ReviewMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-cry.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/impl/CustomerServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/entity/Inventory.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/build/logo.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-foot-in-mouth.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/service/impl/BrandServiceImpl.class" />
@@ -824,36 +1278,58 @@
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/CategoryService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="front/mall-admin-web-master/static/tinymce4.7.5/plugins/emoticons/img/smiley-innocent.gif" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/RacketSupplierService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/VO/CategoryVO.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/AdminService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/InventoryServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/.idea/dataSources/83c6c774-13c1-4f8d-9181-b97c4e6cb03f/storage_v2/_src_/schema/bank.PAYuAA.meta" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/pojo/entity/ReturnReason.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/target/classes/com/fsb/service/UserOrderService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/SupplierServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="back/back/target/classes/com/fsb/service/impl/OrderServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
   </binary>
   <binary>
     <option name="BEFORE_PATH" value="target/classes/com/fsb/mapper/RacketSupplierMapper.class" />

@@ -34,5 +34,7 @@ public interface ReviewService {
 
     void delete(Long id, String memberUsername);
 
+    void deleteAny(Long id);
+
     void updateReview(UserReviewUpdateDTO dto, String memberUsername);
 }

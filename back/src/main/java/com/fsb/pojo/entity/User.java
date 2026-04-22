@@ -13,11 +13,15 @@ public class User {
 
     private Long id;
     private String username;
-    private String password; // 明文
+    private String password;
     private String nickname;
     private String phone;
     private String address;
+    private String email;
+    private Integer status;
+    private Integer isRegistered;
     private String role;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 }
+

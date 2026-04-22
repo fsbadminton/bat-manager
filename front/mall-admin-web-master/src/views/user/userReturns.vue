@@ -3,10 +3,13 @@
     <el-card shadow="never">
       <el-table :data="returnList" v-loading="loading" border style="width: 100%">
         <el-table-column prop="id" label="ID" width="80"/>
-        <el-table-column prop="orderId" label="订单ID" width="180"/>
+        <el-table-column prop="orderSn" label="订单编号" width="220"/>
         <el-table-column prop="reason" label="退货原因"/>
         <el-table-column prop="status" label="处理状态" width="120">
           <template slot-scope="scope">{{ scope.row.status | formatStatus }}</template>
+        </el-table-column>
+        <el-table-column prop="companyAddress" label="退回地址" width="220">
+          <template slot-scope="scope">{{ scope.row.companyAddress || '待商家确认' }}</template>
         </el-table-column>
         <el-table-column prop="createTime" label="申请时间" width="200"/>
       </el-table>
@@ -37,15 +40,12 @@ export default {
       this.loading = true
       const params = { pageNum: this.query.pageNum, pageSize: this.query.pageSize }
       listUserReturnApplies(params).then(res => {
-        // this.loading = false
-        // const outer = res && res.data ? res.data : res
-        // const data = outer && outer.data ? outer.data : outer
-        // this.returnList = data.records || data.list || []
-        // this.total = data.total || 0
         this.loading = false
-    const data = res && res.data ? res.data : res
-    this.returnList = Array.isArray(data) ? data : (data.records || data.list || [])
-    this.total = this.returnList.length
+        const outer = res && res.data ? res.data : res
+        const data = outer && outer.data ? outer.data : outer
+        const list = Array.isArray(data) ? data : (data.records || data.list || [])
+        this.returnList = list
+        this.total = data && data.total ? data.total : list.length
       }).catch(() => { this.loading = false })
     },
     handleSizeChange(val) {
@@ -60,7 +60,7 @@ export default {
   },
   filters: {
     formatStatus(val) {
-      const map = { 0: '待处理', 1: '通过', 2: '拒绝' }
+      const map = { 0: '待处理', 1: '退货中', 2: '已完成', 3: '已拒绝' }
       return map[val] || '未知'
     }
   }

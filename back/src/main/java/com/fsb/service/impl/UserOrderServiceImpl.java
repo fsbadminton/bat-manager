@@ -3,15 +3,20 @@ package com.fsb.Service.impl;
 import com.fsb.Mapper.OrderItemMapper;
 import com.fsb.Mapper.OrderMapper;
 import com.fsb.Mapper.ProductMapper;
+import com.fsb.Mapper.ReturnApplyMapper;
 import com.fsb.Service.UserOrderService;
 import com.fsb.pojo.DTO.OrderPageQueryDTO;
 import com.fsb.pojo.DTO.UserOrderCreateDTO;
+import com.fsb.pojo.DTO.UserOrderUpdateDTO;
+import com.fsb.pojo.VO.OrderVO;
+import com.fsb.pojo.entity.OmsReturnApply;
 import com.fsb.pojo.entity.Order;
 import com.fsb.pojo.entity.OrderItem;
 import com.fsb.pojo.entity.Product;
 import com.fsb.result.PageResult;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +36,9 @@ public class UserOrderServiceImpl implements UserOrderService {
 
     @Autowired
     private ProductMapper productMapper;
+
+    @Autowired
+    private ReturnApplyMapper returnApplyMapper;
 
     @Override
     @Transactional
@@ -87,12 +95,122 @@ public class UserOrderServiceImpl implements UserOrderService {
         for (Order order : orders) {
             List<OrderItem> orderItems = orderItemMapper.getOrderItemsByOrderId(String.valueOf(order.getId()));
             order.setOrderItems(orderItems);
+            attachReturnInfo(order);
         }
 
         return new PageResult(page.getTotal(), orders);
     }
 
+    @Override
+    public OrderVO getUserOrderDetail(Long orderId, String username) {
+        Order order = getOwnedOrder(orderId, username);
+        List<OrderItem> orderItems = orderItemMapper.getOrderItemsByOrderId(String.valueOf(orderId));
+        order.setOrderItems(orderItems);
+        attachReturnInfo(order);
+
+        OrderVO orderVO = new OrderVO();
+        BeanUtils.copyProperties(order, orderVO);
+        orderVO.setOrderItems(orderItems);
+        return orderVO;
+    }
+
+    @Override
+    @Transactional
+    public void updateUserOrder(UserOrderUpdateDTO dto, String username) {
+        if (dto == null || dto.getId() == null) {
+            throw new RuntimeException("订单不存在");
+        }
+        if (dto.getQuantity() == null || dto.getQuantity() < 1) {
+            throw new RuntimeException("购买数量必须大于 0");
+        }
+
+        Order order = getOwnedOrder(dto.getId(), username);
+        if (order.getStatus() == null || order.getStatus() != 1) {
+            throw new RuntimeException("当前订单状态不支持修改");
+        }
+
+        OmsReturnApply latestApply = returnApplyMapper.getLatestByOrderId(order.getId());
+        if (latestApply != null && latestApply.getStatus() != null && latestApply.getStatus() != 3) {
+            throw new RuntimeException("订单正在售后中，暂不支持修改");
+        }
+
+        List<OrderItem> orderItems = orderItemMapper.getOrderItemsByOrderId(String.valueOf(order.getId()));
+        if (orderItems == null || orderItems.isEmpty()) {
+            throw new RuntimeException("订单商品不存在");
+        }
+
+        OrderItem orderItem = orderItems.get(0);
+        Integer oldQuantity = orderItem.getProductQuantity() == null ? 0 : orderItem.getProductQuantity();
+        int delta = dto.getQuantity() - oldQuantity;
+        Product product = productMapper.selectById(orderItem.getProductId());
+        if (product == null) {
+            throw new RuntimeException("商品不存在");
+        }
+        if (delta > 0) {
+            if (product.getStock() == null || product.getStock() < delta) {
+                throw new RuntimeException("商品库存不足");
+            }
+            productMapper.reduceStock(product.getProductId(), delta);
+            productMapper.increaseSales(product.getProductId(), delta);
+        } else if (delta < 0) {
+            productMapper.increaseStock(product.getProductId(), -delta);
+            productMapper.decreaseSales(product.getProductId(), -delta);
+        }
+
+        BigDecimal unitPrice = orderItem.getProductPrice() == null ? BigDecimal.ZERO : orderItem.getProductPrice();
+        BigDecimal totalAmount = unitPrice.multiply(BigDecimal.valueOf(dto.getQuantity()));
+
+        orderItem.setProductQuantity(dto.getQuantity());
+        orderItem.setProductTotal(totalAmount);
+        orderItem.setUpdateTime(LocalDateTime.now());
+        orderItemMapper.updateById(orderItem);
+
+        order.setReceiverName(dto.getReceiverName());
+        order.setReceiverPhone(dto.getReceiverPhone());
+        order.setAddress(dto.getAddress());
+        order.setTotalAmount(totalAmount);
+        order.setUpdateTime(LocalDateTime.now());
+        orderMapper.updateById(order);
+    }
+
+    @Override
+    @Transactional
+    public void confirmReceive(Long orderId, String username) {
+        Order order = getOwnedOrder(orderId, username);
+        if (order.getStatus() == null || order.getStatus() != 2) {
+            throw new RuntimeException("当前订单还不能确认收货");
+        }
+
+        OmsReturnApply latestApply = returnApplyMapper.getLatestByOrderId(order.getId());
+        if (latestApply != null && latestApply.getStatus() != null && (latestApply.getStatus() == 0 || latestApply.getStatus() == 1)) {
+            throw new RuntimeException("售后处理中，暂不可确认收货");
+        }
+
+        order.setStatus(3);
+        order.setUpdateTime(LocalDateTime.now());
+        orderMapper.updateById(order);
+    }
+
     private String generateOrderSn() {
         return "ORDER" + UUID.randomUUID().toString().replace("-", "").toUpperCase();
+    }
+
+    private Order getOwnedOrder(Long orderId, String username) {
+        Order order = orderMapper.getById(orderId);
+        if (order == null || order.getMemberUsername() == null || !order.getMemberUsername().equals(username)) {
+            throw new RuntimeException("订单不存在");
+        }
+        return order;
+    }
+
+    private void attachReturnInfo(Order order) {
+        if (order == null || order.getId() == null) {
+            return;
+        }
+        OmsReturnApply latestApply = returnApplyMapper.getLatestByOrderId(order.getId());
+        if (latestApply != null) {
+            order.setReturnApplyStatus(latestApply.getStatus());
+            order.setReturnApplyId(latestApply.getId());
+        }
     }
 }

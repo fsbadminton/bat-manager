@@ -15,5 +15,8 @@ public interface OmsReturnApplyMapper {
     @Select("select * from return_apply where id=#{id}")
     OmsReturnApply getById(Long id);
 
+    @Select("select * from return_apply where order_id = #{orderId} order by id desc limit 1")
+    OmsReturnApply getLatestByOrderId(Long orderId);
+
     void updateById(OmsReturnApply apply);
 }

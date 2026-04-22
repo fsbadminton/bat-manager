@@ -208,7 +208,8 @@
         }
       },
       formatReturnAmount(row){
-        return row.productRealPrice*row.productCount;//order_item里的字段
+        if (row.returnAmount !== undefined && row.returnAmount !== null) return row.returnAmount
+        return (row.productRealPrice || 0) * (row.productCount || 0)
       }
     },
     methods:{
@@ -336,5 +337,4 @@
     width: 203px;
   }
 </style>
-
 

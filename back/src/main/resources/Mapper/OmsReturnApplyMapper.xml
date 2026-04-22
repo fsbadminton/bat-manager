@@ -11,9 +11,6 @@
             <if test="handleMan != null">
                 handle_man = #{handleMan},
             </if>
-            <if test="handleNote != null">
-                handle_note = #{handleNote},
-            </if>
             <if test="handleTime != null">
                 handle_time = #{handleTime},
             </if>
@@ -28,13 +25,11 @@
             </if>
         </set>
         where id = #{id}
-        order by  handle_time desc
     </update>
 
     <select id="pageQuery" resultType="com.fsb.pojo.entity.OmsReturnApply">
-        select ra.* ,oi.product_price as productRealPrice,oi.product_quantity as productCount
+        select ra.*
         from return_apply ra
-        left join order_item oi on ra.order_id = oi.order_sn
         <where>
             <if test="id != null">
                 and ra.id = #{id}

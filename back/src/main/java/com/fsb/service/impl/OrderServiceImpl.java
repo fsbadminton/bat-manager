@@ -12,6 +12,7 @@ import com.fsb.pojo.entity.Racket;
 import com.fsb.Mapper.InventoryMapper;
 import com.fsb.Mapper.OrderItemMapper;
 import com.fsb.Mapper.OrderMapper;
+import com.fsb.Mapper.OmsReturnApplyMapper;
 import com.fsb.Mapper.RacketMapper;
 import com.fsb.Service.OrderService;
 import com.fsb.result.PageResult;
@@ -35,11 +36,17 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderItemMapper orderItemMapper;
 
+    @Autowired
+    private OmsReturnApplyMapper omsReturnApplyMapper;
+
 
     @Override
     public PageResult pageQuery(OrderPageQueryDTO orderPageQueryDTO) {
         PageHelper.startPage(orderPageQueryDTO.getPageNum(), orderPageQueryDTO.getPageSize());
         Page<Order> page = orderMapper.pageQuery(orderPageQueryDTO);
+        for (Order order : page.getResult()) {
+            attachReturnInfo(order);
+        }
         return new PageResult(page.getTotal(), page.getResult());
     }
 
@@ -50,6 +57,7 @@ public class OrderServiceImpl implements OrderService {
         if (order == null) {
             throw new RuntimeException("订单不存在");
         }
+        attachReturnInfo(order);
 
         // 2. 查询订单项（直接用订单 id）
         List<OrderItem> orderItems = orderItemMapper.getOrderItemsByOrderId(String.valueOf(id));
@@ -58,6 +66,8 @@ public class OrderServiceImpl implements OrderService {
         OrderVO orderVO = new OrderVO();
         BeanUtils.copyProperties(order, orderVO);
         orderVO.setOrderItems(orderItems);
+        orderVO.setReturnApplyStatus(order.getReturnApplyStatus());
+        orderVO.setReturnApplyId(order.getReturnApplyId());
 
         return orderVO;
     }
@@ -116,5 +126,16 @@ public class OrderServiceImpl implements OrderService {
         // 修改订单状态为已发货
         order.setStatus(2); // 假设 2 = 已发货
         orderMapper.updateById(order);
+    }
+
+    private void attachReturnInfo(Order order) {
+        if (order == null || order.getId() == null) {
+            return;
+        }
+        com.fsb.pojo.entity.OmsReturnApply latestApply = omsReturnApplyMapper.getLatestByOrderId(order.getId());
+        if (latestApply != null) {
+            order.setReturnApplyStatus(latestApply.getStatus());
+            order.setReturnApplyId(latestApply.getId());
+        }
     }
 }

@@ -5,6 +5,7 @@ import com.fsb.auth.AuthContext;
 import com.fsb.auth.AuthUser;
 import com.fsb.auth.RolePermissionService;
 import com.fsb.pojo.DTO.UserLoginDTO;
+import com.fsb.pojo.DTO.UserRegisterDTO;
 import com.fsb.pojo.VO.UserLoginVO;
 import com.fsb.pojo.entity.User;
 import com.fsb.result.Result;
@@ -77,6 +78,12 @@ public class UserController {
 
     @PostMapping("/logout")
     public Result<Void> logout() {
+        return Result.success();
+    }
+
+    @PostMapping("/register")
+    public Result<Void> register(@RequestBody UserRegisterDTO userRegisterDTO) {
+        userService.register(userRegisterDTO);
         return Result.success();
     }
 }

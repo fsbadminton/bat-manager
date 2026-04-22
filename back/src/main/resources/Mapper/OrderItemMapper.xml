@@ -8,4 +8,20 @@
             insert into  order_item (order_id, order_sn, product_id, product_name, product_pic, brand_name, product_price, product_quantity, product_total, create_time, update_time)
             values (#{orderId}, #{orderSn}, #{productId}, #{productName}, #{productPic}, #{brandName}, #{productPrice}, #{productQuantity}, #{productTotal}, #{createTime}, #{updateTime})
     </insert>
+
+    <update id="updateById">
+        update order_item
+        <set>
+            <if test="productQuantity != null">
+                product_quantity = #{productQuantity},
+            </if>
+            <if test="productTotal != null">
+                product_total = #{productTotal},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

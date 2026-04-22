@@ -82,6 +82,25 @@
         <svg-icon icon-class="marker" style="color: #606266"></svg-icon>
         <span class="font-small">收货人信息</span>
       </div>
+      <div style="margin-top: 20px">
+        <svg-icon icon-class="marker" style="color: #606266"></svg-icon>
+        <span class="font-small">售后信息</span>
+      </div>
+      <div class="table-layout">
+        <el-row>
+          <el-col :span="8" class="table-cell-title">售后状态</el-col>
+          <el-col :span="8" class="table-cell-title">服务单号</el-col>
+          <el-col :span="8" class="table-cell-title">操作</el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="8" class="table-cell">{{ order.returnApplyStatus | formatReturnStatus }}</el-col>
+          <el-col :span="8" class="table-cell">{{ order.returnApplyId || '无' }}</el-col>
+          <el-col :span="8" class="table-cell">
+            <el-button v-if="order.returnApplyId" type="text" @click="viewReturnApplyDetail">查看退货单</el-button>
+            <span v-else>暂无售后</span>
+          </el-col>
+        </el-row>
+      </div>
       <div class="table-layout">
         <el-row>
           <el-col :span="8" class="table-cell-title">收货人</el-col>
@@ -405,9 +424,22 @@
           }
           return result;
         }
+      },
+      formatReturnStatus(value) {
+        const map = {
+          0: '用户退货待审核',
+          1: '用户退货中',
+          2: '用户已退货',
+          3: '用户退货被拒绝'
+        }
+        return map[value] || '无'
       }
     },
     methods: {
+      viewReturnApplyDetail() {
+        if (!this.order.returnApplyId) return
+        this.$router.push({ path: '/oms/returnApplyDetail', query: { id: this.order.returnApplyId } })
+      },
       onSelectRegion(data){
         this.receiverInfo.receiverProvince=data.province.value;
         this.receiverInfo.receiverCity=data.city.value;
@@ -645,5 +677,3 @@
     color: #303133;
   }
 </style>
-
-

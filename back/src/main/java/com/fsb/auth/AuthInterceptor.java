@@ -77,6 +77,8 @@ public class AuthInterceptor implements HandlerInterceptor {
     private boolean isWhitelisted(String uri) {
         return "/admin/login".equals(uri)
                 || "/user/login".equals(uri)
+                || "/user/register".equals(uri)
+                || "/user/sendCode".equals(uri)
                 || "/admin/logout".equals(uri)
                 || "/user/logout".equals(uri)
                 || "/error".equals(uri)

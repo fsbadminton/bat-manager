@@ -9,4 +9,5 @@ public class OmsReturnApplyDTO {
 
     private String handleMan; // 处理人
     private String handleNote; // 处理备注
+    private String companyAddress;
 }

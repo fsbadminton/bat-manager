@@ -58,6 +58,13 @@ export function updateUserOrder(data) {
   })
 }
 
+export function confirmUserOrderReceive(orderId) {
+  return request({
+    url: '/user/order/confirmReceive/' + orderId,
+    method: 'post'
+  })
+}
+
 export function addUserReview(data) {
   return request({
     url: '/user/review/add',

@@ -20,19 +20,20 @@
         <el-table-column label="金额" prop="totalAmount" width="300" align="center" />
         <el-table-column label="状态" width="300" align="center">
           <template slot-scope="scope">
-            {{ scope.row.status | formatOrderStatus }}
+            <span>{{ getOrderStatusText(scope.row) }}</span>
+            <el-tag v-if="scope.row.returnApplyStatus !== null && scope.row.returnApplyStatus !== undefined" size="mini" style="margin-left: 8px" :type="getReturnTagType(scope.row.returnApplyStatus)">
+              {{ getReturnStatusText(scope.row.returnApplyStatus) }}
+            </el-tag>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="400" align="center">
           <template slot-scope="scope">
-            <template v-if="orderReturnMap[scope.row.id] === 0">
-              <el-tag type="warning">退货中</el-tag>
-            </template>
-            <template v-else>
-              <el-button v-if="scope.row.status === 1 && canUpdateOwnOrder" size="mini" @click="openEditOrder(scope.row)">修改</el-button>
-              <el-button v-if="canCreateOwnReview" size="mini" @click="openCommentDialog(scope.row)">评价</el-button>
-              <el-button v-if="scope.row.status === 1 && canApplyRefund" size="mini" type="danger" @click="openReturnDialog(scope.row)">退货</el-button>
-            </template>
+            <el-button v-if="canEditOrder(scope.row)" size="mini" @click="openEditOrder(scope.row)">修改</el-button>
+            <el-button v-if="canViewLogistics(scope.row)" size="mini" @click="openLogisticsDialog(scope.row)">查看物流</el-button>
+            <el-button v-if="canConfirmReceive(scope.row)" size="mini" type="success" @click="confirmReceive(scope.row)">确认收货</el-button>
+            <el-button v-if="canCommentOrder(scope.row)" size="mini" @click="openCommentDialog(scope.row)">评价</el-button>
+            <el-button v-if="canReturnOrder(scope.row)" size="mini" type="danger" @click="openReturnDialog(scope.row)">退货</el-button>
+            <el-tag v-if="!hasAnyOrderAction(scope.row)" size="mini" type="info">当前无需操作</el-tag>
           </template>
         </el-table-column>
       </el-table>
@@ -71,16 +72,19 @@
       <el-dialog title="修改订单" :visible.sync="orderEditDialogVisible" width="500px">
         <el-form ref="orderEditFormRef" :model="orderEditForm" :rules="orderRules" label-width="100px">
           <el-form-item label="订单号">
-            <el-input v-model="orderEditForm.id" disabled />
+            <el-input v-model="orderEditForm.orderSn" disabled />
+          </el-form-item>
+          <el-form-item label="球拍名称">
+            <el-input v-model="orderEditForm.productName" disabled />
           </el-form-item>
           <el-form-item label="数量">
             <el-input v-model.number="orderEditForm.quantity" type="number" min="1" />
           </el-form-item>
           <el-form-item label="收货人">
-            <el-input v-model="orderEditForm.receiver" placeholder="请输入收货人姓名" />
+            <el-input v-model="orderEditForm.receiverName" placeholder="请输入收货人姓名" />
           </el-form-item>
-          <el-form-item label="手机号码" prop="phone">
-            <el-input v-model="orderEditForm.phone" placeholder="请输入手机号" />
+          <el-form-item label="手机号码" prop="receiverPhone">
+            <el-input v-model="orderEditForm.receiverPhone" placeholder="请输入手机号" />
           </el-form-item>
           <el-form-item label="收货地址">
             <el-input v-model="orderEditForm.address" />
@@ -91,18 +95,21 @@
           <el-button type="primary" @click="submitEditOrder">保存</el-button>
         </span>
       </el-dialog>
+      <logistics-dialog v-model="logisticsDialogVisible" :records="logisticsRecords" />
     </el-card>
   </div>
 </template>
 
 <script>
-import { listUserOrders, updateUserOrder } from '@/api/userLogin'
+import { listUserOrders, updateUserOrder, confirmUserOrderReceive } from '@/api/userLogin'
 import { createUserReturnApply, listUserReturnApplies } from '@/api/userReturnApply'
 import { listUserReturnReasons } from '@/api/userReturnReason'
 import { hasPermission } from '@/utils/permission'
+import LogisticsDialog from '@/views/oms/order/components/logisticsDialog'
 
 export default {
   name: 'UserOrders',
+  components: { LogisticsDialog },
   data() {
     return {
       orderList: [],
@@ -110,9 +117,9 @@ export default {
       totalOrders: 0,
       loadingOrders: false,
       orderEditDialogVisible: false,
-      orderEditForm: { id: null, quantity: 1, receiver: '', phone: '', address: '' },
+      orderEditForm: { id: null, orderSn: '', productName: '', quantity: 1, receiverName: '', receiverPhone: '', address: '' },
       orderRules: {
-        phone: [
+        receiverPhone: [
           {
             validator: (rule, value, callback) => {
               if (!value) return callback(new Error('请输入手机号'))
@@ -127,7 +134,8 @@ export default {
       returnDialogVisible: false,
       returnForm: { orderId: null, reason: '', customReason: '' },
       returnReasonList: [],
-      orderReturnMap: {}
+      logisticsDialogVisible: false,
+      logisticsRecords: []
     }
   },
   mounted() {
@@ -171,20 +179,17 @@ export default {
           const outer = res && res.data ? res.data : res
           const data = outer && outer.data ? outer.data : outer
           const list = data.records || data.list || data || []
-          const map = {}
           for (let i = 0; i < list.length; i++) {
             const item = list[i]
-            const oid = item.orderId
-            const status = item.status !== undefined && item.status !== null ? item.status : item.returnStatus !== undefined ? item.returnStatus : 0
-            if (oid != null) {
-              map[oid] = status
+            const order = this.orderList.find(orderItem => orderItem.id === item.orderId)
+            if (order) {
+              order.returnApplyStatus = item.status
+              order.returnApplyId = item.id
             }
           }
-          this.orderReturnMap = map
         })
         .catch(err => {
           console.warn('加载用户退货映射失败（已静默）', err)
-          this.orderReturnMap = {}
         })
     },
     openReturnDialog(order) {
@@ -230,13 +235,16 @@ export default {
       this.getOrders()
     },
     openEditOrder(order) {
-      if (!this.canUpdateOwnOrder) return
+      if (!this.canEditOrder(order)) return
+      const firstItem = order.orderItems && order.orderItems.length > 0 ? order.orderItems[0] : {}
       this.orderEditForm = {
         id: order.id,
-        quantity: order.quantity,
-        receiver: order.receiver || order.consignee || order.consigneeName || order.receiverName || '',
-        phone: order.phone || order.mobile || '',
-        address: order.address
+        orderSn: order.orderSn || '',
+        productName: firstItem.productName || '未命名商品',
+        quantity: firstItem.productQuantity || 1,
+        receiverName: order.receiverName || '',
+        receiverPhone: order.receiverPhone || '',
+        address: order.address || ''
       }
       this.orderEditDialogVisible = true
     },
@@ -245,8 +253,8 @@ export default {
         const payload = {
           id: this.orderEditForm.id,
           quantity: this.orderEditForm.quantity,
-          receiver: this.orderEditForm.receiver,
-          phone: this.orderEditForm.phone,
+          receiverName: this.orderEditForm.receiverName,
+          receiverPhone: this.orderEditForm.receiverPhone,
           address: this.orderEditForm.address
         }
         updateUserOrder(payload).then(() => {
@@ -268,6 +276,103 @@ export default {
     openCommentDialog() {
       if (!this.canCreateOwnReview) return
       this.$router.push({ path: '/user/comments' })
+    },
+    getOrderStatusText(order) {
+      const returnStatus = order.returnApplyStatus
+      if (returnStatus === 0) return '售后审核中'
+      if (returnStatus === 1) return '退货中'
+      if (returnStatus === 2) return '已退货'
+      if (returnStatus === 3) return '退货被拒绝'
+      return this.$options.filters.formatOrderStatus(order.status)
+    },
+    getReturnStatusText(status) {
+      const statusMap = {
+        0: '退货待审核',
+        1: '退货处理中',
+        2: '退货已完成',
+        3: '退货被拒绝'
+      }
+      return statusMap[status] || '售后中'
+    },
+    getReturnTagType(status) {
+      const map = {
+        0: 'warning',
+        1: '',
+        2: 'success',
+        3: 'danger'
+      }
+      return map[status] || 'info'
+    },
+    canEditOrder(order) {
+      return this.canUpdateOwnOrder && order.status === 1 && (order.returnApplyStatus === null || order.returnApplyStatus === undefined)
+    },
+    canCommentOrder(order) {
+      if (!this.canCreateOwnReview) return false
+      if (order.returnApplyStatus === 0 || order.returnApplyStatus === 1) return false
+      return order.status === 3 || order.returnApplyStatus === 2 || order.returnApplyStatus === 3
+    },
+    canViewLogistics(order) {
+      return !!(order.deliveryCompany || order.deliverySn || order.status === 2 || order.status === 3)
+    },
+    canConfirmReceive(order) {
+      if (!this.canUpdateOwnOrder) return false
+      if (order.returnApplyStatus === 0 || order.returnApplyStatus === 1 || order.returnApplyStatus === 2) return false
+      return order.status === 2
+    },
+    canReturnOrder(order) {
+      if (!this.canApplyRefund) return false
+      if (order.returnApplyStatus !== null && order.returnApplyStatus !== undefined) return false
+      return order.status === 1 || order.status === 2 || order.status === 3
+    },
+    hasAnyOrderAction(order) {
+      return this.canEditOrder(order) || this.canViewLogistics(order) || this.canConfirmReceive(order) || this.canCommentOrder(order) || this.canReturnOrder(order)
+    },
+    buildLogisticsRecords(order) {
+      const records = []
+      if (order.createTime) {
+        records.push({ name: '订单已提交', time: order.createTime })
+      }
+      if (order.status >= 1) {
+        records.push({ name: '商家已接单，等待发货', time: order.updateTime || order.createTime || '' })
+      }
+      if (order.deliveryTime) {
+        records.push({ name: `商家已发货（${order.deliveryCompany || '物流公司待补充'} ${order.deliverySn || ''}）`, time: order.deliveryTime })
+      }
+      if (order.returnApplyStatus === 0) {
+        records.push({ name: '用户已提交退货申请，等待商家审核', time: order.updateTime || '' })
+      }
+      if (order.returnApplyStatus === 1) {
+        records.push({ name: '商家已同意退货，等待用户寄回商品', time: order.updateTime || '' })
+      }
+      if (order.returnApplyStatus === 2) {
+        records.push({ name: '用户退货已完成，商品已回仓', time: order.updateTime || '' })
+      }
+      if (order.returnApplyStatus === 3) {
+        records.push({ name: '退货申请被驳回，订单继续履约', time: order.updateTime || '' })
+      }
+      if (order.status === 3) {
+        records.push({ name: '用户已确认收货', time: order.updateTime || order.deliveryTime || '' })
+      }
+      if (records.length === 0) {
+        records.push({ name: '暂无物流信息', time: '' })
+      }
+      return records
+    },
+    openLogisticsDialog(order) {
+      this.logisticsRecords = this.buildLogisticsRecords(order)
+      this.logisticsDialogVisible = true
+    },
+    confirmReceive(order) {
+      this.$confirm('确认已经收到商品了吗？确认后订单将变为已完成。', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        confirmUserOrderReceive(order.id).then(() => {
+          this.$message({ type: 'success', message: '确认收货成功', duration: 1000 })
+          this.getOrders()
+        })
+      })
     }
   },
   filters: {

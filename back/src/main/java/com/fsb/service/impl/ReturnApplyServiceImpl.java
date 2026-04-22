@@ -1,12 +1,14 @@
 package com.fsb.Service.impl;
 
 import com.fsb.Mapper.ReturnApplyMapper;
+import com.fsb.Mapper.OrderMapper;
 import com.fsb.Mapper.ReturnReasonMapper;
 import com.fsb.Mapper.UserMapper;
 import com.fsb.Service.ReturnApplyService;
 import com.fsb.pojo.DTO.ReturnReasonDTO;
 import com.fsb.pojo.VO.OmsReturnApplyVO;
 import com.fsb.pojo.entity.OmsReturnApply;
+import com.fsb.pojo.entity.Order;
 import com.fsb.pojo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,12 +27,27 @@ public class ReturnApplyServiceImpl implements ReturnApplyService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private OrderMapper orderMapper;
+
     /**
      * 用户创建退货申请
      * @param dto
      */
     @Override
     public void createReturnApply(ReturnReasonDTO dto) {
+        Order order = orderMapper.getById(dto.getOrderId());
+        if (order == null) {
+            throw new RuntimeException("订单不存在");
+        }
+        if (order.getMemberUsername() == null || !order.getMemberUsername().equals(dto.getName())) {
+            throw new RuntimeException("无权申请该订单的退货");
+        }
+        Integer activeCount = returnApplyMapper.countActiveByOrderId(dto.getOrderId());
+        if (activeCount != null && activeCount > 0) {
+            throw new RuntimeException("该订单已有进行中的退货申请");
+        }
+
         OmsReturnApply apply = new OmsReturnApply();
         apply.setOrderId(dto.getOrderId());
         apply.setUsername(dto.getName());
@@ -53,6 +70,19 @@ public class ReturnApplyServiceImpl implements ReturnApplyService {
      */
     @Override
     public List<OmsReturnApplyVO> getUserReturnApplyList(String username) {
-        return returnApplyMapper.listByUsername(username);
+        List<OmsReturnApplyVO> list = returnApplyMapper.listByUsername(username);
+        for (OmsReturnApplyVO vo : list) {
+            Order order = orderMapper.getById(vo.getOrderId());
+            if (order != null) {
+                vo.setOrder(order);
+                vo.setOrderSn(order.getOrderSn());
+                vo.setMemberUsername(order.getMemberUsername());
+                vo.setReceiverName(order.getReceiverName());
+                vo.setReceiverPhone(order.getReceiverPhone());
+                vo.setAddress(order.getAddress());
+                vo.setReturnAmount(order.getTotalAmount());
+            }
+        }
+        return list;
     }
 }

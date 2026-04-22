@@ -34,6 +34,9 @@ public class OmsReturnApplyVO {
 
     private Order order;
     private List<OrderItem> orderItems;
+    private String orderSn;
+    private String memberUsername;
+    private String address;
 
     private String handleNote;
     private String handleMan;

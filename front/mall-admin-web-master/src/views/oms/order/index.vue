@@ -89,6 +89,14 @@
         <el-table-column label="订单状态" width="120" align="center">
           <template slot-scope="scope">{{scope.row.status | formatStatus}}</template>
         </el-table-column>
+        <el-table-column label="售后状态" width="140" align="center">
+          <template slot-scope="scope">
+            <el-tag v-if="scope.row.returnApplyStatus !== null && scope.row.returnApplyStatus !== undefined" size="mini" :type="formatReturnTagType(scope.row.returnApplyStatus)">
+              {{ formatReturnStatus(scope.row.returnApplyStatus) }}
+            </el-tag>
+            <span v-else>无</span>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" width="200" align="center">
           <template slot-scope="scope">
             <el-button
@@ -102,7 +110,7 @@
             <el-button
               size="mini"
               @click="handleDeliveryOrder(scope.$index, scope.row)"
-              v-show="scope.row.status===1">订单发货</el-button>
+              v-show="scope.row.status===1 && !hasActiveReturn(scope.row)">订单发货</el-button>
             <el-button
               size="mini"
               @click="handleViewLogistics(scope.$index, scope.row)"
@@ -297,6 +305,27 @@
       },
     },
     methods: {
+      formatReturnStatus(value) {
+        const map = {
+          0: '用户退货待审核',
+          1: '用户退货中',
+          2: '用户已退货',
+          3: '用户退货被拒绝'
+        }
+        return map[value] || '售后中'
+      },
+      formatReturnTagType(value) {
+        const map = {
+          0: 'warning',
+          1: '',
+          2: 'success',
+          3: 'danger'
+        }
+        return map[value] || 'info'
+      },
+      hasActiveReturn(order) {
+        return order.returnApplyStatus === 0 || order.returnApplyStatus === 1
+      },
       handleResetSearch() {
         this.listQuery = Object.assign({}, defaultListQuery);
       },
@@ -462,5 +491,3 @@
     width: 203px;
   }
 </style>
-
-

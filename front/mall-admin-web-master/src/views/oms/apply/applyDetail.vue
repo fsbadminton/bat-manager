@@ -1,7 +1,7 @@
 <template>
   <div class="detail-container">
     <el-card shadow="never" class="process-guide">
-      <span class="font-title-medium">📋 退货处理流程说明</span>
+      <span class="font-title-medium">退货处理流程说明</span>
       <el-steps :active="orderReturnApply.status" process-status="process" align-center style="margin-top: 20px">
         <el-step title="待处理" description="用户已提交退货申请">
           <template slot="icon">
@@ -125,7 +125,7 @@
                        style="width:200px"
                        :disabled="orderReturnApply.status!==0"
                        v-model="orderReturnApply.companyAddress">
-              <el-option :value="1" label="福州商家退货中心"></el-option>
+              <el-option value="福州商家退货中心" label="福州商家退货中心"></el-option>
 
             </el-select>
           </el-col>
@@ -158,8 +158,8 @@
           <el-col class="form-border font-small" :span="18">{{orderReturnApply.handleTime | formatTime}}</el-col>
         </el-row>
         <el-row>
-          <el-col class="form-border form-left-bg font-small" :span="6">处理备注</el-col>
-          <el-col class="form-border font-small" :span="18">{{ orderReturnApply.handleNote ? orderReturnApply.handleNote : '无' }}</el-col>
+          <el-col class="form-border form-left-bg font-small" :span="6">处理说明</el-col>
+          <el-col class="form-border font-small" :span="18">{{ buildProcessNote(orderReturnApply.status) }}</el-col>
         </el-row>
       </div>
       <div class="form-container-border" v-show="orderReturnApply.status===2">
@@ -172,24 +172,8 @@
           <el-col class="form-border font-small" :span="18">{{orderReturnApply.receiveTime | formatTime}}</el-col>
         </el-row>
         <el-row>
-          <el-col class="form-border form-left-bg font-small" :span="6">收货备注</el-col>
-          <el-col class="form-border font-small" :span="18">{{orderReturnApply.receiveNote? orderReturnApply.receiveNote:'无'}}</el-col>
-        </el-row>
-      </div>
-      <div class="form-container-border" v-show="orderReturnApply.status===0">
-        <el-row>
-          <el-col class="form-border form-left-bg font-small" :span="6" style="height:52px;line-height:32px">处理备注</el-col>
-          <el-col class="form-border font-small" :span="18">
-            <el-input  size="small" v-model="updateStatusParam.handleNote" placeholder="请输入处理备注（同意或拒绝的原因）" style="width:200px;margin-left: 10px"></el-input>
-          </el-col>
-        </el-row>
-      </div>
-      <div class="form-container-border" v-show="orderReturnApply.status===1">
-        <el-row>
-          <el-col class="form-border form-left-bg font-small" :span="6" style="height:52px;line-height:32px">收货备注</el-col>
-          <el-col class="form-border font-small" :span="18">
-            <el-input  size="small" v-model="updateStatusParam.receiveNote" style="width:200px;margin-left: 10px"></el-input>
-          </el-col>
+          <el-col class="form-border form-left-bg font-small" :span="6">收货说明</el-col>
+          <el-col class="form-border font-small" :span="18">商品已回仓，售后流程完成</el-col>
         </el-row>
       </div>
       <div style="margin-top:15px;text-align: center" v-show="orderReturnApply.status===0">
@@ -208,18 +192,14 @@
   import {formatDate} from '@/utils/date';
 
   const defaultUpdateStatusParam = {
-    companyAddressId: null,
     handleMan: 'admin',
-    handleNote: null,
     receiveMan: 'admin',
-    receiveNote: null,
     returnAmount: 0,
     status: 0
   };
   const defaultOrderReturnApply = {
     id: null,
     orderId: null,
-    companyAddressId: null,
     productId: null,
     orderSn: null,
     createTime: null,
@@ -240,11 +220,9 @@
     reason: null,
     description: null,
     proofPics: null,
-    handleNote: null,
     handleMan: null,
     receiveMan: null,
-    receiveTime: null,
-    receiveNote: null
+    receiveTime: null
   };
   export default {
     name: 'returnApplyDetail',
@@ -254,8 +232,7 @@
         orderReturnApply: Object.assign({},defaultOrderReturnApply),
         productList: null,
         proofPics: null,
-        updateStatusParam: Object.assign({}, defaultUpdateStatusParam),
-        companyAddressList: null
+        updateStatusParam: Object.assign({}, defaultUpdateStatusParam)
       }
     },
     created() {
@@ -281,18 +258,6 @@
           return this.orderReturnApply.order.totalAmount;
         }
         return 0;
-      },
-      currentAddress() {
-        console.log("currentAddress()");
-        let id = this.updateStatusParam.companyAddressId;
-        if(this.companyAddressList==null)return {};
-        for (let i = 0; i < this.companyAddressList.length; i++) {
-          let address = this.companyAddressList[i];
-          if (address.id === id) {
-            return address;
-          }
-        }
-        return null;
       }
     },
     filters: {
@@ -352,7 +317,6 @@
           this.orderReturnApply.reason = this.orderReturnApply.reason || res.reason || null;
           this.orderReturnApply.description = this.orderReturnApply.description || res.description || null;
           this.orderReturnApply.handleMan = this.orderReturnApply.handleMan || res.handleMan || null;
-          this.orderReturnApply.handleNote = this.orderReturnApply.handleNote || res.handleNote || null;
           this.orderReturnApply.handleTime = this.orderReturnApply.handleTime || res.handleTime || null;
 
           // normalize product list: prefer orderItems, then order.orderItems, then root fields
@@ -399,24 +363,12 @@
           // 退货中和完成时预填退款金额/收货点
           if (this.orderReturnApply.status === 1 || this.orderReturnApply.status === 2) {
             this.updateStatusParam.returnAmount = this.orderReturnApply.returnAmount;
-            this.updateStatusParam.companyAddressId = this.orderReturnApply.companyAddressId;
-          }
-          this.getCompanyAddressList();
-        });
-      },
-      getCompanyAddressList() {
-        fetchList().then(response => {
-          console.log("getCompanyAddressList()")
-          this.companyAddressList = response.data;
-          for (let i = 0; i < this.companyAddressList.length; i++) {
-            if (this.companyAddressList[i].receiveStatus === 1&&this.orderReturnApply.status===0) {
-              this.updateStatusParam.companyAddressId = this.companyAddressList[i].id;
-            }
           }
         });
       },
       handleUpdateStatus(status){
         this.updateStatusParam.status=status;
+        this.updateStatusParam.companyAddress = this.orderReturnApply.companyAddress;
         this.$confirm('是否要进行此操作?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -431,6 +383,12 @@
             this.$router.back();
           });
         });
+      },
+      buildProcessNote(status) {
+        if (status === 1) return '商家已同意退货，请等待用户寄回商品'
+        if (status === 2) return '商家已确认收货，退款/退货流程已结束'
+        if (status === 3) return '商家已拒绝本次退货申请'
+        return '等待商家审核'
       }
     }
   }
@@ -471,5 +429,3 @@
     background: #F2F6FC;
   }
 </style>
-
-

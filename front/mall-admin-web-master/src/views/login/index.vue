@@ -58,21 +58,34 @@
 
     <img :src="login_center_bg" class="login-center-layout" />
 
-    <el-dialog title="用户注册" :visible.sync="registerDialogVisible" width="400px">
-      <el-form :model="registerForm" label-position="left" label-width="80px">
-        <el-form-item label="用户名">
-          <el-input v-model="registerForm.username" />
+    <el-dialog title="用户注册" :visible.sync="registerDialogVisible" width="420px" @close="resetRegisterForm">
+      <el-form ref="registerForm" :model="registerForm" :rules="registerRules" label-position="left" label-width="80px">
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="registerForm.username" placeholder="请输入用户名" />
         </el-form-item>
-        <el-form-item label="密码">
-          <el-input v-model="registerForm.password" type="password" />
+        <el-form-item label="密码" prop="password">
+          <el-input v-model="registerForm.password" type="password" placeholder="请输入密码（至少6位）" />
         </el-form-item>
-        <el-form-item label="邮箱">
-          <el-input v-model="registerForm.email" />
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="registerForm.email" placeholder="请输入邮箱" />
+        </el-form-item>
+        <el-form-item label="验证码" prop="code">
+          <el-input v-model="registerForm.code" placeholder="请输入验证码" style="width: 55%" />
+          <el-button
+            :disabled="codeBtnDisabled"
+            style="margin-left: 8px; width: 38%"
+            @click="sendCode"
+          >{{ codeBtnText }}</el-button>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="registerDialogVisible = false">取消</el-button>
-        <el-button type="primary" :loading="registerLoading" @click="submitRegister">注册</el-button>
+        <el-button
+          type="primary"
+          :loading="registerLoading"
+          :disabled="!registerFormComplete"
+          @click="submitRegister"
+        >注册</el-button>
       </span>
     </el-dialog>
   </div>
@@ -83,6 +96,8 @@ import { isvalidUsername } from '@/utils/validate'
 import { getCookie } from '@/utils/support'
 import login_center_bg from '@/assets/images/login_center_bg.png'
 import request from '@/utils/request'
+
+const EMAIL_REGEX = /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
 
 export default {
   name: 'login',
@@ -101,38 +116,54 @@ export default {
         callback()
       }
     }
+    const validateRegEmail = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error('请输入邮箱'))
+      } else if (!EMAIL_REGEX.test(value)) {
+        callback(new Error('邮箱格式不正确'))
+      } else {
+        callback()
+      }
+    }
 
     return {
-      loginForm: {
-        username: '',
-        password: ''
-      },
-      registerForm: {
-        username: '',
-        password: '',
-        email: ''
-      },
+      loginForm: { username: '', password: '' },
+      registerForm: { username: '', password: '', email: '', code: '' },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePass }]
+      },
+      registerRules: {
+        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+        password: [{ required: true, min: 6, message: '密码至少6位', trigger: 'blur' }],
+        email: [{ required: true, validator: validateRegEmail, trigger: 'blur' }],
+        code: [{ required: true, message: '请输入验证码', trigger: 'blur' }]
       },
       loading: false,
       registerLoading: false,
       pwdType: 'password',
       login_center_bg,
-      registerDialogVisible: false
+      registerDialogVisible: false,
+      codeBtnText: '获取验证码',
+      codeBtnDisabled: false,
+      codeCountdown: 0,
+      countdownTimer: null
+    }
+  },
+  computed: {
+    registerFormComplete() {
+      const f = this.registerForm
+      return !!(f.username && f.password && f.email && f.code)
     }
   },
   created() {
     this.loginForm.username = getCookie('username')
     this.loginForm.password = getCookie('password')
-
-    if (this.loginForm.username === undefined || this.loginForm.username === null || this.loginForm.username === '') {
-      this.loginForm.username = 'admin'
-    }
-    if (this.loginForm.password === undefined || this.loginForm.password === null) {
-      this.loginForm.password = ''
-    }
+    if (!this.loginForm.username) this.loginForm.username = 'admin'
+    if (!this.loginForm.password) this.loginForm.password = ''
+  },
+  beforeDestroy() {
+    if (this.countdownTimer) clearInterval(this.countdownTimer)
   },
   methods: {
     showPwd() {
@@ -140,9 +171,7 @@ export default {
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
-        if (!valid) {
-          return false
-        }
+        if (!valid) return false
         this.loading = true
         this.$store
           .dispatch('Login', this.loginForm)
@@ -152,46 +181,65 @@ export default {
             const payload = data && data.data ? data.data : data
             const roleRaw = payload.role || payload.userRole || payload.authority || ''
             const role = typeof roleRaw === 'string' ? roleRaw.toLowerCase() : roleRaw
-
-            let dest = '/'
-            if (role === 'admin') {
-              dest = '/pms/product'
-            } else if (role === 'user') {
-              dest = '/user'
-            } else if (String(this.loginForm.username).toLowerCase() === 'admin') {
-              dest = '/pms/product'
-            } else {
-              dest = '/user'
-            }
-
-            // 登录页只负责确定目标首页，动态路由统一由全局守卫按端身份注入
+            let dest = role === 'admin' ? '/pms/product' : '/user'
+            if (!role) dest = String(this.loginForm.username).toLowerCase() === 'admin' ? '/pms/product' : '/user'
             this.$router.push({ path: dest })
           })
-          .catch(() => {
-            this.loading = false
-          })
+          .catch(() => { this.loading = false })
       })
     },
     openRegister() {
       this.registerDialogVisible = true
     },
-    submitRegister() {
-      if (!this.registerForm.username || !this.registerForm.password) {
-        this.$message({ type: 'warning', message: '请输入用户名和密码', duration: 1500 })
+    resetRegisterForm() {
+      this.registerForm = { username: '', password: '', email: '', code: '' }
+      if (this.$refs.registerForm) this.$refs.registerForm.clearValidate()
+      if (this.countdownTimer) clearInterval(this.countdownTimer)
+      this.codeBtnText = '获取验证码'
+      this.codeBtnDisabled = false
+    },
+    sendCode() {
+      const email = this.registerForm.email
+      if (!EMAIL_REGEX.test(email)) {
+        this.$message({ type: 'warning', message: '请输入正确的邮箱地址', duration: 2000 })
         return
       }
-      this.registerLoading = true
-      request({ url: '/auth/register', method: 'post', data: this.registerForm })
+      request({ url: '/user/sendCode', method: 'post', data: { email } })
         .then(() => {
-          this.registerLoading = false
-          this.$message({ type: 'success', message: '注册成功', duration: 1500 })
-          this.registerDialogVisible = false
-          this.loginForm.username = this.registerForm.username
-          this.loginForm.password = this.registerForm.password
+          this.$message({ type: 'success', message: '验证码已发送，请查看后端控制台', duration: 3000 })
+          this.startCountdown()
         })
-        .catch(() => {
-          this.registerLoading = false
-        })
+        .catch(() => {})
+    },
+    startCountdown() {
+      this.codeCountdown = 60
+      this.codeBtnDisabled = true
+      this.codeBtnText = `${this.codeCountdown}s后重试`
+      this.countdownTimer = setInterval(() => {
+        this.codeCountdown--
+        if (this.codeCountdown <= 0) {
+          clearInterval(this.countdownTimer)
+          this.codeBtnDisabled = false
+          this.codeBtnText = '获取验证码'
+        } else {
+          this.codeBtnText = `${this.codeCountdown}s后重试`
+        }
+      }, 1000)
+    },
+    submitRegister() {
+      this.$refs.registerForm.validate(valid => {
+        if (!valid) return
+        this.registerLoading = true
+        request({ url: '/user/register', method: 'post', data: this.registerForm })
+          .then(() => {
+            this.registerLoading = false
+            this.$message({ type: 'success', message: '注册成功，请登录', duration: 2000 })
+            this.registerDialogVisible = false
+            this.loginForm.username = this.registerForm.username
+            this.loginForm.password = this.registerForm.password
+          })
+          .catch(() => { this.registerLoading = false })
+      })
     }
   }
 }

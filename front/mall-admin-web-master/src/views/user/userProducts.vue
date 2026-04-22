@@ -70,8 +70,8 @@
 
       <el-dialog title="下单购买" :visible.sync="orderDialogVisible" width="500px">
         <el-form ref="orderFormRef" :model="orderForm" :rules="orderRules" label-width="100px">
-          <el-form-item label="球拍ID">
-            <el-input v-model="orderForm.productId" disabled />
+          <el-form-item label="球拍名称">
+            <el-input v-model="orderForm.productName" disabled />
           </el-form-item>
           <el-form-item label="数量">
             <el-input v-model.number="orderForm.quantity" type="number" min="1" />
@@ -113,7 +113,7 @@ export default {
       brandOptions: [],
       productCateOptions: [],
       orderDialogVisible: false,
-      orderForm: { productId: null, quantity: 1, receiverName: '', receiverPhone: '', address: '', note: '' },
+      orderForm: { productId: null, productName: '', quantity: 1, receiverName: '', receiverPhone: '', address: '', note: '' },
       orderRules: {
         receiverPhone: [
           {
@@ -211,6 +211,7 @@ export default {
       if (!this.canCreateOrder) return
       this.orderForm = {
         productId: row.productId || row.id,
+        productName: row.name || row.productName || '',
         quantity: 1,
         receiverName: '',
         receiverPhone: '',

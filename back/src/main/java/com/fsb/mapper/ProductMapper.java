@@ -42,9 +42,15 @@ public interface ProductMapper {
     @Update("UPDATE product SET stock = stock - #{quantity} WHERE product_id = #{productId} AND stock >= #{quantity}")
     void reduceStock(Long productId, Integer quantity);
 
+    @Update("UPDATE product SET stock = stock + #{quantity} WHERE product_id = #{productId}")
+    void increaseStock(Long productId, Integer quantity);
+
 
     @Update("UPDATE product SET sale = sale + #{quantity} WHERE product_id = #{productId}")
     void increaseSales(Long productId, Integer quantity);
+
+    @Update("UPDATE product SET sale = CASE WHEN sale >= #{quantity} THEN sale - #{quantity} ELSE 0 END WHERE product_id = #{productId}")
+    void decreaseSales(Long productId, Integer quantity);
 
     Page<Product> pageQueryByUser(ProductPageQueryDTO productPageQueryDTO);
 }

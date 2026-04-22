@@ -58,8 +58,8 @@ service.interceptors.response.use(
     if (error.response) {
       const status = error.response.status
       const data = error.response.data
-      if (data && data.message) {
-        errorMessage = data.message
+      if (data && (data.message || data.msg)) {
+        errorMessage = data.msg || data.message
       } else if (status === 500) {
         errorMessage = '服务器内部错误(500)，请检查后端日志'
       } else if (status === 404) {

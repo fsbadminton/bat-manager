@@ -27,7 +27,11 @@
   export default {
     name:'logisticsDialog',
     props: {
-      value: Boolean
+      value: Boolean,
+      records: {
+        type: Array,
+        default: () => []
+      }
     },
     computed:{
       visible: {
@@ -41,7 +45,19 @@
     },
     data() {
       return {
-        logisticsList:Object.assign({},defaultLogisticsList)
+        logisticsList: defaultLogisticsList.slice()
+      }
+    },
+    watch: {
+      records: {
+        immediate: true,
+        handler(val) {
+          if (Array.isArray(val) && val.length > 0) {
+            this.logisticsList = val
+          } else {
+            this.logisticsList = defaultLogisticsList.slice()
+          }
+        }
       }
     },
     methods:{
@@ -55,5 +71,4 @@
   }
 </script>
 <style></style>
-
 

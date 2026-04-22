@@ -56,6 +56,9 @@ public class OmsReturnApplyServiceImpl implements OmsReturnApplyService {
         }
 
         Page<OmsReturnApply> page = omsReturnApplyMapper.pageQuery(omsReturnApplyPageQueryDTO);
+        for (OmsReturnApply apply : page.getResult()) {
+            enrichApply(apply);
+        }
         return new PageResult(page.getTotal(), page.getResult());
     }
 
@@ -74,16 +77,19 @@ public class OmsReturnApplyServiceImpl implements OmsReturnApplyService {
         }
 
         apply.setStatus(dto.getStatus());
-        apply.setHandleMan("连戍权");
+        apply.setHandleMan(dto.getHandleMan() == null || dto.getHandleMan().trim().isEmpty() ? "管理员" : dto.getHandleMan().trim());
         apply.setHandleTime(LocalDateTime.now());
-        apply.setCompanyAddress("福州商家退货中心");
+        if (dto.getCompanyAddress() != null && !dto.getCompanyAddress().trim().isEmpty()) {
+            apply.setCompanyAddress(dto.getCompanyAddress().trim());
+        } else if (apply.getCompanyAddress() == null || apply.getCompanyAddress().trim().isEmpty()) {
+            apply.setCompanyAddress("福州商家退货中心");
+        }
         apply.setId(id);
         log.info("更新退货申请状态：{}", apply);
-        // 当状态为已收货或处理中时，设置收获时间
-        if (dto.getStatus() == 2||dto.getStatus()==1) { // 假设2表示已收货
+        if (dto.getStatus() == 2) {
+            apply.setReceiveMan(apply.getHandleMan());
             apply.setReceiveTime(LocalDateTime.now());
         }
-        // 如果你表里没有 note 字段，可以不写
         omsReturnApplyMapper.updateById(apply);
     }
 
@@ -108,13 +114,42 @@ public class OmsReturnApplyServiceImpl implements OmsReturnApplyService {
         Order order = orderMapper.getById(apply.getOrderId());
         if (order != null) {
             vo.setOrder( order);
+            vo.setOrderSn(order.getOrderSn());
+            vo.setMemberUsername(order.getMemberUsername());
+            vo.setReceiverName(order.getReceiverName());
+            vo.setReceiverPhone(order.getReceiverPhone());
+            vo.setAddress(order.getAddress());
         }
-        vo.setReturnAmount(order.getTotalAmount());
+        if (order != null) {
+            vo.setReturnAmount(order.getTotalAmount());
+        }
 
 
         //查订单详情
         List<OrderItem> items = orderItemMapper.getOrderItemsByOrderId(String.valueOf(apply.getOrderId()));
         vo.setOrderItems(items);
+        if (items != null && !items.isEmpty()) {
+            OrderItem firstItem = items.get(0);
+            vo.setProductId(firstItem.getProductId());
+            vo.setProductCount(firstItem.getProductQuantity());
+            vo.setProductRealPrice(firstItem.getProductPrice());
+        }
         return vo;
+    }
+
+    private void enrichApply(OmsReturnApply apply) {
+        if (apply == null || apply.getOrderId() == null) {
+            return;
+        }
+        List<OrderItem> items = orderItemMapper.getOrderItemsByOrderId(String.valueOf(apply.getOrderId()));
+        if (items != null && !items.isEmpty()) {
+            OrderItem firstItem = items.get(0);
+            apply.setProductId(firstItem.getProductId());
+            apply.setProductCount(firstItem.getProductQuantity());
+            apply.setProductRealPrice(firstItem.getProductPrice());
+            if (firstItem.getProductPrice() != null && firstItem.getProductQuantity() != null) {
+                apply.setReturnAmount(firstItem.getProductPrice().multiply(java.math.BigDecimal.valueOf(firstItem.getProductQuantity())));
+            }
+        }
     }
 }

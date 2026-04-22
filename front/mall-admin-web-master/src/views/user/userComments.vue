@@ -34,7 +34,7 @@
       </div>
 
       <el-table :data="commentList" v-loading="loadingComments" border style="width: 100%">
-        <el-table-column label="评论ID" prop="id" width="120" align="center" />
+        <el-table-column v-if="isAdmin" label="评论ID" prop="id" width="120" align="center" />
         <el-table-column label="评论用户" prop="memberUsername" width="160" align="center" />
         <el-table-column label="评分" prop="star" width="150" align="center">
           <template slot-scope="scope">
@@ -66,7 +66,7 @@
 
       <el-dialog title="修改评论" :visible.sync="editCommentDialogVisible" width="500px">
         <el-form :model="editingComment" label-width="100px">
-          <el-form-item label="评论ID">
+          <el-form-item v-if="isAdmin" label="评论ID">
             <el-input v-model="editingComment.id" disabled />
           </el-form-item>
           <el-form-item label="内容">
@@ -206,6 +206,8 @@ export default {
           const opts = []
           for (let i = 0; i < orders.length; i++) {
             const ord = orders[i]
+            const canReview = ord.status === 3 || ord.returnApplyStatus === 2 || ord.returnApplyStatus === 3
+            if (!canReview) continue
             const orderId = ord.id || ord.orderId || ord.orderNo
             const orderSn = ord.orderSn || ''
             if (ord.orderItems && Array.isArray(ord.orderItems)) {

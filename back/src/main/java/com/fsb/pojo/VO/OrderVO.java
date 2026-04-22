@@ -35,6 +35,8 @@ public class OrderVO {
     private String deliveryCompany;
     private String deliverySn;
     private LocalDateTime createTime;
+    private Integer returnApplyStatus;
+    private Long returnApplyId;
 
     // 订单商品明细列表
     private List<OrderItem> orderItems;

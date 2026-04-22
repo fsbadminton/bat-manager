@@ -19,4 +19,10 @@ public interface ReturnApplyMapper {
 
     @Select("select * from return_apply where username =#{username}")
     List<OmsReturnApplyVO> listByUsername(String username);
+
+    @Select("select * from return_apply where order_id = #{orderId} order by id desc limit 1")
+    OmsReturnApply getLatestByOrderId(Long orderId);
+
+    @Select("select count(*) from return_apply where order_id = #{orderId} and status in (0,1)")
+    Integer countActiveByOrderId(Long orderId);
 }

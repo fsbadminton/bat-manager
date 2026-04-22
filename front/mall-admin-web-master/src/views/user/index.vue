@@ -129,18 +129,21 @@
               <el-pagination background @size-change="handleOrderSizeChange" @current-change="handleOrderCurrentChange" layout="total, sizes, prev, pager, next, jumper" :page-size="orderQuery.pageSize" :page-sizes="[5,10,15]" :current-page.sync="orderQuery.pageNum" :total="totalOrders" />
             </div>
             <el-dialog title="修改订单" :visible.sync="orderEditDialogVisible" width="500px">
-              <el-form ref="orderEditFormRef" :model="orderEditForm" :rules="orderRules" label-width="100px">
-                <el-form-item label="订单号">
-                  <el-input v-model="orderEditForm.id" disabled/>
-                </el-form-item>
-                <el-form-item label="数量">
+                <el-form ref="orderEditFormRef" :model="orderEditForm" :rules="orderRules" label-width="100px">
+                  <el-form-item label="订单号">
+                  <el-input v-model="orderEditForm.orderSn" disabled/>
+                  </el-form-item>
+                  <el-form-item label="球拍名称">
+                    <el-input v-model="orderEditForm.productName" disabled/>
+                  </el-form-item>
+                  <el-form-item label="数量">
                   <el-input v-model.number="orderEditForm.quantity" type="number" min="1" />
-                </el-form-item>
-                <el-form-item label="收货人">
-                  <el-input v-model="orderEditForm.receiver" placeholder="请输入收货人姓名" />
-                </el-form-item>
-                <el-form-item label="手机号" prop="phone">
-                  <el-input v-model="orderEditForm.phone" placeholder="请输入手机号" />
+                  </el-form-item>
+                  <el-form-item label="收货人">
+                  <el-input v-model="orderEditForm.receiverName" placeholder="请输入收货人姓名" />
+                  </el-form-item>
+                <el-form-item label="手机号" prop="receiverPhone">
+                  <el-input v-model="orderEditForm.receiverPhone" placeholder="请输入手机号" />
                 </el-form-item>
                 <el-form-item label="收货地址">
                   <el-input v-model="orderEditForm.address" />
@@ -177,7 +180,6 @@
               </div>
             </div>
             <el-table :data="commentList" v-loading="loadingComments" border style="width:100%">
-              <el-table-column label="评论ID" prop="id" width="120" align="center"/>
               <el-table-column label="评分" prop="star" width="150" align="center">
                 <template slot-scope="scope">
                   <el-rate
@@ -201,9 +203,6 @@
             </div>
             <el-dialog title="修改评论" :visible.sync="editCommentDialogVisible" width="500px">
               <el-form :model="editingComment" label-width="100px">
-                <el-form-item label="评论ID">
-                  <el-input v-model="editingComment.id" disabled/>
-                </el-form-item>
                 <el-form-item label="内容">
                   <el-input type="textarea" v-model="editingComment.content" />
                 </el-form-item>
@@ -253,7 +252,7 @@ export default {
       totalOrders: 0,
       loadingOrders: false,
       orderEditDialogVisible: false,
-      orderEditForm: { id: null, quantity: 1, receiverName: '', receiverPhone: '', address: '',note:'' },
+      orderEditForm: { id: null, orderSn: '', productName: '', quantity: 1, receiverName: '', receiverPhone: '', address: '', note:'' },
       commentQuery: { productName: null, pageNum: 1, pageSize: 5 },
       commentList: [],
       commentDialogVisible: false,
@@ -432,9 +431,11 @@ export default {
     openEditOrder(order) {
       this.orderEditForm = {
         id: order.id,
-        quantity: order.quantity,
-        receiverName: order.receiver || order.consignee || order.consigneeName || order.receiverName || '',
-        receiverPhone: order.phone || order.mobile || '',
+        orderSn: order.orderSn || '',
+        productName: order.orderItems && order.orderItems.length > 0 ? order.orderItems[0].productName : '未命名商品',
+        quantity: order.orderItems && order.orderItems.length > 0 ? order.orderItems[0].productQuantity : 1,
+        receiverName: order.receiverName || '',
+        receiverPhone: order.receiverPhone || '',
         address: order.address,
         note:order.note
       }
@@ -454,8 +455,8 @@ export default {
       const payload = {
         id: this.orderEditForm.id,
         quantity: this.orderEditForm.quantity,
-        receiver: this.orderEditForm.receiverName,
-        phone: this.orderEditForm.receiverPhone,
+        receiverName: this.orderEditForm.receiverName,
+        receiverPhone: this.orderEditForm.receiverPhone,
         address: this.orderEditForm.address,
         note:this.orderEditForm.note
       }

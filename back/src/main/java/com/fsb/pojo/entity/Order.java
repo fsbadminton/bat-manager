@@ -37,6 +37,8 @@ public class Order {
     private LocalDateTime deliveryTime;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private Integer returnApplyStatus;
+    private Long returnApplyId;
 
     // 订单商品明细列表
     private List<OrderItem> orderItems;

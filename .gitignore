@@ -5,3 +5,19 @@ temp/
 
 # 后端本地配置
 back/src/main/resources/application.yml
+
+# redis本地持久化快照文件
+dump.rdb
+
+# IDE / system
+.DS_Store
+back/.idea/
+
+# Build output
+back/target/
+
+# Maven wrapper downloaded binaries/cache
+back/.mvn/wrapper/download/
+
+# 垃圾
+task.md

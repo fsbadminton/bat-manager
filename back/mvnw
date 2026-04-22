@@ -1,0 +1,48 @@
+#!/bin/sh
+
+set -eu
+
+BASE_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+WRAPPER_PROPS="$BASE_DIR/.mvn/wrapper/maven-wrapper.properties"
+
+if [ ! -f "$WRAPPER_PROPS" ]; then
+  echo "Missing $WRAPPER_PROPS" >&2
+  exit 1
+fi
+
+DISTRIBUTION_URL=$(sed -n 's/^distributionUrl=//p' "$WRAPPER_PROPS")
+if [ -z "$DISTRIBUTION_URL" ]; then
+  echo "distributionUrl not found in $WRAPPER_PROPS" >&2
+  exit 1
+fi
+
+ARCHIVE_NAME=$(basename "$DISTRIBUTION_URL")
+MAVEN_DIR_NAME=${ARCHIVE_NAME%-bin.zip}
+DOWNLOAD_DIR="$BASE_DIR/.mvn/wrapper/download"
+ARCHIVE_PATH="$DOWNLOAD_DIR/$ARCHIVE_NAME"
+MAVEN_HOME="$DOWNLOAD_DIR/$MAVEN_DIR_NAME"
+MVN_BIN="$MAVEN_HOME/bin/mvn"
+
+mkdir -p "$DOWNLOAD_DIR"
+
+if [ ! -x "$MVN_BIN" ]; then
+  if [ ! -f "$ARCHIVE_PATH" ]; then
+    if command -v curl >/dev/null 2>&1; then
+      curl -fsSL "$DISTRIBUTION_URL" -o "$ARCHIVE_PATH"
+    elif command -v wget >/dev/null 2>&1; then
+      wget -q "$DISTRIBUTION_URL" -O "$ARCHIVE_PATH"
+    else
+      echo "curl or wget is required to download Maven." >&2
+      exit 1
+    fi
+  fi
+
+  rm -rf "$MAVEN_HOME"
+  unzip -q -o "$ARCHIVE_PATH" -d "$DOWNLOAD_DIR"
+fi
+
+export LANG="${LANG:-zh_CN.UTF-8}"
+export LC_ALL="${LC_ALL:-zh_CN.UTF-8}"
+export MAVEN_OPTS="${MAVEN_OPTS:+$MAVEN_OPTS }-Dfile.encoding=UTF-8"
+
+exec "$MVN_BIN" "$@"

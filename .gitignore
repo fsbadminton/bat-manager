@@ -1,23 +1,71 @@
-# 数据库文件
+# =========================
+# Database / local data
+# =========================
 *.sql
 *.db
 temp/
-
-# 后端本地配置
-back/src/main/resources/application.yml
-
-# redis本地持久化快照文件
 dump.rdb
 
-# IDE / system
+# =========================
+# Local config
+# =========================
+back/src/main/resources/application.yml
+
+# =========================
+# OS / Editor
+# =========================
 .DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+
+.idea/
+.vscode/
 back/.idea/
 
-# Build output
-back/target/
+*.swp
+*.swo
+*~
 
-# Maven wrapper downloaded binaries/cache
+# =========================
+# Backend build output
+# =========================
+back/target/
+*.class
+*.jar
+*.war
+*.nar
+*.out
+
+# Maven wrapper downloaded cache
 back/.mvn/wrapper/download/
 
-# 垃圾
+# =========================
+# Frontend dependencies / build
+# =========================
+front/mall-admin-web-master/node_modules/
+front/mall-admin-web-master/dist/
+
+# =========================
+# Logs
+# =========================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Runtime / temp
+# =========================
+*.pid
+*.pid.lock
+*.seed
+*.tmp
+*.temp
+
+# =========================
+# Misc
+# =========================
 task.md

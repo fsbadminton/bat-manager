@@ -34,7 +34,11 @@ public class OrderVO {
     private String adminNote;  // 管理员备注
     private String deliveryCompany;
     private String deliverySn;
+    private LocalDateTime deliveryTime;
     private LocalDateTime createTime;
+    private LocalDateTime updateTime;
+    private BigDecimal couponAmount;
+    private Long couponHistoryId;
     private Integer returnApplyStatus;
     private Long returnApplyId;
 

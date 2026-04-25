@@ -4,10 +4,12 @@ import com.fsb.Mapper.OrderItemMapper;
 import com.fsb.Mapper.OrderMapper;
 import com.fsb.Mapper.ProductMapper;
 import com.fsb.Mapper.ReturnApplyMapper;
+import com.fsb.Service.CouponService;
 import com.fsb.Service.UserOrderService;
 import com.fsb.pojo.DTO.OrderPageQueryDTO;
 import com.fsb.pojo.DTO.UserOrderCreateDTO;
 import com.fsb.pojo.DTO.UserOrderUpdateDTO;
+import com.fsb.pojo.entity.CouponHistory;
 import com.fsb.pojo.VO.OrderVO;
 import com.fsb.pojo.entity.OmsReturnApply;
 import com.fsb.pojo.entity.Order;
@@ -40,6 +42,9 @@ public class UserOrderServiceImpl implements UserOrderService {
     @Autowired
     private ReturnApplyMapper returnApplyMapper;
 
+    @Autowired
+    private CouponService couponService;
+
     @Override
     @Transactional
     public Long createOrder(UserOrderCreateDTO dto, String username) {
@@ -52,15 +57,27 @@ public class UserOrderServiceImpl implements UserOrderService {
             throw new RuntimeException("商品库存不足");
         }
 
-        BigDecimal totalAmount = BigDecimal.valueOf(product.getPrice() * dto.getQuantity());
+        BigDecimal originalAmount = BigDecimal.valueOf(product.getPrice()).multiply(BigDecimal.valueOf(dto.getQuantity()));
+        BigDecimal couponAmount = BigDecimal.ZERO;
+        if (dto.getCouponHistoryId() != null) {
+            CouponHistory couponHistory = couponService.validateCouponForOrder(dto.getCouponHistoryId(), username, dto.getProductId(), originalAmount);
+            couponAmount = couponHistory.getAmount() == null ? BigDecimal.ZERO : couponHistory.getAmount();
+            if (couponAmount.compareTo(originalAmount) > 0) {
+                couponAmount = originalAmount;
+            }
+        }
+        BigDecimal totalAmount = originalAmount.subtract(couponAmount);
 
         Order order = new Order();
         order.setMemberUsername(username);
         order.setTotalAmount(totalAmount);
+        order.setCouponAmount(couponAmount);
+        order.setCouponHistoryId(dto.getCouponHistoryId());
         order.setPayType(1);
         order.setReceiverName(dto.getReceiverName());
         order.setReceiverPhone(dto.getReceiverPhone());
         order.setAddress(dto.getAddress());
+        order.setNote(dto.getNote());
         order.setSourceType(1);
         order.setStatus(1);
         order.setOrderType(1);
@@ -76,11 +93,14 @@ public class UserOrderServiceImpl implements UserOrderService {
         item.setProductName(product.getName());
         item.setProductPrice(BigDecimal.valueOf(product.getPrice()));
         item.setProductQuantity(dto.getQuantity());
-        item.setProductTotal(totalAmount);
+        item.setProductTotal(originalAmount);
         item.setCreateTime(LocalDateTime.now());
         item.setUpdateTime(LocalDateTime.now());
         orderItemMapper.insert(item);
 
+        if (dto.getCouponHistoryId() != null) {
+            couponService.markCouponUsed(dto.getCouponHistoryId(), order.getId(), order.getOrderSn());
+        }
         productMapper.reduceStock(dto.getProductId(), dto.getQuantity());
         productMapper.increaseSales(dto.getProductId(), dto.getQuantity());
         return order.getId();
@@ -101,7 +121,6 @@ public class UserOrderServiceImpl implements UserOrderService {
         return new PageResult(page.getTotal(), orders);
     }
 
-    @Override
     public OrderVO getUserOrderDetail(Long orderId, String username) {
         Order order = getOwnedOrder(orderId, username);
         List<OrderItem> orderItems = orderItemMapper.getOrderItemsByOrderId(String.valueOf(orderId));
@@ -158,10 +177,26 @@ public class UserOrderServiceImpl implements UserOrderService {
         }
 
         BigDecimal unitPrice = orderItem.getProductPrice() == null ? BigDecimal.ZERO : orderItem.getProductPrice();
-        BigDecimal totalAmount = unitPrice.multiply(BigDecimal.valueOf(dto.getQuantity()));
+        BigDecimal originalAmount = unitPrice.multiply(BigDecimal.valueOf(dto.getQuantity()));
+        BigDecimal couponAmount = order.getCouponAmount() == null ? BigDecimal.ZERO : order.getCouponAmount();
+        if (order.getCouponHistoryId() != null) {
+            CouponHistory usedCoupon = couponService.getJoinedHistoryById(order.getCouponHistoryId());
+            if (usedCoupon == null) {
+                throw new RuntimeException("订单优惠券记录不存在");
+            }
+            BigDecimal minPoint = usedCoupon.getMinPoint() == null ? BigDecimal.ZERO : usedCoupon.getMinPoint();
+            if (originalAmount.compareTo(minPoint) < 0) {
+                throw new RuntimeException("修改后的订单金额已不满足已使用优惠券门槛");
+            }
+            couponAmount = usedCoupon.getAmount() == null ? BigDecimal.ZERO : usedCoupon.getAmount();
+            if (couponAmount.compareTo(originalAmount) > 0) {
+                couponAmount = originalAmount;
+            }
+        }
+        BigDecimal totalAmount = originalAmount.subtract(couponAmount);
 
         orderItem.setProductQuantity(dto.getQuantity());
-        orderItem.setProductTotal(totalAmount);
+        orderItem.setProductTotal(originalAmount);
         orderItem.setUpdateTime(LocalDateTime.now());
         orderItemMapper.updateById(orderItem);
 
@@ -169,6 +204,7 @@ public class UserOrderServiceImpl implements UserOrderService {
         order.setReceiverPhone(dto.getReceiverPhone());
         order.setAddress(dto.getAddress());
         order.setTotalAmount(totalAmount);
+        order.setCouponAmount(couponAmount);
         order.setUpdateTime(LocalDateTime.now());
         orderMapper.updateById(order);
     }

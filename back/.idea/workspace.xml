@@ -4,7 +4,56 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f30e173-bcbf-4620-beca-ecd44bb890c7" name="Default Changelist" comment="管理员登录" />
+    <list default="true" id="0f30e173-bcbf-4620-beca-ecd44bb890c7" name="Default Changelist" comment="管理员登录">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fsb/auth/PermissionConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fsb/auth/PermissionConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fsb/auth/RolePermissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fsb/auth/RolePermissionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fsb/pojo/DTO/UserOrderCreateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fsb/pojo/DTO/UserOrderCreateDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fsb/pojo/VO/OrderVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fsb/pojo/VO/OrderVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fsb/pojo/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fsb/pojo/entity/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fsb/service/impl/UserOrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fsb/service/impl/UserOrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fsb/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fsb/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Mapper/OrderMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Mapper/OrderMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Mapper/OmsReturnApplyMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Mapper/OmsReturnApplyMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Mapper/OrderItemMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Mapper/OrderItemMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Mapper/OrderMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Mapper/OrderMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/Controller/user/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/Controller/user/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/Controller/user/UserOrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/Controller/user/UserOrderController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/auth/AuthInterceptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/auth/AuthInterceptor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/auth/PermissionConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/auth/PermissionConstants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/auth/RolePermissionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/auth/RolePermissionService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/mapper/OmsReturnApplyMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/mapper/OmsReturnApplyMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/mapper/OrderItemMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/mapper/OrderItemMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/mapper/ProductMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/mapper/ProductMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/mapper/ReturnApplyMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/mapper/ReturnApplyMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/mapper/UserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/mapper/UserMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/pojo/DTO/OmsReturnApplyDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/pojo/DTO/OmsReturnApplyDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/pojo/DTO/UserOrderCreateDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/pojo/DTO/UserOrderCreateDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/pojo/DTO/UserOrderUpdateDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/pojo/DTO/UserOrderUpdateDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/pojo/VO/OmsReturnApplyVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/pojo/VO/OmsReturnApplyVO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/pojo/VO/OrderVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/pojo/VO/OrderVO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/pojo/entity/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/pojo/entity/Order.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/pojo/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/pojo/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/service/UserOrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/service/UserOrderService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/service/impl/OmsReturnApplyServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/service/impl/OmsReturnApplyServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/service/impl/OrderServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/service/impl/OrderServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/service/impl/ReturnApplyServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/service/impl/ReturnApplyServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/service/impl/UserOrderServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/service/impl/UserOrderServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fsb/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fsb/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/fsb/BatManagerApplicationTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/mall-admin-web-master/src/api/coupon.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/mall-admin-web-master/src/api/coupon.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/mall-admin-web-master/src/api/couponHistory.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/mall-admin-web-master/src/api/couponHistory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/mall-admin-web-master/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/mall-admin-web-master/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/mall-admin-web-master/src/store/modules/permission.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/mall-admin-web-master/src/store/modules/permission.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/mall-admin-web-master/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front/mall-admin-web-master/src/views/login/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/mall-admin-web-master/src/views/sms/coupon/components/CouponDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front/mall-admin-web-master/src/views/sms/coupon/components/CouponDetail.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/mall-admin-web-master/src/views/user/userProducts.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front/mall-admin-web-master/src/views/user/userProducts.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,6 +115,9 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.fsb.service" />
@@ -240,6 +292,7 @@
       <workItem from="1764347970999" duration="2948000" />
       <workItem from="1775976365456" duration="5029000" />
       <workItem from="1776691525031" duration="1986000" />
+      <workItem from="1776999065501" duration="1700000" />
     </task>
     <task id="LOCAL-00001" summary="管理员登录">
       <option name="closed" value="true" />

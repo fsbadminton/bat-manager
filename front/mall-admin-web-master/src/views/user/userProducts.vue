@@ -88,6 +88,16 @@
           <el-form-item label="备注">
             <el-input v-model="orderForm.note" />
           </el-form-item>
+          <el-form-item label="优惠券">
+            <el-select v-model="orderForm.couponHistoryId" clearable placeholder="不使用优惠券" style="width: 100%">
+              <el-option v-for="item in filteredCouponOptions" :key="item.id" :label="buildCouponLabel(item)" :value="item.id" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="订单预估">
+            <div>原价：{{ currentOrderOriginalAmount.toFixed(2) }} 元</div>
+            <div>优惠：{{ selectedCouponAmount.toFixed(2) }} 元</div>
+            <div>应付：{{ previewPayAmount.toFixed(2) }} 元</div>
+          </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="orderDialogVisible = false">取消</el-button>
@@ -100,6 +110,7 @@
 
 <script>
 import { listUserProducts, listUserBrands, createUserOrder } from '@/api/userLogin'
+import { listMyCoupons } from '@/api/userCoupon'
 import { hasPermission } from '@/utils/permission'
 
 export default {
@@ -113,7 +124,8 @@ export default {
       brandOptions: [],
       productCateOptions: [],
       orderDialogVisible: false,
-      orderForm: { productId: null, productName: '', quantity: 1, receiverName: '', receiverPhone: '', address: '', note: '' },
+      orderForm: { productId: null, productName: '', productCategoryId: null, productPrice: 0, quantity: 1, receiverName: '', receiverPhone: '', address: '', note: '', couponHistoryId: null },
+      myCouponList: [],
       orderRules: {
         receiverPhone: [
           {
@@ -140,6 +152,40 @@ export default {
     },
     canCreateOrder() {
       return hasPermission(this.$store.getters.permissions, 'order:create:own') || this.isUserAccount
+    },
+    currentOrderOriginalAmount() {
+      const price = Number(this.orderForm.productPrice || 0)
+      const quantity = Number(this.orderForm.quantity || 0)
+      return price * quantity
+    },
+    filteredCouponOptions() {
+      const amount = this.currentOrderOriginalAmount
+      const productId = this.orderForm.productId
+      const categoryId = this.orderForm.productCategoryId
+      const now = new Date().getTime()
+      return this.myCouponList.filter(item => {
+        if (item.useStatus !== 0) return false
+        if (item.startTime && new Date(item.startTime).getTime() > now) return false
+        if (item.endTime && new Date(item.endTime).getTime() < now) return false
+        if (Number(amount) < Number(item.minPoint || 0)) return false
+        if (item.useType === 2) {
+          const list = item.productRelationList || []
+          return list.some(rel => Number(rel.productId) === Number(productId))
+        }
+        if (item.useType === 1) {
+          const list = item.productCategoryRelationList || []
+          return list.some(rel => Number(rel.productCategoryId) === Number(categoryId))
+        }
+        return true
+      })
+    },
+    selectedCouponAmount() {
+      const selected = this.myCouponList.find(item => Number(item.id) === Number(this.orderForm.couponHistoryId))
+      if (!selected) return 0
+      return Math.min(Number(selected.amount || 0), this.currentOrderOriginalAmount)
+    },
+    previewPayAmount() {
+      return Math.max(this.currentOrderOriginalAmount - this.selectedCouponAmount, 0)
     }
   },
   methods: {
@@ -212,13 +258,28 @@ export default {
       this.orderForm = {
         productId: row.productId || row.id,
         productName: row.name || row.productName || '',
+        productCategoryId: row.category || row.categoryId || null,
+        productPrice: row.price || 0,
         quantity: 1,
         receiverName: '',
         receiverPhone: '',
         address: '',
-        note: ''
+        note: '',
+        couponHistoryId: null
       }
+      this.loadMyCoupons()
       this.orderDialogVisible = true
+    },
+    loadMyCoupons() {
+      listMyCoupons({ pageNum: 1, pageSize: 100, useStatus: 0 }).then(res => {
+        const data = res && res.data ? res.data : {}
+        this.myCouponList = data.list || []
+      }).catch(() => {
+        this.myCouponList = []
+      })
+    },
+    buildCouponLabel(item) {
+      return `${item.couponName} - 满${item.minPoint || 0}减${item.amount || 0}`
     },
     submitOrder() {
       if (!this.canCreateOrder) {
@@ -241,7 +302,8 @@ export default {
         receiverName: this.orderForm.receiverName,
         receiverPhone: this.orderForm.receiverPhone,
         address: this.orderForm.address,
-        note: this.orderForm.note
+        note: this.orderForm.note,
+        couponHistoryId: this.orderForm.couponHistoryId
       }
       createUserOrder(payload)
         .then(res => {

@@ -81,8 +81,10 @@ const permission = {
         const sourceRouters = cloneAsyncRouters()
         const accessedRouters = sourceRouters.filter(v => {
           if (username === 'admin' || roleUpper === 'ADMIN') {
-            if (v.name === 'sms') return false
             if (v.name === 'user') return false
+            if (v.name === 'sms' && v.children && v.children.length > 0) {
+              v.children = v.children.filter(child => ['coupon', 'addCoupon', 'updateCoupon', 'couponHistory'].includes(child.name))
+            }
             return true
           }
 

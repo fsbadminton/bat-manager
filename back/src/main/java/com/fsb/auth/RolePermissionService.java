@@ -35,6 +35,8 @@ public class RolePermissionService {
         permissions.add(PermissionConstants.ORDER_UPDATE_OWN);
         permissions.add(PermissionConstants.REFUND_APPLY_OWN);
         permissions.add(PermissionConstants.REFUND_READ_OWN);
+        permissions.add(PermissionConstants.COUPON_READ_OWN);
+        permissions.add(PermissionConstants.COUPON_CLAIM_OWN);
         return permissions;
     }
 

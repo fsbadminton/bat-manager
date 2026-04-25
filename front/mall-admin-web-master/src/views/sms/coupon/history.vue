@@ -211,8 +211,12 @@
         return formatDate(date, 'yyyy-MM-dd')
       },
       formatStatus(endTime) {
+        if (endTime == null || endTime === '') {
+          return 'N/A'
+        }
         let now = new Date().getTime();
-        if (endTime > now) {
+        let endDate = new Date(endTime).getTime();
+        if (endDate > now) {
           return '未过期'
         } else {
           return '已过期';
@@ -309,5 +313,4 @@
     color: #303133;
   }
 </style>
-
 

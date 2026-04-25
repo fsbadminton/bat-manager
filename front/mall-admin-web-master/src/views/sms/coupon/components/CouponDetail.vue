@@ -144,8 +144,8 @@
 </template>
 <script>
   import {createCoupon,getCoupon,updateCoupon} from '@/api/coupon';
-  import {fetchSimpleList as fetchProductList} from '@/api/product';
-  import {fetchListWithChildren} from '@/api/productCate'
+  import {fetchPageList as fetchProductList} from '@/api/product';
+  import {fetchCategoryList} from '@/api/productCate'
   const defaultCoupon = {
     type: 0,
     name: null,
@@ -283,15 +283,18 @@
       },
       searchProductMethod(query){
         if (query !== '') {
-          this.loading = true;
-          fetchProductList({keyword:query}).then(response=>{
-            this.loading=false;
-            let productList = response.data;
+          this.selectProductLoading = true;
+          fetchProductList({pageNum:1, pageSize:20, name:query}).then(response=>{
+            this.selectProductLoading=false;
+            const data = response.data || {};
+            let productList = data.records || data.list || [];
             this.selectProductOptions = [];
             for(let i=0;i<productList.length;i++){
               let item = productList[i];
-              this.selectProductOptions.push({productId:item.id,productName:item.name,productSn:item.productSn});
+              this.selectProductOptions.push({productId:item.productId,productName:item.name,productSn:item.productSn});
             }
+          }).catch(() => {
+            this.selectProductLoading = false;
           });
         } else {
           this.selectProductOptions = [];
@@ -334,17 +337,15 @@
         return null;
       },
       getProductCateList() {
-        fetchListWithChildren().then(response => {
+        fetchCategoryList().then(response => {
           let list = response.data;
           this.productCateOptions = [];
           for (let i = 0; i < list.length; i++) {
-            let children = [];
-            if (list[i].children != null && list[i].children.length > 0) {
-              for (let j = 0; j < list[i].children.length; j++) {
-                children.push({label: list[i].children[j].name, value: list[i].children[j].id});
-              }
-            }
-            this.productCateOptions.push({label: list[i].name, value: list[i].id, children: children});
+            this.productCateOptions.push({
+              label: list[i].name,
+              value: list[i].id,
+              children: [{label: list[i].name, value: list[i].id}]
+            });
           }
         });
       },
@@ -355,13 +356,14 @@
           if (this.productCateOptions[i].value === ids[0]) {
             parentName = this.productCateOptions[i].label;
             for (let j = 0; j < this.productCateOptions[i].children.length; j++) {
-              if (this.productCateOptions[i].children[j].value === ids[1]) {
+              const targetId = ids.length > 1 ? ids[1] : ids[0];
+              if (this.productCateOptions[i].children[j].value === targetId) {
                 name = this.productCateOptions[i].children[j].label;
               }
             }
           }
         }
-        return {productCategoryId: ids[1], productCategoryName: name, parentCategoryName: parentName};
+        return {productCategoryId: ids.length > 1 ? ids[1] : ids[0], productCategoryName: name, parentCategoryName: parentName};
       }
     }
   }
@@ -371,5 +373,3 @@
     width: 60%;
   }
 </style>
-
-

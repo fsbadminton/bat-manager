@@ -28,7 +28,10 @@ public class UserServiceImpl implements UserService {
     public User login(UserLoginDTO userLoginDTO) throws Exception {
         User user = userMapper.getByUsername(userLoginDTO.getUsername());
         if (user == null) {
-            throw new Exception("用户不存在");
+            throw new RuntimeException("用户不存在");
+        }
+        if (user.getStatus() != null && user.getStatus() == 0) {
+            throw new RuntimeException("当前用户已被禁用");
         }
         String raw = userLoginDTO.getPassword();
         String encoded = user.getPassword();
@@ -44,7 +47,7 @@ public class UserServiceImpl implements UserService {
             }
         }
         if (!pass) {
-            throw new Exception("密码错误");
+            throw new RuntimeException("密码错误");
         }
         return user;
     }

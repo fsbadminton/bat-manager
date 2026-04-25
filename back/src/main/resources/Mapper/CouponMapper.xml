@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fsb.Mapper.CouponMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into coupon (
+            type, name, platform, publish_count, amount, per_limit, min_point,
+            enable_time, start_time, end_time, use_type, note,
+            product_relation_json, product_category_relation_json, create_time, update_time
+        ) values (
+            #{type}, #{name}, #{platform}, #{publishCount}, #{amount}, #{perLimit}, #{minPoint},
+            #{enableTime}, #{startTime}, #{endTime}, #{useType}, #{note},
+            #{productRelationJson}, #{productCategoryRelationJson}, #{createTime}, #{updateTime}
+        )
+    </insert>
+
+    <update id="updateById">
+        update coupon
+        <set>
+            <if test="type != null">type = #{type},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="platform != null">platform = #{platform},</if>
+            <if test="publishCount != null">publish_count = #{publishCount},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="perLimit != null">per_limit = #{perLimit},</if>
+            <if test="minPoint != null">min_point = #{minPoint},</if>
+            <if test="enableTime != null">enable_time = #{enableTime},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="useType != null">use_type = #{useType},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="productRelationJson != null">product_relation_json = #{productRelationJson},</if>
+            <if test="productCategoryRelationJson != null">product_category_relation_json = #{productCategoryRelationJson},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from coupon where id = #{id}
+    </delete>
+
+    <select id="pageQuery" resultType="com.fsb.pojo.entity.Coupon">
+        select
+            c.*,
+            (select count(*) from coupon_history ch where ch.coupon_id = c.id) as receive_count,
+            (select count(*) from coupon_history ch where ch.coupon_id = c.id and ch.use_status = 1) as use_count
+        from coupon c
+        <where>
+            <if test="name != null and name != ''">
+                and c.name like concat('%', #{name}, '%')
+            </if>
+            <if test="type != null">
+                and c.type = #{type}
+            </if>
+        </where>
+        order by c.create_time desc, c.id desc
+    </select>
+
+    <select id="getById" resultType="com.fsb.pojo.entity.Coupon">
+        select
+            c.*,
+            (select count(*) from coupon_history ch where ch.coupon_id = c.id) as receive_count,
+            (select count(*) from coupon_history ch where ch.coupon_id = c.id and ch.use_status = 1) as use_count
+        from coupon c
+        where c.id = #{id}
+    </select>
+
+    <select id="pageAvailableForUser" resultType="com.fsb.pojo.entity.Coupon">
+        select
+            c.*,
+            (select count(*) from coupon_history ch where ch.coupon_id = c.id) as receive_count,
+            (select count(*) from coupon_history ch where ch.coupon_id = c.id and ch.use_status = 1) as use_count
+        from coupon c
+        where (c.enable_time is null or c.enable_time &lt;= now())
+          and (c.end_time is null or c.end_time &gt;= now())
+          and (
+              c.publish_count is null
+              or (select count(*) from coupon_history ch where ch.coupon_id = c.id) &lt; c.publish_count
+          )
+          and (
+              c.per_limit is null
+              or (select count(*) from coupon_history ch where ch.coupon_id = c.id and ch.member_username = #{username}) &lt; c.per_limit
+          )
+        order by c.create_time desc, c.id desc
+    </select>
+</mapper>

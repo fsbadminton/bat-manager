@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fsb.Mapper.CouponHistoryMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into coupon_history (
+            coupon_id, coupon_code, member_nickname, member_username,
+            get_type, create_time, use_status, use_time, order_id, order_sn
+        ) values (
+            #{couponId}, #{couponCode}, #{memberNickname}, #{memberUsername},
+            #{getType}, #{createTime}, #{useStatus}, #{useTime}, #{orderId}, #{orderSn}
+        )
+    </insert>
+
+    <select id="pageQueryAdmin" resultType="com.fsb.pojo.entity.CouponHistory">
+        select
+            ch.*,
+            c.name as coupon_name,
+            c.start_time,
+            c.end_time
+        from coupon_history ch
+        left join coupon c on c.id = ch.coupon_id
+        <where>
+            <if test="couponId != null">
+                and ch.coupon_id = #{couponId}
+            </if>
+            <if test="useStatus != null">
+                and ch.use_status = #{useStatus}
+            </if>
+            <if test="orderSn != null and orderSn != ''">
+                and ch.order_sn like concat('%', #{orderSn}, '%')
+            </if>
+        </where>
+        order by ch.create_time desc, ch.id desc
+    </select>
+
+    <select id="pageUserCoupons" resultType="com.fsb.pojo.entity.CouponHistory">
+        select
+            ch.*,
+            c.name as coupon_name,
+            c.amount,
+            c.min_point,
+            c.use_type,
+            c.platform,
+            c.start_time,
+            c.end_time,
+            c.product_relation_json,
+            c.product_category_relation_json
+        from coupon_history ch
+        inner join coupon c on c.id = ch.coupon_id
+        where ch.member_username = #{username}
+        <if test="dto.useStatus != null">
+            and ch.use_status = #{dto.useStatus}
+        </if>
+        order by ch.create_time desc, ch.id desc
+    </select>
+
+    <select id="getUserCouponById" resultType="com.fsb.pojo.entity.CouponHistory">
+        select
+            ch.*,
+            c.name as coupon_name,
+            c.amount,
+            c.min_point,
+            c.use_type,
+            c.platform,
+            c.start_time,
+            c.end_time,
+            c.product_relation_json,
+            c.product_category_relation_json
+        from coupon_history ch
+        inner join coupon c on c.id = ch.coupon_id
+        where ch.id = #{id}
+          and ch.member_username = #{username}
+    </select>
+
+    <select id="getJoinedById" resultType="com.fsb.pojo.entity.CouponHistory">
+        select
+            ch.*,
+            c.name as coupon_name,
+            c.amount,
+            c.min_point,
+            c.use_type,
+            c.platform,
+            c.start_time,
+            c.end_time,
+            c.product_relation_json,
+            c.product_category_relation_json
+        from coupon_history ch
+        inner join coupon c on c.id = ch.coupon_id
+        where ch.id = #{id}
+    </select>
+</mapper>

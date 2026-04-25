@@ -151,6 +151,12 @@ export const asyncRouterMap = [
         meta: { title: '我的订单' }
       },
       {
+        path: 'coupons',
+        name: 'userCoupons',
+        component: () => import('@/views/user/userCoupons'),
+        meta: { title: '我的优惠券' }
+      },
+      {
         path: 'returns',
         name: 'userReturns',
         component: () => import('@/views/user/userReturns'),

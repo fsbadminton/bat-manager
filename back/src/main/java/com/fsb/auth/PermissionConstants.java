@@ -23,4 +23,7 @@ public final class PermissionConstants {
     public static final String REFUND_APPROVE_ANY = "refund:approve:any";
 
     public static final String PRODUCT_UPDATE_ANY = "product:update:any";
+
+    public static final String COUPON_READ_OWN = "coupon:read:own";
+    public static final String COUPON_CLAIM_OWN = "coupon:claim:own";
 }

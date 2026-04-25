@@ -5,6 +5,11 @@ spring:
     url: jdbc:mysql://localhost:3306/batnew
     username: root
     password: 12345678
+  #Redis配置
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
   #阿里云OSS配置
   alioss:
@@ -18,4 +23,4 @@ mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true # 驼峰命名
-  mapper-locations: classpath*:mapper/*.xml
+  mapper-locations: classpath*:Mapper/*.xml

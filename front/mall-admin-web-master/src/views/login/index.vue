@@ -181,8 +181,8 @@ export default {
             const payload = data && data.data ? data.data : data
             const roleRaw = payload.role || payload.userRole || payload.authority || ''
             const role = typeof roleRaw === 'string' ? roleRaw.toLowerCase() : roleRaw
-            let dest = role === 'admin' ? '/pms/product' : '/user'
-            if (!role) dest = String(this.loginForm.username).toLowerCase() === 'admin' ? '/pms/product' : '/user'
+            let dest = role === 'admin' ? '/pms/product' : '/user/products'
+            if (!role) dest = String(this.loginForm.username).toLowerCase() === 'admin' ? '/pms/product' : '/user/products'
             this.$router.push({ path: dest })
           })
           .catch(() => { this.loading = false })

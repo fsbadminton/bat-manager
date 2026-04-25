@@ -35,6 +35,8 @@ public class Order {
     private String deliveryCompany;
     private String deliverySn;
     private LocalDateTime deliveryTime;
+    private BigDecimal couponAmount;
+    private Long couponHistoryId;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private Integer returnApplyStatus;

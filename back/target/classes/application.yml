@@ -14,8 +14,8 @@ spring:
   #阿里云OSS配置
   alioss:
     endpoint: oss-cn-beijing.aliyuncs.com
-    access-key-id: LTAI5tD5eoJfrkbeFifWtG5v
-    access-key-secret: mbU3xcgcuenf1qutEhSvtmm0UaP9dX
+    access-key-id: ${ALIOSS_ACCESS_KEY_ID:}
+    access-key-secret: ${ALIOSS_ACCESS_KEY_SECRET:}
     bucket-name: bat-manager
 
 #Mybatis配置

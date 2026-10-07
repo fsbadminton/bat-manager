@@ -11,6 +11,9 @@
     </div>
     <el-card shadow="never" style="margin-top: 15px">
       <div class="operate-container">
+        <div class="operate-button-container">
+          <el-button size="mini" @click="backToOrderList">返回订单列表</el-button>
+        </div>
         <i class="el-icon-warning color-danger" style="margin-left: 20px"></i>
         <span class="color-danger">当前订单状态：{{order.status | formatStatus}}</span>
         <div class="operate-button-container" v-show="order.status===0">
@@ -21,6 +24,7 @@
           <el-button size="mini" @click="showMarkOrderDialog">备注订单</el-button>
         </div>
         <div class="operate-button-container" v-show="order.status===1">
+          <el-button type="primary" size="mini" @click="goDelivery">发货</el-button>
           <el-button size="mini" @click="showUpdateReceiverDialog">修改收货人信息</el-button>
           <!-- <el-button size="mini" @click="showMessageDialog">发送站内信</el-button> -->
           <el-button size="mini">取消订单</el-button>
@@ -438,7 +442,43 @@
     methods: {
       viewReturnApplyDetail() {
         if (!this.order.returnApplyId) return
-        this.$router.push({ path: '/oms/returnApplyDetail', query: { id: this.order.returnApplyId } })
+        this.$router.push({ path: '/admin/oms/returnApplyDetail', query: { id: this.order.returnApplyId } })
+      },
+      backToOrderList() {
+        this.$router.push({ path: '/admin/oms/order', query: this.getListRouteQuery() });
+      },
+      goDelivery() {
+        const addressParts = [
+          this.order.receiverProvince,
+          this.order.receiverCity,
+          this.order.receiverRegion,
+          this.order.receiverDetailAddress
+        ].filter(value => value !== null && value !== undefined && value !== '' && value !== 0);
+        const deliveryOrder = {
+          orderId: this.order.id,
+          orderSn: this.order.orderSn,
+          receiverName: this.order.receiverName,
+          receiverPhone: this.order.receiverPhone,
+          receiverPostCode: this.order.receiverPostCode,
+          address: this.order.address || addressParts.join(''),
+          deliveryCompany: null,
+          deliverySn: null
+        };
+        this.$router.push({
+          path: '/admin/oms/deliverOrderList',
+          query: { list: [deliveryOrder], returnPath: '/admin/oms/order', ...this.getListRouteQuery() }
+        });
+      },
+      getListRouteQuery() {
+        const query = {};
+        ['pageNum', 'pageSize', 'orderSn', 'receiverKeyword', 'status', 'orderType', 'sourceType', 'createTime']
+          .forEach(key => {
+            const value = this.$route.query[`return_${key}`];
+            if (value !== null && value !== undefined && value !== '') {
+              query[`return_${key}`] = value;
+            }
+          });
+        return query;
       },
       onSelectRegion(data){
         this.receiverInfo.receiverProvince=data.province.value;

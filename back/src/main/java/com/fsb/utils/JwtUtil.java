@@ -17,7 +17,7 @@ import java.util.List;
 @Component
 public class JwtUtil {
 
-    @Value("${jwt.secret:BatManagerJwtSecretKeyForSign256Bits!!}")
+    @Value("${jwt.secret:}")
     private String secret;
 
     @Value("${jwt.expiration-millis:604800000}")
@@ -27,6 +27,9 @@ public class JwtUtil {
 
     @PostConstruct
     public void init() {
+        if (secret == null || secret.length() < 32) {
+            throw new IllegalStateException("JWT_SECRET must be configured with at least 32 characters");
+        }
         byte[] keyBytes = secret.getBytes(StandardCharsets.UTF_8);
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
     }
@@ -71,4 +74,3 @@ public class JwtUtil {
                 .build();
     }
 }
-

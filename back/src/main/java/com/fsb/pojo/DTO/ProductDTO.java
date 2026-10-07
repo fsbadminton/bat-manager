@@ -3,6 +3,8 @@ package com.fsb.pojo.DTO;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
+
 @Data
 public class ProductDTO {
     private Long productId;
@@ -19,7 +21,7 @@ public class ProductDTO {
     private String imageUrls;
 
     private Long sale;
-    private double price;
+    private BigDecimal price;
     private String productSn;       //货号
 
     private Integer category;

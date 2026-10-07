@@ -11,7 +11,7 @@
         <div style="text-align: center">
           <svg-icon icon-class="login-mall" style="width: 56px; height: 56px; color: #409eff" />
         </div>
-        <h2 class="login-title color-main">mall-admin-web</h2>
+        <h2 class="login-title color-main">{{ isClientLogin ? '球拍商城' : '球拍管理后台' }}</h2>
 
         <el-form-item prop="username">
           <el-input
@@ -49,7 +49,7 @@
           <el-button style="width: 45%" type="primary" :loading="loading" @click.native.prevent="handleLogin">
             登录
           </el-button>
-          <el-button style="width: 45%; margin-left: 10px" @click.native.prevent="openRegister">
+          <el-button v-if="isClientLogin" style="width: 45%; margin-left: 10px" @click.native.prevent="openRegister">
             注册
           </el-button>
         </el-form-item>
@@ -151,6 +151,12 @@ export default {
     }
   },
   computed: {
+    isClientLogin() {
+      return this.loginRole === 'USER'
+    },
+    loginRole() {
+      return String((this.$route.meta && this.$route.meta.role) || 'USER').toUpperCase()
+    },
     registerFormComplete() {
       const f = this.registerForm
       return !!(f.username && f.password && f.email && f.code)
@@ -159,7 +165,6 @@ export default {
   created() {
     this.loginForm.username = getCookie('username')
     this.loginForm.password = getCookie('password')
-    if (!this.loginForm.username) this.loginForm.username = 'admin'
     if (!this.loginForm.password) this.loginForm.password = ''
   },
   beforeDestroy() {
@@ -174,15 +179,13 @@ export default {
         if (!valid) return false
         this.loading = true
         this.$store
-          .dispatch('Login', this.loginForm)
+          .dispatch('Login', { ...this.loginForm, role: this.loginRole })
           .then(res => {
             this.loading = false
             const data = res && res.data ? res.data : res
             const payload = data && data.data ? data.data : data
-            const roleRaw = payload.role || payload.userRole || payload.authority || ''
-            const role = typeof roleRaw === 'string' ? roleRaw.toLowerCase() : roleRaw
-            let dest = role === 'admin' ? '/pms/product' : '/user/products'
-            if (!role) dest = String(this.loginForm.username).toLowerCase() === 'admin' ? '/pms/product' : '/user/products'
+            const role = String(payload.role || '').toUpperCase()
+            const dest = role === 'ADMIN' ? '/admin/pms/product' : '/client/products'
             this.$router.push({ path: dest })
           })
           .catch(() => { this.loading = false })

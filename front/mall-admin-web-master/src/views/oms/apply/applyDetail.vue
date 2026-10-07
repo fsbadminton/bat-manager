@@ -290,7 +290,7 @@
     },
     methods: {
       handleViewOrder(){
-        this.$router.push({path:'/oms/orderDetail',query:{id:this.orderReturnApply.orderId}});
+        this.$router.push({path:'/admin/oms/orderDetail',query:{id:this.orderReturnApply.orderId}});
       },
       getDetail() {
         getApplyDetail(this.id).then(response => {

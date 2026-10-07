@@ -33,7 +33,9 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public PageResult pageQuery(BrandPageQueryDTO brandPageQueryDTO) {
-        PageHelper.startPage(brandPageQueryDTO.getPageNum(), brandPageQueryDTO.getPageSize());
+        int pageNum = brandPageQueryDTO.getPageNum() == null ? 1 : brandPageQueryDTO.getPageNum();
+        int pageSize = brandPageQueryDTO.getPageSize() == null ? 10 : brandPageQueryDTO.getPageSize();
+        PageHelper.startPage(pageNum, pageSize);
         Page<Brand> page = brandMapper.pageQuery(brandPageQueryDTO);
         return new PageResult(page.getTotal(), page.getResult());
     }

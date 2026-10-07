@@ -1,12 +1,19 @@
 <template>
   <div class="app-container">
     <el-row :gutter="20">
-      <el-col :span="12">
+      <el-col :xs="24" :sm="24" :md="24" :lg="12">
         <el-card shadow="never">
           <div slot="header" class="clearfix">
             <span>可领取优惠券</span>
           </div>
-          <el-table :data="availableList" v-loading="availableLoading" border style="width: 100%">
+          <el-alert v-if="availableError" :title="availableError" type="error" :closable="false" show-icon />
+          <el-table
+            :data="availableList"
+            v-loading="availableLoading"
+            :empty-text="availableError ? '加载失败' : '暂无可领取优惠券'"
+            border
+            style="width: 100%"
+          >
             <el-table-column label="名称" prop="name" />
             <el-table-column label="门槛" width="120" align="center">
               <template slot-scope="scope">满{{ scope.row.minPoint || 0 }}元</template>
@@ -23,12 +30,19 @@
           </el-table>
         </el-card>
       </el-col>
-      <el-col :span="12">
+      <el-col :xs="24" :sm="24" :md="24" :lg="12">
         <el-card shadow="never">
           <div slot="header" class="clearfix">
             <span>我的优惠券</span>
           </div>
-          <el-table :data="myList" v-loading="myLoading" border style="width: 100%">
+          <el-alert v-if="myError" :title="myError" type="error" :closable="false" show-icon />
+          <el-table
+            :data="myList"
+            v-loading="myLoading"
+            :empty-text="myError ? '加载失败' : '暂无已领取优惠券'"
+            border
+            style="width: 100%"
+          >
             <el-table-column label="名称" prop="couponName" />
             <el-table-column label="优惠码" prop="couponCode" width="180" />
             <el-table-column label="面额" width="100" align="center">
@@ -61,8 +75,10 @@ export default {
     return {
       availableList: [],
       availableLoading: false,
+      availableError: '',
       myList: [],
-      myLoading: false
+      myLoading: false,
+      myError: ''
     }
   },
   created() {
@@ -75,26 +91,32 @@ export default {
     },
     loadAvailable() {
       this.availableLoading = true
+      this.availableError = ''
       listAvailableCoupons({ pageNum: 1, pageSize: 100 })
         .then(res => {
           this.availableLoading = false
           const data = res && res.data ? res.data : {}
-          this.availableList = data.list || []
+          this.availableList = data.records || data.list || []
         })
         .catch(() => {
           this.availableLoading = false
+          this.availableList = []
+          this.availableError = '优惠券加载失败，请稍后重试'
         })
     },
     loadMine() {
       this.myLoading = true
+      this.myError = ''
       listMyCoupons({ pageNum: 1, pageSize: 100 })
         .then(res => {
           this.myLoading = false
           const data = res && res.data ? res.data : {}
-          this.myList = data.list || []
+          this.myList = data.records || data.list || []
         })
         .catch(() => {
           this.myLoading = false
+          this.myList = []
+          this.myError = '已领取优惠券加载失败，请稍后重试'
         })
     },
     handleClaim(row) {
@@ -118,3 +140,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.el-alert {
+  margin-bottom: 12px;
+}
+
+@media (max-width: 1199px) {
+  .el-col + .el-col {
+    margin-top: 20px;
+  }
+}
+</style>

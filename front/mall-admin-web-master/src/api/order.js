@@ -1,9 +1,10 @@
 import request from '@/utils/request'
-export function fetchList(params) {
+export function fetchList(params, config = {}) {
   return request({
     url:'/admin/order/list',
     method:'get',
-    params:params
+    params:params,
+    ...config
   })
 }
 

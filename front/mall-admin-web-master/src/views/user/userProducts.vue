@@ -23,7 +23,14 @@
         </el-form>
       </div>
 
-      <el-table :data="productList" v-loading="loadingProducts" border style="width: 100%">
+      <el-alert v-if="productLoadError" :title="productLoadError" type="error" :closable="false" show-icon />
+      <el-table
+        :data="productList"
+        v-loading="loadingProducts"
+        :empty-text="productLoadError ? '加载失败' : '暂无球拍'"
+        border
+        style="width: 100%"
+      >
         <el-table-column label="编号" width="100" align="center">
           <template slot-scope="scope">{{ scope.row.productId }}</template>
         </el-table-column>
@@ -121,6 +128,7 @@ export default {
       productList: [],
       totalProducts: 0,
       loadingProducts: false,
+      productLoadError: '',
       brandOptions: [],
       productCateOptions: [],
       orderDialogVisible: false,
@@ -191,6 +199,7 @@ export default {
   methods: {
     getProducts() {
       this.loadingProducts = true
+      this.productLoadError = ''
       const mapped = {
         pageNum: this.listQuery.pageNum || 1,
         pageSize: this.listQuery.pageSize || 5,
@@ -210,6 +219,9 @@ export default {
         })
         .catch(() => {
           this.loadingProducts = false
+          this.productList = []
+          this.totalProducts = 0
+          this.productLoadError = '球拍列表加载失败，请稍后重试'
         })
     },
     resetProductFilters() {
@@ -226,18 +238,22 @@ export default {
       this.getProducts()
     },
     loadBrandOptions() {
-      listUserBrands({ pageNum: 1, pageSize: 100 }).then(response => {
-        let list = []
-        const outer = response && response.data ? response.data : response
-        const data = outer && outer.data ? outer.data : outer
-        if (Array.isArray(data)) list = data
-        else list = data.records || data.list || []
-        this.brandOptions = []
-        for (let i = 0; i < list.length; i++) {
-          const b = list[i]
-          this.brandOptions.push({ label: b.name || b.brandName || b.label, value: b.id || b.value || b.name })
-        }
-      })
+      listUserBrands({ pageNum: 1, pageSize: 100 })
+        .then(response => {
+          let list = []
+          const outer = response && response.data ? response.data : response
+          const data = outer && outer.data ? outer.data : outer
+          if (Array.isArray(data)) list = data
+          else list = data.records || data.list || []
+          this.brandOptions = []
+          for (let i = 0; i < list.length; i++) {
+            const b = list[i]
+            this.brandOptions.push({ label: b.name || b.brandName || b.label, value: b.id || b.value || b.name })
+          }
+        })
+        .catch(() => {
+          this.brandOptions = []
+        })
     },
     rebuildCategoryOptions(products) {
       const list = Array.isArray(products) ? products : []
@@ -273,7 +289,7 @@ export default {
     loadMyCoupons() {
       listMyCoupons({ pageNum: 1, pageSize: 100, useStatus: 0 }).then(res => {
         const data = res && res.data ? res.data : {}
-        this.myCouponList = data.list || []
+        this.myCouponList = data.records || data.list || []
       }).catch(() => {
         this.myCouponList = []
       })
@@ -338,5 +354,9 @@ export default {
 <style scoped>
 .pagination-container {
   margin-top: 15px;
+}
+
+.el-alert {
+  margin-bottom: 12px;
 }
 </style>

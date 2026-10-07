@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -23,7 +24,7 @@ public class ProductVO {
     private String description;   // 品牌简介
     private Long stock;//库存
     private Long sale;
-    private double price;
+    private BigDecimal price;
     private String productSn;       //货号
     private Integer recommendStatus;
     private Integer newStatus;

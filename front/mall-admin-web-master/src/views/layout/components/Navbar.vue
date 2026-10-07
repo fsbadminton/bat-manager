@@ -7,18 +7,40 @@
       placement="bottom"
       width="320"
       trigger="click"
-      popper-class="return-reminder-popover"
+      popper-class="todo-reminder-popover"
     >
-      <div class="return-reminder-panel">
+      <div class="todo-reminder-panel">
         <div class="reminder-header">
-          <span>退货提醒</span>
-          <el-button type="text" @click="goToReturnApplyPage">查看全部</el-button>
+          <span>待办提醒</span>
+          <span class="reminder-total">共 {{ pendingTodoCount }} 项</span>
         </div>
-        <div v-if="pendingReturnCount > 0">
-          <div class="reminder-summary">当前有 {{ pendingReturnCount }} 条用户退货待审核</div>
+
+        <div v-if="pendingOrderCount > 0" class="reminder-section">
+          <div class="reminder-section-header">
+            <span>待发货订单（{{ pendingOrderCount }}）</span>
+            <el-button type="text" @click="goToPendingOrderPage">查看全部</el-button>
+          </div>
+          <div
+            v-for="item in pendingOrderItems"
+            :key="`order-${item.id}`"
+            class="reminder-item"
+            @click="goToOrderDetail(item.id)"
+          >
+            <div class="reminder-title">新订单 #{{ item.orderSn || item.id }}</div>
+            <div class="reminder-meta">
+              {{ item.memberUsername || '未知用户' }} · {{ formatOrderTime(item.createTime) }}
+            </div>
+          </div>
+        </div>
+
+        <div v-if="pendingReturnCount > 0" class="reminder-section">
+          <div class="reminder-section-header">
+            <span>退货待审核（{{ pendingReturnCount }}）</span>
+            <el-button type="text" @click="goToReturnApplyPage">查看全部</el-button>
+          </div>
           <div
             v-for="item in pendingReturnItems"
-            :key="item.id"
+            :key="`return-${item.id}`"
             class="reminder-item"
             @click="goToReturnApplyDetail(item.id)"
           >
@@ -27,10 +49,10 @@
             <div class="reminder-reason">{{ item.reason || '未填写退货原因' }}</div>
           </div>
         </div>
-        <div v-else class="reminder-empty">暂无新的用户退货待审核</div>
+        <div v-if="pendingTodoCount === 0" class="reminder-empty">暂无待处理事项</div>
       </div>
-      <el-badge slot="reference" :value="pendingReturnCount" :hidden="pendingReturnCount === 0" class="return-reminder-badge">
-        <div class="return-reminder-trigger" title="退货提醒">
+      <el-badge slot="reference" :value="pendingTodoCount" :max="99" :hidden="pendingTodoCount === 0" class="todo-reminder-badge">
+        <div class="todo-reminder-trigger" title="待办提醒">
           <i class="el-icon-bell"></i>
         </div>
       </el-badge>
@@ -41,7 +63,7 @@
         <i class="el-icon-caret-bottom" />
       </div>
       <el-dropdown-menu class="user-dropdown" slot="dropdown">
-        <router-link class="inlineBlock" to="/">
+        <router-link class="inlineBlock" to="/admin/home">
           <el-dropdown-item>首页</el-dropdown-item>
         </router-link>
         <el-dropdown-item divided>
@@ -57,6 +79,7 @@ import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import { fetchList as fetchReturnApplyList } from '@/api/returnApply'
+import { fetchList as fetchOrderList } from '@/api/order'
 
 export default {
   components: {
@@ -65,9 +88,12 @@ export default {
   },
   data() {
     return {
+      pendingOrderCount: 0,
+      pendingOrderItems: [],
       pendingReturnCount: 0,
       pendingReturnItems: [],
       reminderTimer: null,
+      knownPendingOrderIds: [],
       knownPendingIds: []
     }
   },
@@ -76,11 +102,14 @@ export default {
     isAdmin() {
       const roles = this.roles || []
       return roles.some(role => String(role).toUpperCase() === 'ADMIN')
+    },
+    pendingTodoCount() {
+      return this.pendingOrderCount + this.pendingReturnCount
     }
   },
   created() {
     if (this.isAdmin) {
-      this.loadPendingReturns(false)
+      this.loadPendingReminders(false)
       this.startReminderPolling()
     }
   },
@@ -92,12 +121,15 @@ export default {
       immediate: false,
       handler(val) {
         if (val) {
-          this.loadPendingReturns(false)
+          this.loadPendingReminders(false)
           this.startReminderPolling()
         } else {
           this.stopReminderPolling()
+          this.pendingOrderCount = 0
+          this.pendingOrderItems = []
           this.pendingReturnCount = 0
           this.pendingReturnItems = []
+          this.knownPendingOrderIds = []
           this.knownPendingIds = []
         }
       }
@@ -110,7 +142,7 @@ export default {
     startReminderPolling() {
       this.stopReminderPolling()
       this.reminderTimer = setInterval(() => {
-        this.loadPendingReturns(true)
+        this.loadPendingReminders(true)
       }, 30000)
     },
     stopReminderPolling() {
@@ -119,13 +151,38 @@ export default {
         this.reminderTimer = null
       }
     },
+    loadPendingReminders(shouldNotify) {
+      this.loadPendingOrders(shouldNotify)
+      this.loadPendingReturns(shouldNotify)
+    },
+    loadPendingOrders(shouldNotify) {
+      fetchOrderList({ pageNum: 1, pageSize: 5, status: 1 }, { silent: true })
+        .then(response => {
+          const data = this.extractPageData(response)
+          const records = data.records || []
+          const currentIds = records.map(item => item.id)
+          if (shouldNotify) {
+            const newIds = currentIds.filter(id => this.knownPendingOrderIds.indexOf(id) === -1)
+            if (newIds.length > 0) {
+              this.$notify({
+                title: '新订单提醒',
+                message: `有 ${newIds.length} 条新订单待发货`,
+                type: 'warning',
+                duration: 4000
+              })
+            }
+          }
+          this.pendingOrderCount = Number(data.total) || records.length
+          this.pendingOrderItems = records
+          this.knownPendingOrderIds = currentIds
+        })
+        .catch(() => {})
+    },
     loadPendingReturns(shouldNotify) {
       fetchReturnApplyList({ pageNum: 1, pageSize: 5, status: 0 }, { silent: true })
         .then(response => {
-          const outer = response && response.data ? response.data : response
-          const data = outer && outer.data ? outer.data : outer
-          const records = data && data.records ? data.records : []
-          const total = data && data.total ? data.total : records.length
+          const data = this.extractPageData(response)
+          const records = data.records || []
           const currentIds = records.map(item => item.id)
           if (shouldNotify) {
             const newIds = currentIds.filter(id => this.knownPendingIds.indexOf(id) === -1)
@@ -138,22 +195,37 @@ export default {
               })
             }
           }
-          this.pendingReturnCount = total
+          this.pendingReturnCount = Number(data.total) || records.length
           this.pendingReturnItems = records
           this.knownPendingIds = currentIds
         })
         .catch(() => {})
     },
+    extractPageData(response) {
+      const outer = response && response.data ? response.data : response
+      return outer && outer.data ? outer.data : (outer || {})
+    },
+    formatOrderTime(value) {
+      if (!value) return '时间未知'
+      return String(value).replace('T', ' ')
+    },
+    goToPendingOrderPage() {
+      this.$router.push({ path: '/admin/oms/order', query: { status: 1, pageNum: 1, pageSize: 10 } })
+    },
+    goToOrderDetail(id) {
+      this.$router.push({ path: '/admin/oms/orderDetail', query: { id } })
+    },
     goToReturnApplyPage() {
-      this.$router.push({ path: '/oms/returnApply' })
+      this.$router.push({ path: '/admin/oms/returnApply' })
     },
     goToReturnApplyDetail(id) {
-      this.$router.push({ path: '/oms/returnApplyDetail', query: { id } })
+      this.$router.push({ path: '/admin/oms/returnApplyDetail', query: { id } })
     },
     logout() {
       this.$store.dispatch('LogOut').then(() => {
         // 退出后直接回登录页，避免被另一端 token 干扰跳转
-        this.$router.replace('/login')
+        const role = (this.roles[0] || 'ADMIN').toUpperCase()
+        this.$router.replace(role === 'USER' ? '/client/login' : '/admin/login')
       })
     }
   }
@@ -180,13 +252,13 @@ export default {
     color: red;
   }
 
-  .return-reminder-badge {
+  .todo-reminder-badge {
     position: absolute;
     right: 110px;
     top: 10px;
   }
 
-  .return-reminder-trigger {
+  .todo-reminder-trigger {
     width: 32px;
     height: 32px;
     line-height: 32px;
@@ -197,7 +269,7 @@ export default {
     transition: background-color 0.2s ease;
   }
 
-  .return-reminder-trigger:hover {
+  .todo-reminder-trigger:hover {
     background: #ecf5ff;
     color: #409eff;
   }
@@ -229,7 +301,7 @@ export default {
   }
 }
 
-.return-reminder-panel {
+.todo-reminder-panel {
   .reminder-header {
     display: flex;
     justify-content: space-between;
@@ -238,10 +310,23 @@ export default {
     margin-bottom: 10px;
   }
 
-  .reminder-summary {
-    margin-bottom: 10px;
-    color: #e6a23c;
+  .reminder-total {
+    color: #909399;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .reminder-section + .reminder-section {
+    margin-top: 12px;
+  }
+
+  .reminder-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #606266;
     font-size: 13px;
+    font-weight: 600;
   }
 
   .reminder-item {

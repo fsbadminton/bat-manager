@@ -41,8 +41,13 @@ public class AuthInterceptor implements HandlerInterceptor {
         request.setAttribute("authUser", authUser);
 
         if (uri.startsWith("/admin/")) {
+            requireRole(authUser, "ADMIN", "Admin role required");
             requirePermission(authUser, PermissionConstants.ADMIN_ACCESS, "Admin permission required");
             return true;
+        }
+
+        if (uri.startsWith("/user/")) {
+            requireRole(authUser, "USER", "User role required");
         }
 
         if ("/user/review/add".equals(uri)) {
@@ -79,8 +84,6 @@ public class AuthInterceptor implements HandlerInterceptor {
                 || "/user/login".equals(uri)
                 || "/user/register".equals(uri)
                 || "/user/sendCode".equals(uri)
-                || "/admin/logout".equals(uri)
-                || "/user/logout".equals(uri)
                 || "/error".equals(uri)
                 || uri.startsWith("/auth/");
     }
@@ -95,6 +98,12 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     private void requirePermission(AuthUser authUser, String permission, String message) {
         if (authUser == null || !authUser.hasPermission(permission)) {
+            throw new AuthException(403, message);
+        }
+    }
+
+    private void requireRole(AuthUser authUser, String expectedRole, String message) {
+        if (authUser == null || !expectedRole.equalsIgnoreCase(authUser.getRole())) {
             throw new AuthException(403, message);
         }
     }

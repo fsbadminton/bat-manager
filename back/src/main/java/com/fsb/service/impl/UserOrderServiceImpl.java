@@ -57,7 +57,8 @@ public class UserOrderServiceImpl implements UserOrderService {
             throw new RuntimeException("商品库存不足");
         }
 
-        BigDecimal originalAmount = BigDecimal.valueOf(product.getPrice()).multiply(BigDecimal.valueOf(dto.getQuantity()));
+        BigDecimal productPrice = product.getPrice() == null ? BigDecimal.ZERO : product.getPrice();
+        BigDecimal originalAmount = productPrice.multiply(BigDecimal.valueOf(dto.getQuantity()));
         BigDecimal couponAmount = BigDecimal.ZERO;
         if (dto.getCouponHistoryId() != null) {
             CouponHistory couponHistory = couponService.validateCouponForOrder(dto.getCouponHistoryId(), username, dto.getProductId(), originalAmount);
@@ -91,7 +92,7 @@ public class UserOrderServiceImpl implements UserOrderService {
         item.setOrderId(order.getId());
         item.setProductId(product.getProductId());
         item.setProductName(product.getName());
-        item.setProductPrice(BigDecimal.valueOf(product.getPrice()));
+        item.setProductPrice(productPrice);
         item.setProductQuantity(dto.getQuantity());
         item.setProductTotal(originalAmount);
         item.setCreateTime(LocalDateTime.now());

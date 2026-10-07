@@ -4,6 +4,7 @@ import com.fsb.Service.AdminService;
 import com.fsb.auth.AuthContext;
 import com.fsb.auth.AuthUser;
 import com.fsb.auth.RolePermissionService;
+import com.fsb.exception.AuthException;
 import com.fsb.pojo.DTO.AdminLoginDTO;
 import com.fsb.pojo.VO.AdminLoginVO;
 import com.fsb.pojo.entity.Admin;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,11 +39,14 @@ public class AdminController {
     private RolePermissionService rolePermissionService;
 
     @PostMapping("/login")
-    public Result<AdminLoginVO> login(@RequestBody AdminLoginDTO adminLoginDTO) throws Exception {
+    public Result<AdminLoginVO> login(@Valid @RequestBody AdminLoginDTO adminLoginDTO) throws Exception {
         log.info("管理员登录: {}", adminLoginDTO.getUsername());
         Admin admin = adminService.login(adminLoginDTO);
 
         String role = rolePermissionService.normalizeRole(admin.getRole());
+        if (!"ADMIN".equals(role)) {
+            throw new AuthException(403, "管理员角色无效");
+        }
         List<String> permissions = rolePermissionService.resolvePermissions(role);
 
         AuthUser authUser = AuthUser.builder()

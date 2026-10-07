@@ -34,4 +34,6 @@ public interface CouponService {
     CouponHistory getJoinedHistoryById(Long id);
 
     void markCouponUsed(Long couponHistoryId, Long orderId, String orderSn);
+
+    void grantCouponToUser(String couponNote, String username, String nickname);
 }

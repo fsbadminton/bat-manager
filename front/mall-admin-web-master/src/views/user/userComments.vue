@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
     <el-card shadow="never">
+      <el-alert v-if="commentLoadError" :title="commentLoadError" type="error" :closable="false" show-icon />
       <el-form :inline="true" :model="commentQuery" size="small" label-width="120px">
         <el-form-item label="商品名">
           <el-input v-model="commentQuery.productName" placeholder="输入商品名字" />
@@ -33,7 +34,13 @@
         </div>
       </div>
 
-      <el-table :data="commentList" v-loading="loadingComments" border style="width: 100%">
+      <el-table
+        :data="commentList"
+        v-loading="loadingComments"
+        :empty-text="commentLoadError ? '加载失败' : '暂无评价'"
+        border
+        style="width: 100%"
+      >
         <el-table-column v-if="isAdmin" label="评论ID" prop="id" width="120" align="center" />
         <el-table-column label="评论用户" prop="memberUsername" width="160" align="center" />
         <el-table-column label="评分" prop="star" width="150" align="center">
@@ -98,6 +105,7 @@ export default {
       commentList: [],
       totalComments: 0,
       loadingComments: false,
+      commentLoadError: '',
       newCommentText: '',
       newCommentStar: 5,
       commentForm: { orderId: null, productId: null },
@@ -140,6 +148,7 @@ export default {
   methods: {
     getComments() {
       this.loadingComments = true
+      this.commentLoadError = ''
       const params = { pageNum: this.commentQuery.pageNum, pageSize: this.commentQuery.pageSize }
       if (this.commentQuery.productName) {
         params.productName = this.commentQuery.productName
@@ -159,6 +168,9 @@ export default {
         })
         .catch(() => {
           this.loadingComments = false
+          this.commentList = []
+          this.totalComments = 0
+          this.commentLoadError = '评价加载失败，请稍后重试'
         })
     },
     handleCommentSizeChange(val) {
@@ -279,5 +291,9 @@ export default {
 <style scoped>
 .pagination-container {
   margin-top: 15px;
+}
+
+.el-alert {
+  margin-bottom: 12px;
 }
 </style>

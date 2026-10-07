@@ -5,19 +5,19 @@ import 'nprogress/nprogress.css'
 import { Message } from 'element-ui'
 import { getToken, getCurrentRoleByRoute } from '@/utils/auth'
 
-const whiteList = ['/login']
+const whiteList = ['/login', '/admin/login', '/client/login']
 
 router.beforeEach((to, from, next) => {
   NProgress.start()
 
   // 登录页始终允许进入，确保任一端退出后都能稳定回到登录界面
-  if (to.path === '/login') {
+  if (whiteList.indexOf(to.path) !== -1) {
     next()
     NProgress.done()
     return
   }
 
-  // 按目标路由判断使用哪套 token（/user 走用户 token，其余走管理员 token）
+  // 按目标路由判断使用哪套 token（/client 走用户 token，其余走管理员 token）
   const targetRole = getCurrentRoleByRoute(to.path)
   const token = getToken(to.path)
 
@@ -32,21 +32,22 @@ router.beforeEach((to, from, next) => {
       store
         .dispatch('GetInfo', { role: targetRole })
         .then(res => {
+          const actualRole = (store.getters.roles[0] || '').toUpperCase()
+          if (actualRole !== targetRole) throw new Error('登录身份与访问入口不匹配')
           const menus = res.data.menus
-          const username = res.data.username
           const roles = store.getters.roles && store.getters.roles.length > 0 ? store.getters.roles : [targetRole]
 
-          store.dispatch('GenerateRoutes', { menus, username, roles }).then(() => {
+          store.dispatch('GenerateRoutes', { menus, roles }).then(() => {
             // 切换身份端时先重置 matcher，再注入当前端动态路由，避免旧路由污染
             resetRouter()
-            router.addRoutes(store.getters.addRouters)
+            router.addRoutes(store.getters.addRouters.concat([{ path: '*', redirect: '/404', hidden: true }]))
             next({ ...to, replace: true })
           })
         })
         .catch(err => {
           store.dispatch('FedLogOut', { role: targetRole }).then(() => {
-            Message.error(err || 'Verification failed, please login again')
-            next({ path: '/login' })
+            Message.error((err && err.message) || err || '登录状态无效，请重新登录')
+            next({ path: targetRole === 'USER' ? '/client/login' : '/admin/login' })
           })
         })
     } else {
@@ -54,10 +55,9 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     if (whiteList.indexOf(to.path) !== -1) {
-      // 登录页始终允许进入，保证任一端都能独立重新登录
       next()
     } else {
-      next('/login')
+      next(targetRole === 'USER' ? '/client/login' : '/admin/login')
       NProgress.done()
     }
   }

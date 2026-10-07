@@ -1,7 +1,14 @@
 ﻿<template>
   <div class="app-container">
     <el-card shadow="never">
-      <el-table :data="orderList" v-loading="loadingOrders" border style="width: 100%">
+      <el-alert v-if="orderLoadError" :title="orderLoadError" type="error" :closable="false" show-icon />
+      <el-table
+        :data="orderList"
+        v-loading="loadingOrders"
+        :empty-text="orderLoadError ? '加载失败' : '暂无订单'"
+        border
+        style="width: 100%"
+      >
         <el-table-column label="订单号" prop="orderSn" width="300" align="center" />
         <el-table-column label="商品" width="300">
           <template slot-scope="scope">
@@ -116,6 +123,7 @@ export default {
       orderQuery: { pageNum: 1, pageSize: 5 },
       totalOrders: 0,
       loadingOrders: false,
+      orderLoadError: '',
       orderEditDialogVisible: false,
       orderEditForm: { id: null, orderSn: '', productName: '', quantity: 1, receiverName: '', receiverPhone: '', address: '' },
       orderRules: {
@@ -211,6 +219,7 @@ export default {
     },
     getOrders() {
       this.loadingOrders = true
+      this.orderLoadError = ''
       const params = { pageNum: this.orderQuery.pageNum, pageSize: this.orderQuery.pageSize }
       listUserOrders(params)
         .then(res => {
@@ -223,6 +232,9 @@ export default {
         })
         .catch(() => {
           this.loadingOrders = false
+          this.orderList = []
+          this.totalOrders = 0
+          this.orderLoadError = '订单加载失败，请稍后重试'
         })
     },
     handleOrderSizeChange(val) {
@@ -275,7 +287,7 @@ export default {
     },
     openCommentDialog() {
       if (!this.canCreateOwnReview) return
-      this.$router.push({ path: '/user/comments' })
+      this.$router.push({ path: '/client/comments' })
     },
     getOrderStatusText(order) {
       const returnStatus = order.returnApplyStatus
@@ -394,5 +406,9 @@ export default {
 <style scoped>
 .pagination-container {
   margin-top: 15px;
+}
+
+.el-alert {
+  margin-bottom: 12px;
 }
 </style>

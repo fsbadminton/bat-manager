@@ -224,7 +224,7 @@
         this.getList();
       },
       handleViewDetail(index,row){
-        this.$router.push({path:'/oms/returnApplyDetail',query:{id:row.id}})
+        this.$router.push({path:'/admin/oms/returnApplyDetail',query:{id:row.id}})
       },
       handleQuickApprove(row){
         this.$confirm('确认同意该退货申请？', '提示', {

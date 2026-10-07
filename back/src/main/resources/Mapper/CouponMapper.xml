@@ -75,6 +75,7 @@
         from coupon c
         where (c.enable_time is null or c.enable_time &lt;= now())
           and (c.end_time is null or c.end_time &gt;= now())
+          and (c.note is null or c.note != 'system_code:NEW_USER_50')
           and (
               c.publish_count is null
               or (select count(*) from coupon_history ch where ch.coupon_id = c.id) &lt; c.publish_count

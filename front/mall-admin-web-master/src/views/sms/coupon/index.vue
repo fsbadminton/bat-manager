@@ -211,13 +211,13 @@
         this.getList();
       },
       handleAdd(){
-        this.$router.push({path: '/sms/addCoupon'})
+        this.$router.push({path: '/admin/sms/addCoupon'})
       },
       handleView(index, row) {
-        this.$router.push({path: '/sms/couponHistory', query: {id: row.id}})
+        this.$router.push({path: '/admin/sms/couponHistory', query: {id: row.id}})
       },
       handleUpdate(index, row) {
-        this.$router.push({path: '/sms/updateCoupon', query: {id: row.id}})
+        this.$router.push({path: '/admin/sms/updateCoupon', query: {id: row.id}})
       },
       handleDelete(index, row) {
         this.$confirm('是否进行删除操作?', '提示', {
@@ -250,5 +250,4 @@
     width: 203px;
   }
 </style>
-
 

@@ -69,7 +69,7 @@
     },
     methods:{
       cancel(){
-        this.$router.back();
+        this.returnToPrevious();
       },
       confirm(){
         this.$confirm('是否要进行发货操作?', '提示', {
@@ -86,7 +86,7 @@
             return deliveryOrder(payload);
           });
           Promise.all(requests).then(responses => {
-            this.$router.back();
+            this.returnToPrevious();
             this.$message({
               type: 'success',
               message: '发货成功!'
@@ -103,10 +103,24 @@
             message: '已取消发货'
           });
         });
+      },
+      returnToPrevious(){
+        const returnPath = this.$route.query.returnPath;
+        if (!returnPath) {
+          this.$router.back();
+          return;
+        }
+        const query = {};
+        ['pageNum', 'pageSize', 'orderSn', 'receiverKeyword', 'status', 'orderType', 'sourceType', 'createTime']
+          .forEach(key => {
+            const value = this.$route.query[`return_${key}`];
+            if (value !== null && value !== undefined && value !== '') {
+              query[`return_${key}`] = value;
+            }
+          });
+        this.$router.push({ path: returnPath, query });
       }
     }
   }
 </script>
 <style></style>
-
-

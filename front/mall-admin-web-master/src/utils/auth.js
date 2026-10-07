@@ -21,7 +21,7 @@ const KEY_MAP = {
 
 function resolveRoleFromPath(path) {
   const p = String(path || '').toLowerCase()
-  if (p.startsWith('/user')) return ROLE_USER
+  if (p.startsWith('/user') || p.startsWith('/client')) return ROLE_USER
   return ROLE_ADMIN
 }
 

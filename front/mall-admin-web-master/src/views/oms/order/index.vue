@@ -87,7 +87,14 @@
           <template slot-scope="scope">{{scope.row.payType | formatPayType}}</template>
         </el-table-column>
         <el-table-column label="订单状态" width="120" align="center">
-          <template slot-scope="scope">{{scope.row.status | formatStatus}}</template>
+          <template slot-scope="scope">
+            <el-tag
+              class="order-status-tag"
+              size="small"
+              :type="formatStatusTagType(scope.row.status)">
+              {{scope.row.status | formatStatus}}
+            </el-tag>
+          </template>
         </el-table-column>
         <el-table-column label="售后状态" width="140" align="center">
           <template slot-scope="scope">
@@ -265,6 +272,7 @@
       }
     },
     created() {
+      this.restoreListQueryFromRoute();
       this.getList();
     },
     filters: {
@@ -323,21 +331,38 @@
         }
         return map[value] || 'info'
       },
+      formatStatusTagType(value) {
+        const map = {
+          0: 'warning',
+          1: 'danger',
+          2: '',
+          3: 'success',
+          4: 'info',
+          5: 'info'
+        }
+        return map[value] || 'info'
+      },
       hasActiveReturn(order) {
         return order.returnApplyStatus === 0 || order.returnApplyStatus === 1
       },
       handleResetSearch() {
         this.listQuery = Object.assign({}, defaultListQuery);
+        this.syncListQueryToRoute();
+        this.getList();
       },
       handleSearchList() {
         this.listQuery.pageNum = 1;
+        this.syncListQueryToRoute();
         this.getList();
       },
       handleSelectionChange(val){
         this.multipleSelection = val;
       },
       handleViewOrder(index, row){
-        this.$router.push({path:'/oms/orderDetail',query:{id:row.id}})
+        this.$router.push({
+          path:'/admin/oms/orderDetail',
+          query:{id:row.id, ...this.getListRouteQuery()}
+        })
       },
       handleCloseOrder(index, row){
         this.closeOrder.dialogVisible=true;
@@ -345,7 +370,10 @@
       },
       handleDeliveryOrder(index, row){
         let listItem = this.covertOrder(row);
-        this.$router.push({path:'/oms/deliverOrderList',query:{list:[listItem]}})
+        this.$router.push({
+          path:'/admin/oms/deliverOrderList',
+          query:{list:[listItem], returnPath:'/admin/oms/order', ...this.getListRouteQuery()}
+        })
       },
       handleViewLogistics(index, row){
         this.logisticsDialogVisible=true;
@@ -380,7 +408,10 @@
             });
             return;
           }
-          this.$router.push({path:'/oms/deliverOrderList',query:{list:list}})
+          this.$router.push({
+            path:'/admin/oms/deliverOrderList',
+            query:{list:list, returnPath:'/admin/oms/order', ...this.getListRouteQuery()}
+          })
         }else if(this.operateType===2){
           //关闭订单
           this.closeOrder.orderIds=[];
@@ -400,10 +431,12 @@
       handleSizeChange(val){
         this.listQuery.pageNum = 1;
         this.listQuery.pageSize = val;
+        this.syncListQueryToRoute();
         this.getList();
       },
       handleCurrentChange(val){
         this.listQuery.pageNum = val;
+        this.syncListQueryToRoute();
         this.getList();
       },
       handleCloseOrderConfirm() {
@@ -443,6 +476,39 @@
           this.total = response.data.total;
         });
       },
+      getListRouteQuery() {
+        return this.buildListRouteQuery('return_');
+      },
+      buildListRouteQuery(prefix) {
+        const query = {};
+        Object.keys(defaultListQuery).forEach(key => {
+          const value = this.listQuery[key];
+          if (value !== null && value !== undefined && value !== '') {
+            query[`${prefix}${key}`] = value;
+          }
+        });
+        return query;
+      },
+      syncListQueryToRoute() {
+        this.$router.replace({
+          path: this.$route.path,
+          query: this.buildListRouteQuery('')
+        });
+      },
+      restoreListQueryFromRoute() {
+        const query = this.$route.query || {};
+        Object.keys(defaultListQuery).forEach(key => {
+          const value = query[`return_${key}`] !== undefined
+            ? query[`return_${key}`]
+            : query[key];
+          if (value === null || value === undefined || value === '') {
+            return;
+          }
+          this.listQuery[key] = ['pageNum', 'pageSize', 'status', 'orderType', 'sourceType'].includes(key)
+            ? Number(value)
+            : value;
+        });
+      },
       deleteOrder(ids){
         this.$confirm('是否要进行该删除操作?', '提示', {
           confirmButtonText: '确定',
@@ -470,7 +536,13 @@
         })
       },
       covertOrder(order){
-        let address=order.receiverProvince+order.receiverCity+order.receiverRegion+order.receiverDetailAddress;
+        const addressParts = [
+          order.receiverProvince,
+          order.receiverCity,
+          order.receiverRegion,
+          order.receiverDetailAddress
+        ].filter(value => value !== null && value !== undefined && value !== '' && value !== 0);
+        const address = order.address || addressParts.join('');
         let listItem={
           orderId:order.id,
           orderSn:order.orderSn,
@@ -489,5 +561,11 @@
 <style scoped>
   .input-width {
     width: 203px;
+  }
+
+  .order-status-tag {
+    min-width: 72px;
+    font-weight: 600;
+    text-align: center;
   }
 </style>

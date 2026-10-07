@@ -5,26 +5,50 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '../views/layout/Layout'
+import ClientLayout from '../views/client/ClientLayout'
+
+// 项目使用 hash 路由。将 IDEA/浏览器打开的 history 风格地址统一到根路径，
+// 避免出现 /admin/login#/admin/... 以及刷新后空白页。
+if (typeof window !== 'undefined' && !['/', '/index.html'].includes(window.location.pathname)) {
+  const hashRoute = window.location.hash.indexOf('#/') === 0
+    ? window.location.hash.substring(1)
+    : window.location.pathname + window.location.search
+  window.location.replace('/#' + hashRoute)
+}
 
 export const constantRouterMap = [
-  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
+  { path: '/', redirect: '/admin/login', hidden: true },
+  { path: '/login', redirect: '/client/login', hidden: true },
+  {
+    path: '/admin/login',
+    component: () => import('@/views/login/index'),
+    hidden: true,
+    meta: { role: 'ADMIN' }
+  },
+  {
+    path: '/client/login',
+    component: () => import('@/views/login/index'),
+    hidden: true,
+    meta: { role: 'USER' }
+  },
   { path: '/404', component: () => import('@/views/404'), hidden: true },
   {
-    path: '',
+    path: '/admin',
     component: Layout,
-    redirect: '/home',
+    redirect: '/admin/home',
     hidden: true,
-    meta: { title: '首页', icon: 'home' },
+    meta: { title: '首页', icon: 'home', roles: ['ADMIN'] },
     children: [
       {
         path: 'home',
         name: 'home',
         component: () => import('@/views/home/index'),
         hidden: true,
-        meta: { title: '仪表盘', icon: 'dashboard' }
+        meta: { title: '仪表盘', icon: 'dashboard', roles: ['ADMIN'] }
       }
     ]
-  }
+  },
+  { path: '/home', redirect: '/admin/home', hidden: true }
 ]
 
 export const asyncRouterMap = [
@@ -125,9 +149,9 @@ export const asyncRouterMap = [
     ]
   },
   {
-    path: '/user',
+    path: '/client',
     component: Layout,
-    redirect: '/user/products',
+    redirect: '/client/products',
     name: 'user',
     meta: { title: '用户', icon: 'ums-admin' },
     children: [
@@ -334,11 +358,62 @@ export const asyncRouterMap = [
   { path: '*', redirect: '/404', hidden: true }
 ]
 
+function cloneRouteWithRole(route, role) {
+  const cloned = { ...route }
+  cloned.meta = { ...(route.meta || {}), roles: [role] }
+  if (route.children) {
+    cloned.children = route.children.map(child => cloneRouteWithRole(child, role))
+  }
+  return cloned
+}
+
+function prefixAdminRoute(route) {
+  const cloned = cloneRouteWithRole(route, 'ADMIN')
+  cloned.path = `/admin${route.path}`
+  if (typeof route.redirect === 'string' && route.redirect.startsWith('/')) {
+    cloned.redirect = `/admin${route.redirect}`
+  }
+  return cloned
+}
+
+export const adminRouterMap = asyncRouterMap
+  .filter(route => route.name !== 'user' && route.path !== '*')
+  .map(route => {
+    const cloned = prefixAdminRoute(route)
+    if (cloned.name === 'sms') {
+      const supportedMarketingRoutes = ['coupon', 'addCoupon', 'updateCoupon', 'couponHistory']
+      cloned.children = cloned.children.filter(child => supportedMarketingRoutes.includes(child.name))
+    }
+    return cloned
+  })
+
+const userRoute = asyncRouterMap.find(route => route.name === 'user')
+export const clientRouterMap = userRoute
+  ? [{
+      ...cloneRouteWithRole(userRoute, 'USER'),
+      path: '/client',
+      component: ClientLayout,
+      redirect: '/client/products'
+    }]
+  : []
+
 const createRouter = () =>
   new Router({
     // mode: 'history', //后端支持可开
     scrollBehavior: () => ({ y: 0 }),
-    routes: constantRouterMap
+    routes: [
+      ...constantRouterMap,
+      { path: '/pms', redirect: '/admin/pms', hidden: true },
+      { path: '/pms/*', redirect: to => `/admin/pms/${to.params.pathMatch}`, hidden: true },
+      { path: '/oms', redirect: '/admin/oms', hidden: true },
+      { path: '/oms/*', redirect: to => `/admin/oms/${to.params.pathMatch}`, hidden: true },
+      { path: '/sms', redirect: '/admin/sms', hidden: true },
+      { path: '/sms/*', redirect: to => `/admin/sms/${to.params.pathMatch}`, hidden: true },
+      { path: '/ums', redirect: '/admin/ums', hidden: true },
+      { path: '/ums/*', redirect: to => `/admin/ums/${to.params.pathMatch}`, hidden: true },
+      { path: '/user', redirect: '/client/products', hidden: true },
+      { path: '/user/*', redirect: to => `/client/${to.params.pathMatch}`, hidden: true }
+    ]
   })
 
 const router = createRouter()

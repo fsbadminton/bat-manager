@@ -16,6 +16,9 @@ public interface CouponMapper {
 
     Coupon getById(Long id);
 
+    @Select("select * from coupon where note = #{note} limit 1")
+    Coupon getByNote(String note);
+
     void updateById(Coupon coupon);
 
     void deleteById(Long id);

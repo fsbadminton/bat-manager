@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +39,7 @@ public class UserController {
     private RolePermissionService rolePermissionService;
 
     @PostMapping("/login")
-    public Result<UserLoginVO> login(@RequestBody UserLoginDTO userLoginDTO) throws Exception {
+    public Result<UserLoginVO> login(@Valid @RequestBody UserLoginDTO userLoginDTO) throws Exception {
         User user = userService.login(userLoginDTO);
 
         String role = rolePermissionService.normalizeRole(user.getRole());
@@ -82,7 +83,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public Result<Void> register(@RequestBody UserRegisterDTO userRegisterDTO) {
+    public Result<Void> register(@Valid @RequestBody UserRegisterDTO userRegisterDTO) {
         userService.register(userRegisterDTO);
         return Result.success();
     }

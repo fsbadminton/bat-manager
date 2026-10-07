@@ -1,4 +1,4 @@
-﻿import { login, userLogin, logout, getInfo } from '@/api/login'
+import { login, userLogin, logout, getInfo } from '@/api/login'
 import {
   getToken,
   setToken,
@@ -16,12 +16,17 @@ import {
 } from '@/utils/auth'
 
 function getContextRole(routeHint) {
-  return getCurrentRoleByRoute(routeHint || (typeof window !== 'undefined' ? window.location.pathname : '/pms'))
+  return getCurrentRoleByRoute(routeHint || (typeof window !== 'undefined' ? window.location.pathname : '/admin'))
+}
+
+function normalizeRole(role) {
+  const value = String(role || '').toUpperCase()
+  return value === 'ADMIN' || value === 'USER' ? value : ''
 }
 
 function resolveRoleInput(roleLike) {
   if (!roleLike) return getContextRole()
-  if (typeof roleLike === 'object' && roleLike.role) return getCurrentRoleByRoute(roleLike.role)
+  if (typeof roleLike === 'object' && roleLike.role) return normalizeRole(roleLike.role)
   return getCurrentRoleByRoute(roleLike)
 }
 
@@ -35,148 +40,98 @@ const user = {
   },
 
   mutations: {
-    SET_TOKEN: (state, token) => {
-      state.token = token
-    },
-    SET_NAME: (state, name) => {
-      state.name = name
-    },
-    SET_AVATAR: (state, avatar) => {
-      state.avatar = avatar
-    },
-    SET_ROLES: (state, roles) => {
-      state.roles = roles
-    },
-    SET_PERMISSIONS: (state, permissions) => {
-      state.permissions = permissions
-    }
+    SET_TOKEN: (state, token) => { state.token = token },
+    SET_NAME: (state, name) => { state.name = name },
+    SET_AVATAR: (state, avatar) => { state.avatar = avatar },
+    SET_ROLES: (state, roles) => { state.roles = roles },
+    SET_PERMISSIONS: (state, permissions) => { state.permissions = permissions }
   },
 
   actions: {
     Login({ commit }, userInfo) {
       const username = userInfo.username.trim()
       const password = userInfo.password
-      return new Promise((resolve, reject) => {
-        const apiCall = username.toLowerCase() === 'admin' ? login : userLogin
-        apiCall(username, password)
-          .then(response => {
-            const outer = response && response.data ? response.data : response
-            const payload = outer && outer.data ? outer.data : outer
-            const tokenStr = payload.tokenHead ? payload.tokenHead + payload.token : payload.token
-            const roleRaw = payload.role || payload.userRole || payload.authority || ''
-            const role = (typeof roleRaw === 'string' ? roleRaw : getContextRole()).toUpperCase()
+      const role = normalizeRole(userInfo.role || getContextRole())
+      if (!role) return Promise.reject(new Error('Invalid login role'))
 
-            // 按角色写入独立存储，避免 admin/user 登录态互相覆盖
-            setToken(tokenStr, role)
-            setUserRole(role, role)
-            commit('SET_TOKEN', tokenStr)
-            commit('SET_ROLES', [role])
+      const apiCall = role === 'ADMIN' ? login : userLogin
+      return apiCall(username, password)
+        .then(response => {
+          const outer = response && response.data ? response.data : response
+          const payload = outer && outer.data ? outer.data : outer
+          const returnedRole = normalizeRole(payload && (payload.role || payload.userRole || payload.authority))
+          if (returnedRole !== role) throw new Error('登录身份与入口不匹配')
 
-            const permissions = Array.isArray(payload.permissions) ? payload.permissions : []
-            commit('SET_PERMISSIONS', permissions)
-            setPermissions(permissions, role)
+          const tokenStr = payload.tokenHead ? payload.tokenHead + payload.token : payload.token
+          setToken(tokenStr, role)
+          setUserRole(role, role)
+          commit('SET_TOKEN', tokenStr)
+          commit('SET_ROLES', [role])
 
-            if (payload.username) {
-              commit('SET_NAME', payload.username)
-              setUsername(payload.username, role)
-            }
-            resolve(payload)
-          })
-          .catch(error => {
-            reject(error)
-          })
-      })
+          const permissions = Array.isArray(payload.permissions) ? payload.permissions : []
+          commit('SET_PERMISSIONS', permissions)
+          setPermissions(permissions, role)
+
+          if (payload.username) {
+            commit('SET_NAME', payload.username)
+            setUsername(payload.username, role)
+          }
+          return payload
+        })
     },
 
     GetInfo({ commit }, payload) {
-      return new Promise(resolve => {
-        // 优先使用路由守卫传入的目标路由来判断身份，避免在 /login 页面误判成 ADMIN
-        const contextRole = getContextRole(payload && payload.role)
-        const storedRole = (getUserRole(contextRole) || contextRole).toUpperCase()
+      const contextRole = getContextRole(payload && payload.role)
+      const storedRole = normalizeRole(getUserRole(contextRole) || contextRole)
+      return getInfo(storedRole).then(response => {
+        const outer = response && response.data ? response.data : response
+        const info = outer && outer.data ? outer.data : outer
+        const token = getToken(storedRole)
+        if (token) commit('SET_TOKEN', token)
 
-        getInfo(storedRole)
-          .then(response => {
-            const outer = response && response.data ? response.data : response
-            const payload = outer && outer.data ? outer.data : outer
-            const token = getToken(storedRole)
-            if (token) commit('SET_TOKEN', token)
+        const roles = info.roles && info.roles.length > 0
+          ? info.roles.map(role => normalizeRole(role)).filter(Boolean)
+          : [storedRole]
+        commit('SET_ROLES', roles)
 
-            if (payload.roles && payload.roles.length > 0) {
-              const upperRoles = payload.roles.map(r => String(r).toUpperCase())
-              commit('SET_ROLES', upperRoles)
-            } else {
-              commit('SET_ROLES', [storedRole])
-            }
+        const name = info.username || getUsername(storedRole)
+        if (name) {
+          commit('SET_NAME', name)
+          setUsername(name, storedRole)
+        }
 
-            if (payload.username) {
-              commit('SET_NAME', payload.username)
-              setUsername(payload.username, storedRole)
-            } else {
-              const name = getUsername(storedRole)
-              if (name) commit('SET_NAME', name)
-            }
-
-            const permissions = Array.isArray(payload.permissions) ? payload.permissions : getPermissions(storedRole)
-            commit('SET_PERMISSIONS', permissions)
-            setPermissions(permissions, storedRole)
-
-            resolve({
-              data: {
-                menus: payload.menus || [],
-                username: payload.username || getUsername(storedRole),
-                permissions
-              }
-            })
-          })
-          .catch(() => {
-            const token = getToken(storedRole)
-            const name = getUsername(storedRole)
-            const permissions = getPermissions(storedRole)
-            if (token) commit('SET_TOKEN', token)
-            commit('SET_ROLES', [storedRole])
-            if (name) commit('SET_NAME', name)
-            commit('SET_PERMISSIONS', permissions)
-            resolve({ data: { menus: [], username: name, permissions } })
-          })
+        const permissions = Array.isArray(info.permissions) ? info.permissions : getPermissions(storedRole)
+        commit('SET_PERMISSIONS', permissions)
+        setPermissions(permissions, storedRole)
+        return { data: { menus: info.menus || [], username: name, permissions, roles } }
       })
     },
 
     LogOut({ commit, state }) {
-      return new Promise((resolve, reject) => {
-        const contextRole = (state.roles && state.roles[0]) || getContextRole()
-        logout(contextRole)
-          .then(() => {
-            // 仅清理当前端身份，保留另一端登录状态
-            commit('SET_TOKEN', '')
-            commit('SET_NAME', '')
-            commit('SET_ROLES', [])
-            commit('SET_PERMISSIONS', [])
-            removeToken(contextRole)
-            removeUserRole(contextRole)
-            removeUsername(contextRole)
-            removePermissions(contextRole)
-            resolve()
-          })
-          .catch(error => {
-            reject(error)
-          })
-      })
-    },
-
-    FedLogOut({ commit, state }, payload) {
-      return new Promise(resolve => {
-        // 允许按指定端登出（如 401 来自 /user/* 时仅清理用户态）
-        const contextRole = resolveRoleInput((payload && payload.role) || (state.roles && state.roles[0]) || getContextRole())
+      const role = normalizeRole((state.roles && state.roles[0]) || getContextRole())
+      return logout(role).then(() => {
         commit('SET_TOKEN', '')
         commit('SET_NAME', '')
         commit('SET_ROLES', [])
         commit('SET_PERMISSIONS', [])
-        removeToken(contextRole)
-        removeUserRole(contextRole)
-        removeUsername(contextRole)
-        removePermissions(contextRole)
-        resolve()
+        removeToken(role)
+        removeUserRole(role)
+        removeUsername(role)
+        removePermissions(role)
       })
+    },
+
+    FedLogOut({ commit }, payload) {
+      const role = resolveRoleInput(payload && payload.role)
+      commit('SET_TOKEN', '')
+      commit('SET_NAME', '')
+      commit('SET_ROLES', [])
+      commit('SET_PERMISSIONS', [])
+      removeToken(role)
+      removeUserRole(role)
+      removeUsername(role)
+      removePermissions(role)
+      return Promise.resolve()
     }
   }
 }

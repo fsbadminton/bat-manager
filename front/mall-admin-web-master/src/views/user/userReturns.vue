@@ -1,7 +1,14 @@
 <template>
   <div class="app-container">
     <el-card shadow="never">
-      <el-table :data="returnList" v-loading="loading" border style="width: 100%">
+      <el-alert v-if="loadError" :title="loadError" type="error" :closable="false" show-icon />
+      <el-table
+        :data="returnList"
+        v-loading="loading"
+        :empty-text="loadError ? '加载失败' : '暂无退货申请'"
+        border
+        style="width: 100%"
+      >
         <el-table-column prop="id" label="ID" width="80"/>
         <el-table-column prop="orderSn" label="订单编号" width="220"/>
         <el-table-column prop="reason" label="退货原因"/>
@@ -28,6 +35,7 @@ export default {
     return {
       returnList: [],
       loading: false,
+      loadError: '',
       total: 0,
       query: { pageNum: 1, pageSize: 5 }
     }
@@ -38,6 +46,7 @@ export default {
   methods: {
     getList() {
       this.loading = true
+      this.loadError = ''
       const params = { pageNum: this.query.pageNum, pageSize: this.query.pageSize }
       listUserReturnApplies(params).then(res => {
         this.loading = false
@@ -46,7 +55,12 @@ export default {
         const list = Array.isArray(data) ? data : (data.records || data.list || [])
         this.returnList = list
         this.total = data && data.total ? data.total : list.length
-      }).catch(() => { this.loading = false })
+      }).catch(() => {
+        this.loading = false
+        this.returnList = []
+        this.total = 0
+        this.loadError = '退货记录加载失败，请稍后重试'
+      })
     },
     handleSizeChange(val) {
       this.query.pageSize = val
@@ -69,4 +83,5 @@ export default {
 
 <style scoped>
 .pagination-container { margin-top: 15px }
+.el-alert { margin-bottom: 12px }
 </style>

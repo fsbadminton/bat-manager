@@ -7,7 +7,7 @@
       <el-step title="选择球拍关联"></el-step>
     </el-steps>
     <product-info-detail
-      v-show="showStatus[0]"
+      v-if="active === 0"
       v-model="productParam"
       :is-edit="isEdit"
       @nextStep="nextStep">
@@ -20,14 +20,14 @@
       @prevStep="prevStep">
     </product-sale-detail> -->
     <product-attr-detail
-      v-show="showStatus[1]"
+      v-if="active === 1"
       v-model="productParam"
       :is-edit="isEdit"
       @prevStep="prevStep"
       @finishCommit="finishCommit">
     </product-attr-detail>
     <product-relation-detail
-      v-show="showStatus[2]"
+      v-if="active === 2"
       v-model="productParam"
       :is-edit="isEdit"
       @prevStep="prevStep"
@@ -177,7 +177,7 @@
                 message: '提交成功',
                 duration:1000
               });
-              setTimeout(()=>{ this.$router.push({ path: '/pms/product' }); }, 500);
+              setTimeout(() => { this.$router.push({ path: '/admin/pms/product' }); }, 500);
             });
           }
         })
@@ -193,4 +193,3 @@
     width: 800px;
   }
 </style>
-

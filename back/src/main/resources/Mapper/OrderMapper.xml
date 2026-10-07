@@ -86,5 +86,6 @@
                 and (receiver_name like concat('%',#{receiverKeyword},'%') or receiver_phone like concat('%',#{receiverKeyword},'%'))
             </if>
         </where>
+        order by create_time desc, id desc
     </select>
 </mapper>

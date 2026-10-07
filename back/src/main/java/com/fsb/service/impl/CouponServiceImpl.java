@@ -139,6 +139,9 @@ public class CouponServiceImpl implements CouponService {
         if (coupon == null) {
             throw new RuntimeException("优惠券不存在");
         }
+        if ("system_code:NEW_USER_50".equals(coupon.getNote())) {
+            throw new RuntimeException("新人优惠券仅在注册时自动发放");
+        }
         LocalDateTime now = LocalDateTime.now();
         if (coupon.getEnableTime() != null && now.isBefore(coupon.getEnableTime())) {
             throw new RuntimeException("该优惠券还未到领取时间");
@@ -212,6 +215,32 @@ public class CouponServiceImpl implements CouponService {
     @Override
     public void markCouponUsed(Long couponHistoryId, Long orderId, String orderSn) {
         couponHistoryMapper.markUsed(couponHistoryId, orderId, orderSn, LocalDateTime.now());
+    }
+
+    @Override
+    @Transactional
+    public void grantCouponToUser(String couponNote, String username, String nickname) {
+        if (username == null || username.trim().isEmpty()) {
+            throw new IllegalArgumentException("优惠券发放用户不能为空");
+        }
+        Coupon coupon = couponMapper.getByNote(couponNote);
+        if (coupon == null) {
+            throw new RuntimeException("系统优惠券未初始化: " + couponNote);
+        }
+        Integer existing = couponHistoryMapper.countByCouponIdAndUsername(coupon.getId(), username);
+        if (existing != null && existing > 0) {
+            return;
+        }
+
+        CouponHistory history = new CouponHistory();
+        history.setCouponId(coupon.getId());
+        history.setCouponCode(generateCouponCode());
+        history.setMemberUsername(username);
+        history.setMemberNickname(nickname == null || nickname.trim().isEmpty() ? username : nickname);
+        history.setGetType(2);
+        history.setCreateTime(LocalDateTime.now());
+        history.setUseStatus(0);
+        couponHistoryMapper.insert(history);
     }
 
     private void normalizeCoupon(Coupon coupon) {

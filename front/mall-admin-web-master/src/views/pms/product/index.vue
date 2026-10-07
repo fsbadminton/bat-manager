@@ -651,7 +651,7 @@
         this.getList();
       },
       handleAddProduct() {
-        this.$router.push({path:'/pms/addProduct'});
+        this.$router.push({ path: '/admin/pms/addProduct' });
       },
       handleBatchOperate() {
         if(this.operateType==null){
@@ -779,7 +779,7 @@
           });
         }).catch(() => {
           // 取消时进入编辑页
-          this.$router.push({path:'/pms/updateProduct',query:{id:row.productId || row.id}});
+          this.$router.push({ path: '/admin/pms/updateProduct', query: { id: row.productId || row.id } });
         });
       },
       handleShowProduct(index,row){
@@ -850,4 +850,3 @@
   }
 </script>
 <style></style>
-

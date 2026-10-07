@@ -2,6 +2,10 @@
 # Database / local data
 # =========================
 *.sql
+!database/
+!database/*.sql
+!database/migrations/
+!database/migrations/*.sql
 *.db
 temp/
 dump.rdb

@@ -2,14 +2,14 @@ spring:
   #数据库连接信息
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/batnew
-    username: root
-    password: 12345678
+    url: ${DB_URL:jdbc:mysql://localhost:3306/batnew}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:123456}
   #Redis配置
   data:
     redis:
-      host: localhost
-      port: 6379
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
 
   #阿里云OSS配置
   alioss:
@@ -17,6 +17,10 @@ spring:
     access-key-id: ${ALIOSS_ACCESS_KEY_ID:}
     access-key-secret: ${ALIOSS_ACCESS_KEY_SECRET:}
     bucket-name: bat-manager
+
+jwt:
+  secret: ${JWT_SECRET:bat-manager-local-secret-key-2026-0123456789}
+  expiration-millis: ${JWT_EXPIRATION_MILLIS:604800000}
 
 #Mybatis配置
 mybatis:

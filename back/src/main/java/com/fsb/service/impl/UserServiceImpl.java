@@ -3,11 +3,13 @@ package com.fsb.Service.impl;
 
 import com.fsb.Mapper.UserMapper;
 import com.fsb.Service.UserService;
+import com.fsb.Service.CouponService;
 import com.fsb.pojo.DTO.UserLoginDTO;
 import com.fsb.pojo.DTO.UserRegisterDTO;
 import com.fsb.pojo.entity.User;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,11 +19,13 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
     private final StringRedisTemplate redisTemplate;
+    private final CouponService couponService;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public UserServiceImpl(UserMapper userMapper, StringRedisTemplate redisTemplate) {
+    public UserServiceImpl(UserMapper userMapper, StringRedisTemplate redisTemplate, CouponService couponService) {
         this.userMapper = userMapper;
         this.redisTemplate = redisTemplate;
+        this.couponService = couponService;
     }
 
     @Override
@@ -53,6 +57,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void register(UserRegisterDTO dto) {
         if (dto == null || dto.getUsername() == null || dto.getPassword() == null || dto.getEmail() == null || dto.getCode() == null) {
             throw new RuntimeException("注册信息不完整");
@@ -83,6 +88,8 @@ public class UserServiceImpl implements UserService {
         user.setIsRegistered(1);
         user.setCreateTime(LocalDateTime.now());
         userMapper.insert(user);
+
+        couponService.grantCouponToUser("system_code:NEW_USER_50", user.getUsername(), user.getNickname());
 
         redisTemplate.delete(codeKey);
     }

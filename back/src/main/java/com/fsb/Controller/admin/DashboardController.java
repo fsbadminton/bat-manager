@@ -3,6 +3,8 @@ package com.fsb.Controller.admin;
 
 import com.fsb.Service.DashboardService;
 import com.fsb.pojo.DTO.OrderChartDTO;
+import com.fsb.pojo.VO.DashboardSummaryVO;
+import com.fsb.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +22,13 @@ public class DashboardController {
     private DashboardService dashboardService;
 
     @GetMapping("/order-chart")
-    public List<OrderChartDTO> getOrderChart(@RequestParam String start, @RequestParam String end) {
-        return dashboardService.getOrderChart(start, end);
+    public Result<List<OrderChartDTO>> getOrderChart(@RequestParam String start, @RequestParam String end) {
+        return Result.success(dashboardService.getOrderChart(start, end));
+    }
+
+    @GetMapping("/summary")
+    public Result<DashboardSummaryVO> getSummary() {
+        return Result.success(dashboardService.getSummary());
     }
 
 }

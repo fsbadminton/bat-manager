@@ -31,7 +31,10 @@ export default {
       if (first && first.name !== 'home') {
         matched = [{ path: '/home', meta: { title: '首页' }}].concat(matched)
       }
-      this.levelList = matched
+      this.levelList = matched.filter((item, index, list) => {
+        if (index === 0) return true
+        return item.meta.title !== list[index - 1].meta.title
+      })
     }
   }
 }

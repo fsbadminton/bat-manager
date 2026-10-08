@@ -1,470 +1,699 @@
 <template>
-  <div class="app-container">
-    <div class="total-layout">
-      <el-row :gutter="20">
-        <el-col :span="6">
-          <div class="total-frame">
-            <img :src="img_home_order" class="total-icon">
-            <div class="total-title">今日订单总数</div>
-            <div class="total-value">200</div>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="total-frame">
-            <img :src="img_home_today_amount" class="total-icon">
-            <div class="total-title">今日销售总额</div>
-            <div class="total-value">￥5000.00</div>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="total-frame">
-            <img :src="img_home_yesterday_amount" class="total-icon">
-            <div class="total-title">昨日销售总额</div>
-            <div class="total-value">￥5000.00</div>
-          </div>
-        </el-col>
-        <!--<el-col :span="6">-->
-          <!--<div class="total-frame">-->
-            <!--<svg-icon icon-class="total-week" class="total-icon">-->
-            <!--</svg-icon>-->
-            <!--<div class="total-title">近7天销售总额</div>-->
-            <!--<div class="total-value">￥50000.00</div>-->
-          <!--</div>-->
-        <!--</el-col>-->
-      </el-row>
-    </div>
-    
-    <div class="un-handle-layout">
-      <div class="layout-title">待处理事务</div>
-      <div class="un-handle-content">
-        <el-row :gutter="20">
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">待付款订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">已完成订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">待确认收货订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20">
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">待发货订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">新缺货登记</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">待处理退款申请</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20">
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">已发货订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">待处理退货订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">广告位即将到期</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-        </el-row>
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <div>
+        <h1>仪表盘</h1>
+        <p>{{ currentDateText }}</p>
       </div>
+      <el-tooltip content="刷新数据" placement="bottom">
+        <el-button
+          icon="el-icon-refresh"
+          circle
+          :loading="dashboardLoading"
+          @click="loadDashboard"
+        />
+      </el-tooltip>
     </div>
-    <div class="overview-layout">
-      <el-row :gutter="20">
-        <el-col :span="12">
-          <div class="out-border">
-            <div class="layout-title">商品总览</div>
-            <div style="padding: 40px">
-              <el-row>
-                <el-col :span="6" class="color-danger overview-item-value">100</el-col>
-                <el-col :span="6" class="color-danger overview-item-value">400</el-col>
-                <el-col :span="6" class="color-danger overview-item-value">50</el-col>
-                <el-col :span="6" class="color-danger overview-item-value">500</el-col>
-              </el-row>
-              <el-row class="font-medium">
-                <el-col :span="6" class="overview-item-title">已下架</el-col>
-                <el-col :span="6" class="overview-item-title">已上架</el-col>
-                <el-col :span="6" class="overview-item-title">库存紧张</el-col>
-                <el-col :span="6" class="overview-item-title">全部商品</el-col>
-              </el-row>
+
+    <el-row :gutter="16" class="metric-grid" v-loading="dashboardLoading">
+      <el-col v-for="item in primaryMetrics" :key="item.label" :xs="24" :sm="12" :lg="6">
+        <div class="metric-card">
+          <div class="metric-icon" :class="item.colorClass">
+            <i :class="item.icon"></i>
+          </div>
+          <div class="metric-content">
+            <span class="metric-label">{{ item.label }}</span>
+            <strong class="metric-value">{{ item.value }}</strong>
+          </div>
+        </div>
+      </el-col>
+    </el-row>
+
+    <section class="dashboard-section">
+      <div class="section-header">
+        <h2>待处理事务</h2>
+        <span>共 {{ pendingTotal }} 项</span>
+      </div>
+      <div class="todo-grid">
+        <button
+          v-for="item in todoItems"
+          :key="item.label"
+          type="button"
+          class="todo-item"
+          @click="item.action"
+        >
+          <span>{{ item.label }}</span>
+          <strong :class="{ urgent: item.urgent && item.count > 0 }">{{ item.count }}</strong>
+          <i class="el-icon-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <el-row :gutter="16" class="overview-grid">
+      <el-col :xs="24" :lg="12">
+        <section class="dashboard-section overview-section">
+          <div class="section-header">
+            <h2>商品概览</h2>
+            <el-button type="text" @click="goToProducts">查看商品</el-button>
+          </div>
+          <div class="overview-values">
+            <div v-for="item in productOverview" :key="item.label" class="overview-item">
+              <strong :class="{ warning: item.warning && item.value > 0 }">{{ item.value }}</strong>
+              <span>{{ item.label }}</span>
             </div>
           </div>
-        </el-col>
-        <el-col :span="12">
-          <div class="out-border">
-            <div class="layout-title">用户总览</div>
-            <div style="padding: 40px">
-              <el-row>
-                <el-col :span="6" class="color-danger overview-item-value">100</el-col>
-                <el-col :span="6" class="color-danger overview-item-value">200</el-col>
-                <el-col :span="6" class="color-danger overview-item-value">1000</el-col>
-                <el-col :span="6" class="color-danger overview-item-value">5000</el-col>
-              </el-row>
-              <el-row class="font-medium">
-                <el-col :span="6" class="overview-item-title">今日新增</el-col>
-                <el-col :span="6" class="overview-item-title">昨日新增</el-col>
-                <el-col :span="6" class="overview-item-title">本月新增</el-col>
-                <el-col :span="6" class="overview-item-title">会员总数</el-col>
-              </el-row>
+        </section>
+      </el-col>
+      <el-col :xs="24" :lg="12">
+        <section class="dashboard-section overview-section">
+          <div class="section-header">
+            <h2>用户概览</h2>
+          </div>
+          <div class="overview-values">
+            <div v-for="item in userOverview" :key="item.label" class="overview-item">
+              <strong>{{ item.value }}</strong>
+              <span>{{ item.label }}</span>
             </div>
           </div>
-        </el-col>
-      </el-row>
-    </div>
-    <div class="statistics-layout">
-      <div class="layout-title">订单统计</div>
-      <el-row>
-        <el-col :span="4">
-          <div style="padding: 20px">
-            <div>
-              <div style="color: #909399;font-size: 14px">本月订单总数</div>
-              <div style="color: #606266;font-size: 24px;padding: 10px 0">10000</div>
-              <div>
-                <span class="color-success" style="font-size: 14px">+10%</span>
-                <span style="color: #C0C4CC;font-size: 14px">同比上月</span>
-              </div>
-            </div>
-            <div style="margin-top: 20px;">
-              <div style="color: #909399;font-size: 14px">本周订单总数</div>
-              <div style="color: #606266;font-size: 24px;padding: 10px 0">1000</div>
-              <div>
-                <span class="color-danger" style="font-size: 14px">-10%</span>
-                <span style="color: #C0C4CC;font-size: 14px">同比上周</span>
-              </div>
-            </div>
-            <div style="margin-top: 20px;">
-              <div style="color: #909399;font-size: 14px">本月销售总额</div>
-              <div style="color: #606266;font-size: 24px;padding: 10px 0">100000</div>
-              <div>
-                <span class="color-success" style="font-size: 14px">+10%</span>
-                <span style="color: #C0C4CC;font-size: 14px">同比上月</span>
-              </div>
-            </div>
-            <div style="margin-top: 20px;">
-              <div style="color: #909399;font-size: 14px">本周销售总额</div>
-              <div style="color: #606266;font-size: 24px;padding: 10px 0">50000</div>
-              <div>
-                <span class="color-danger" style="font-size: 14px">-10%</span>
-                <span style="color: #C0C4CC;font-size: 14px">同比上周</span>
-              </div>
-            </div>
+        </section>
+      </el-col>
+    </el-row>
+
+    <section class="dashboard-section statistics-section">
+      <div class="section-header statistics-header">
+        <h2>订单趋势</h2>
+        <el-date-picker
+          v-model="orderCountDate"
+          size="small"
+          type="daterange"
+          value-format="yyyy-MM-dd"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          :picker-options="pickerOptions"
+          @change="getChartData"
+        />
+      </div>
+      <div class="statistics-content">
+        <div class="period-summary">
+          <div v-for="item in periodMetrics" :key="item.label" class="period-item">
+            <span>{{ item.label }}</span>
+            <strong>{{ item.value }}</strong>
           </div>
-        </el-col>
-        <el-col :span="20">
-          <div style="padding: 10px;border-left:1px solid #DCDFE6">
-            <el-date-picker
-              style="float: right;z-index: 1"
-              size="small"
-              v-model="orderCountDate"
-              type="daterange"
-              align="right"
-              unlink-panels
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-              @change="handleDateChange"
-              :picker-options="pickerOptions">
-            </el-date-picker>
-            <div>
-              <ve-line
-                ref="orderLine"
-                :data="chartData"
-                :legend-visible="false"
-                :loading="loading"
-                :data-empty="dataEmpty"
-                :settings="chartSettings"></ve-line>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
+        </div>
+        <div class="chart-wrap">
+          <ve-line
+            ref="orderLine"
+            height="340px"
+            :data="chartData"
+            :legend-visible="true"
+            :loading="chartLoading"
+            :data-empty="dataEmpty"
+            :settings="chartSettings"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-section latest-orders">
+      <div class="section-header">
+        <h2>最新订单</h2>
+        <el-button type="text" @click="goToOrders">查看全部</el-button>
+      </div>
+      <el-table :data="latestOrders" v-loading="ordersLoading" empty-text="暂无订单">
+        <el-table-column prop="orderSn" label="订单编号" min-width="180" />
+        <el-table-column prop="memberUsername" label="用户" min-width="110" />
+        <el-table-column label="订单金额" min-width="110">
+          <template slot-scope="scope">￥{{ formatAmount(scope.row.totalAmount) }}</template>
+        </el-table-column>
+        <el-table-column label="状态" min-width="100">
+          <template slot-scope="scope">
+            <el-tag size="small" :type="statusTagType(scope.row.status)">
+              {{ statusText(scope.row.status) }}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="提交时间" min-width="170">
+          <template slot-scope="scope">{{ formatDateTime(scope.row.createTime) }}</template>
+        </el-table-column>
+        <el-table-column label="操作" width="90" align="center">
+          <template slot-scope="scope">
+            <el-button type="text" @click="goToOrderDetail(scope.row.id)">查看</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </section>
   </div>
 </template>
 
 <script>
-  import {str2Date} from '@/utils/date';
-  import img_home_order from '@/assets/images/home_order.png';
-  import img_home_today_amount from '@/assets/images/home_today_amount.png';
-  import img_home_yesterday_amount from '@/assets/images/home_yesterday_amount.png';
-  import axios from 'axios';
-  import { fetchOrderChart } from '@/api/dashboard'
+import { fetchDashboardSummary, fetchOrderChart } from '@/api/dashboard'
+import { fetchList as fetchOrderList } from '@/api/order'
 
-  const DATA_FROM_BACKEND = {
-    columns: ['date', 'orderCount','orderAmount'],
-    rows: [
-      {date: '2018-11-01', orderCount: 10, orderAmount: 1093},
-      {date: '2018-11-02', orderCount: 20, orderAmount: 2230},
-      {date: '2018-11-03', orderCount: 33, orderAmount: 3623},
-      {date: '2018-11-04', orderCount: 50, orderAmount: 6423},
-      {date: '2018-11-05', orderCount: 80, orderAmount: 8492},
-      {date: '2018-11-06', orderCount: 60, orderAmount: 6293},
-      {date: '2018-11-07', orderCount: 20, orderAmount: 2293},
-      {date: '2018-11-08', orderCount: 60, orderAmount: 6293},
-      {date: '2018-11-09', orderCount: 50, orderAmount: 5293},
-      {date: '2018-11-10', orderCount: 30, orderAmount: 3293},
-      {date: '2018-11-11', orderCount: 20, orderAmount: 2293},
-      {date: '2018-11-12', orderCount: 80, orderAmount: 8293},
-      {date: '2018-11-13', orderCount: 100, orderAmount: 10293},
-      {date: '2018-11-14', orderCount: 10, orderAmount: 1293},
-      {date: '2018-11-15', orderCount: 40, orderAmount: 4293}
-    ]
-  };
-  export default {
-    name: 'home',
-    data() {
-      return {
-        pickerOptions: {
-          shortcuts: [{
-            text: '最近一周',
-            onClick(picker) {
-              let start = new Date(2018,10,1);
-              const end = new Date(start.getTime() + 1000 * 60 * 60 * 24 * 7);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: '最近一月',
-            onClick(picker) {
-              let start = new Date(2018,10,1);
-              const end = new Date(start.getTime() + 1000 * 60 * 60 * 24 * 30);
-              picker.$emit('pick', [start, end]);
-            }
-          }]
-        },
-        orderCountDate: '',
-        chartSettings: {
-          xAxisType: 'time',
-          area:true,
-          axisSite: { right: ['orderAmount']},
-        labelMap: {'orderCount': '订单数量', 'orderAmount': '订单金额'}},
-        chartData: {
-          columns: [],
-          rows: []
-        },
-        loading: false,
-        dataEmpty: false,
-        img_home_order,
-        img_home_today_amount,
-        img_home_yesterday_amount
-      }
-    },
-    created(){
-      this.initOrderCountDate();
-      this.getData();
-    },
-    methods:{
-      handleDateChange(){
-        this.getData();
+const emptySummary = {
+  todayOrderCount: 0,
+  todaySalesAmount: 0,
+  yesterdaySalesAmount: 0,
+  pendingPaymentCount: 0,
+  pendingDeliveryCount: 0,
+  shippedCount: 0,
+  completedCount: 0,
+  pendingReturnCount: 0,
+  totalProductCount: 0,
+  publishedProductCount: 0,
+  unpublishedProductCount: 0,
+  lowStockProductCount: 0,
+  totalUserCount: 0,
+  todayUserCount: 0,
+  yesterdayUserCount: 0,
+  monthUserCount: 0,
+  monthOrderCount: 0,
+  weekOrderCount: 0,
+  monthSalesAmount: 0,
+  weekSalesAmount: 0
+}
+
+export default {
+  name: 'home',
+  data() {
+    return {
+      summary: { ...emptySummary },
+      latestOrders: [],
+      dashboardLoading: false,
+      ordersLoading: false,
+      chartLoading: false,
+      dataEmpty: false,
+      orderCountDate: [],
+      chartSettings: {
+        xAxisType: 'time',
+        area: true,
+        axisSite: { right: ['orderAmount'] },
+        labelMap: { orderCount: '订单数量', orderAmount: '订单金额' }
       },
-      initOrderCountDate(){
-        // 默认范围：2025-11-15 到 2025-11-29
-        const start = new Date('2025-11-15');
-        const end = new Date('2025-11-29');
-        this.orderCountDate = [start, end];
-      },
-      getData() {
-    this.loading = true;
-    const start = this.orderCountDate[0].toISOString().split('T')[0];
-    const end = this.orderCountDate[1].toISOString().split('T')[0];
-
-    fetchOrderChart({ start, end }).then(res => {
-      console.log('fetchOrderChart response:', res);
-      // 更宽松地查找返回的数组：res / res.data / res.data.data / res.rows / res.list
-      let rows = [];
-      if (Array.isArray(res)) {
-        rows = res;
-      } else if (res && Array.isArray(res.data)) {
-        rows = res.data;
-      } else if (res && res.data && Array.isArray(res.data.data)) {
-        rows = res.data.data;
-      } else if (res && Array.isArray(res.rows)) {
-        rows = res.rows;
-      } else if (res && Array.isArray(res.list)) {
-        rows = res.list;
-      }
-
-      // 如果还没有找到数组，尝试从深层对象中提取第一个数组值
-      if (rows.length === 0 && res && typeof res === 'object') {
-        for (const k in res) {
-          if (Array.isArray(res[k])) {
-            rows = res[k];
-            break;
-          }
-        }
-      }
-
-      // 规范化每一行，保证有 date/orderCount/orderAmount 字段且 date 为 YYYY-MM-DD
-      rows = rows.map(r => {
-        const item = Object.assign({}, r);
-        // normalize date
-        if (item.date) {
-          // 如果包含 T，取前半部分
-          if (typeof item.date === 'string' && item.date.includes('T')) {
-            item.date = item.date.split('T')[0];
-          } else if (typeof item.date === 'string' && /\d{4}-\d{2}-\d{2}/.test(item.date)) {
-            // already yyyy-mm-dd
-          } else {
-            // 尝试用 Date 解析并转为 yyyy-mm-dd
-            const d = new Date(item.date);
-            if (!isNaN(d.getTime())) {
-              const y = d.getFullYear();
-              const m = (d.getMonth() + 1).toString().padStart(2, '0');
-              const dd = d.getDate().toString().padStart(2, '0');
-              item.date = `${y}-${m}-${dd}`;
-            }
-          }
-        }
-        if (item.orderCount == null) item.orderCount = 0;
-        if (item.orderAmount == null) item.orderAmount = 0;
-        return item;
-      });
-
-      console.log('parsed chart rows:', rows);
-
-      this.chartData = {
+      chartData: {
         columns: ['date', 'orderCount', 'orderAmount'],
-        rows: rows
-      };
-      this.dataEmpty = rows.length === 0;
-      this.loading = false;
-
-      this.$nextTick(() => {
-        if (this.$refs.orderLine && this.$refs.orderLine.refresh) {
-          try { this.$refs.orderLine.refresh(); } catch (e) { /* ignore */ }
-        }
-      });
-    }).catch(err => {
-      console.error('fetchOrderChart error:', err);
-      this.dataEmpty = true;
-      this.loading = false;
-    });
-  }
+        rows: []
+      },
+      pickerOptions: {
+        shortcuts: [
+          {
+            text: '最近7天',
+            onClick: picker => picker.$emit('pick', this.createDateRange(6))
+          },
+          {
+            text: '最近30天',
+            onClick: picker => picker.$emit('pick', this.createDateRange(29))
+          }
+        ]
+      }
+    }
+  },
+  computed: {
+    currentDateText() {
+      return new Date().toLocaleDateString('zh-CN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        weekday: 'long'
+      })
+    },
+    primaryMetrics() {
+      return [
+        { label: '今日订单', value: this.summary.todayOrderCount, icon: 'el-icon-document', colorClass: 'blue' },
+        { label: '今日销售额', value: `￥${this.formatAmount(this.summary.todaySalesAmount)}`, icon: 'el-icon-coin', colorClass: 'green' },
+        { label: '昨日销售额', value: `￥${this.formatAmount(this.summary.yesterdaySalesAmount)}`, icon: 'el-icon-data-line', colorClass: 'amber' },
+        { label: '待处理事务', value: this.pendingTotal, icon: 'el-icon-bell', colorClass: 'red' }
+      ]
+    },
+    pendingTotal() {
+      return this.numberValue(this.summary.pendingPaymentCount) +
+        this.numberValue(this.summary.pendingDeliveryCount) +
+        this.numberValue(this.summary.pendingReturnCount)
+    },
+    todoItems() {
+      return [
+        { label: '待付款订单', count: this.summary.pendingPaymentCount, action: () => this.goToOrders(0) },
+        { label: '待发货订单', count: this.summary.pendingDeliveryCount, urgent: true, action: () => this.goToOrders(1) },
+        { label: '已发货订单', count: this.summary.shippedCount, action: () => this.goToOrders(2) },
+        { label: '已完成订单', count: this.summary.completedCount, action: () => this.goToOrders(3) },
+        { label: '退货待审核', count: this.summary.pendingReturnCount, urgent: true, action: this.goToReturns }
+      ]
+    },
+    productOverview() {
+      return [
+        { label: '全部商品', value: this.summary.totalProductCount },
+        { label: '已上架', value: this.summary.publishedProductCount },
+        { label: '未上架', value: this.summary.unpublishedProductCount },
+        { label: '库存紧张', value: this.summary.lowStockProductCount, warning: true }
+      ]
+    },
+    userOverview() {
+      return [
+        { label: '今日新增', value: this.summary.todayUserCount },
+        { label: '昨日新增', value: this.summary.yesterdayUserCount },
+        { label: '本月新增', value: this.summary.monthUserCount },
+        { label: '用户总数', value: this.summary.totalUserCount }
+      ]
+    },
+    periodMetrics() {
+      return [
+        { label: '本周订单', value: this.summary.weekOrderCount },
+        { label: '本月订单', value: this.summary.monthOrderCount },
+        { label: '本周销售额', value: `￥${this.formatAmount(this.summary.weekSalesAmount)}` },
+        { label: '本月销售额', value: `￥${this.formatAmount(this.summary.monthSalesAmount)}` }
+      ]
+    }
+  },
+  created() {
+    this.orderCountDate = this.createDateRange(13).map(this.formatDate)
+    this.loadDashboard()
+  },
+  methods: {
+    loadDashboard() {
+      this.dashboardLoading = true
+      Promise.all([this.loadSummary(), this.loadLatestOrders(), this.getChartData()])
+        .then(() => {
+          this.dashboardLoading = false
+        })
+        .catch(() => {
+          this.dashboardLoading = false
+        })
+    },
+    loadSummary() {
+      return fetchDashboardSummary().then(response => {
+        this.summary = { ...emptySummary, ...(response.data || {}) }
+      })
+    },
+    loadLatestOrders() {
+      this.ordersLoading = true
+      return fetchOrderList({ pageNum: 1, pageSize: 5 })
+        .then(response => {
+          this.latestOrders = response.data.records || []
+          this.ordersLoading = false
+        })
+        .catch(error => {
+          this.ordersLoading = false
+          throw error
+        })
+    },
+    getChartData() {
+      if (!this.orderCountDate || this.orderCountDate.length !== 2) return Promise.resolve()
+      this.chartLoading = true
+      const start = this.normalizeDateValue(this.orderCountDate[0])
+      const end = this.normalizeDateValue(this.orderCountDate[1])
+      return fetchOrderChart({ start, end })
+        .then(response => {
+          const rows = Array.isArray(response.data) ? response.data : []
+          this.chartData = {
+            columns: ['date', 'orderCount', 'orderAmount'],
+            rows: this.fillChartDates(start, end, rows)
+          }
+          this.dataEmpty = rows.length === 0
+          this.chartLoading = false
+        })
+        .catch(error => {
+          this.chartLoading = false
+          this.dataEmpty = true
+          throw error
+        })
+    },
+    fillChartDates(start, end, rows) {
+      const rowMap = rows.reduce((result, item) => {
+        const date = this.normalizeDateValue(item.date)
+        result[date] = item
+        return result
+      }, {})
+      const result = []
+      const cursor = new Date(`${start}T00:00:00`)
+      const endDate = new Date(`${end}T00:00:00`)
+      while (cursor <= endDate) {
+        const date = this.formatDate(cursor)
+        const item = rowMap[date] || {}
+        result.push({
+          date,
+          orderCount: this.numberValue(item.orderCount),
+          orderAmount: this.numberValue(item.orderAmount)
+        })
+        cursor.setDate(cursor.getDate() + 1)
+      }
+      return result
+    },
+    createDateRange(daysBeforeToday) {
+      const end = new Date()
+      const start = new Date()
+      start.setDate(start.getDate() - daysBeforeToday)
+      return [start, end]
+    },
+    formatDate(date) {
+      const value = date instanceof Date ? date : new Date(date)
+      const year = value.getFullYear()
+      const month = String(value.getMonth() + 1).padStart(2, '0')
+      const day = String(value.getDate()).padStart(2, '0')
+      return `${year}-${month}-${day}`
+    },
+    normalizeDateValue(value) {
+      if (!value) return ''
+      if (value instanceof Date) return this.formatDate(value)
+      return String(value).substring(0, 10)
+    },
+    formatDateTime(value) {
+      return value ? String(value).replace('T', ' ') : '-'
+    },
+    formatAmount(value) {
+      return this.numberValue(value).toLocaleString('zh-CN', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      })
+    },
+    numberValue(value) {
+      const number = Number(value)
+      return Number.isFinite(number) ? number : 0
+    },
+    statusText(status) {
+      return ['待付款', '待发货', '已发货', '已完成', '已关闭', '无效订单'][status] || '未知状态'
+    },
+    statusTagType(status) {
+      return ({ 0: 'warning', 1: 'danger', 2: '', 3: 'success', 4: 'info', 5: 'info' })[status] || 'info'
+    },
+    goToOrders(status) {
+      const query = { pageNum: 1, pageSize: 10 }
+      if (status !== undefined) query.status = status
+      this.$router.push({ path: '/admin/oms/order', query })
+    },
+    goToOrderDetail(id) {
+      this.$router.push({ path: '/admin/oms/orderDetail', query: { id } })
+    },
+    goToReturns() {
+      this.$router.push({ path: '/admin/oms/returnApply', query: { status: 0 } })
+    },
+    goToProducts() {
+      this.$router.push({ path: '/admin/pms/product' })
     }
   }
+}
 </script>
 
 <style scoped>
-  .app-container {
-    margin-top: 40px;
-    margin-left: 120px;
-    margin-right: 120px;
+.dashboard-container {
+  padding: 24px;
+  background: #f5f7fa;
+  min-height: calc(100vh - 50px);
+}
+
+.dashboard-header,
+.section-header,
+.statistics-content,
+.overview-values,
+.metric-card,
+.todo-item {
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-header {
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.dashboard-header h1,
+.section-header h2 {
+  margin: 0;
+  color: #303133;
+  letter-spacing: 0;
+}
+
+.dashboard-header h1 {
+  font-size: 22px;
+}
+
+.dashboard-header p {
+  margin: 6px 0 0;
+  color: #909399;
+  font-size: 13px;
+}
+
+.metric-grid .el-col,
+.overview-grid .el-col {
+  margin-bottom: 16px;
+}
+
+.metric-card {
+  min-height: 104px;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid #ebeef5;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.metric-icon {
+  width: 48px;
+  height: 48px;
+  margin-right: 14px;
+  line-height: 48px;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 22px;
+}
+
+.metric-icon.blue { color: #409eff; background: #ecf5ff; }
+.metric-icon.green { color: #67c23a; background: #f0f9eb; }
+.metric-icon.amber { color: #e6a23c; background: #fdf6ec; }
+.metric-icon.red { color: #f56c6c; background: #fef0f0; }
+
+.metric-content {
+  min-width: 0;
+}
+
+.metric-label,
+.metric-value {
+  display: block;
+}
+
+.metric-label {
+  color: #909399;
+  font-size: 13px;
+}
+
+.metric-value {
+  margin-top: 8px;
+  overflow: hidden;
+  color: #303133;
+  font-size: 22px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dashboard-section {
+  margin-bottom: 16px;
+  background: #fff;
+  border: 1px solid #ebeef5;
+}
+
+.section-header {
+  min-height: 48px;
+  justify-content: space-between;
+  padding: 0 18px;
+  border-bottom: 1px solid #ebeef5;
+  box-sizing: border-box;
+}
+
+.section-header h2 {
+  font-size: 15px;
+}
+
+.section-header > span {
+  color: #909399;
+  font-size: 12px;
+}
+
+.todo-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.todo-item {
+  min-width: 0;
+  height: 58px;
+  padding: 0 16px;
+  color: #606266;
+  background: #fff;
+  border: 0;
+  border-right: 1px solid #ebeef5;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.todo-item:last-child {
+  border-right: 0;
+}
+
+.todo-item:hover {
+  color: #409eff;
+  background: #f5f7fa;
+}
+
+.todo-item span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.todo-item strong {
+  margin-left: auto;
+  color: #303133;
+  font-size: 17px;
+}
+
+.todo-item strong.urgent {
+  color: #f56c6c;
+}
+
+.todo-item i {
+  margin-left: 8px;
+  color: #c0c4cc;
+}
+
+.overview-grid {
+  margin-bottom: 0;
+}
+
+.overview-section {
+  margin-bottom: 0;
+}
+
+.overview-values {
+  min-height: 116px;
+  justify-content: space-around;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.overview-item {
+  min-width: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.overview-item strong,
+.overview-item span {
+  display: block;
+}
+
+.overview-item strong {
+  color: #303133;
+  font-size: 24px;
+}
+
+.overview-item strong.warning {
+  color: #e6a23c;
+}
+
+.overview-item span {
+  margin-top: 10px;
+  color: #909399;
+  font-size: 13px;
+}
+
+.statistics-header {
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.statistics-content {
+  align-items: stretch;
+}
+
+.period-summary {
+  width: 190px;
+  flex: 0 0 190px;
+  padding: 18px;
+  border-right: 1px solid #ebeef5;
+  box-sizing: border-box;
+}
+
+.period-item + .period-item {
+  margin-top: 20px;
+}
+
+.period-item span,
+.period-item strong {
+  display: block;
+}
+
+.period-item span {
+  color: #909399;
+  font-size: 12px;
+}
+
+.period-item strong {
+  margin-top: 7px;
+  color: #303133;
+  font-size: 19px;
+}
+
+.chart-wrap {
+  min-width: 0;
+  flex: 1;
+  padding: 8px 14px 0;
+}
+
+.latest-orders {
+  margin-bottom: 0;
+}
+
+@media (max-width: 1100px) {
+  .todo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  /* .address-layout 已移除空规则 */
-
-  .total-layout {
-    margin-top: 20px;
+  .todo-item {
+    border-bottom: 1px solid #ebeef5;
   }
+}
 
-  .total-frame {
-    border: 1px solid #DCDFE6;
-    padding: 20px;
-    height: 100px;
+@media (max-width: 720px) {
+  .dashboard-container {
+    padding: 14px;
   }
 
-  .total-icon {
-    color: #409EFF;
-    width: 60px;
-    height: 60px;
+  .todo-grid {
+    grid-template-columns: 1fr;
   }
 
-  .total-title {
-    position: relative;
-    font-size: 16px;
-    color: #909399;
-    left: 70px;
-    top: -50px;
+  .todo-item {
+    border-right: 0;
   }
 
-  .total-value {
-    position: relative;
-    font-size: 18px;
-    color: #606266;
-    left: 70px;
-    top: -40px;
+  .overview-values {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 8px;
   }
 
-  .un-handle-layout {
-    margin-top: 20px;
-    border: 1px solid #DCDFE6;
+  .statistics-content {
+    display: block;
   }
 
-  .layout-title {
-    color: #606266;
-    padding: 15px 20px;
-    background: #F2F6FC;
-    font-weight: bold;
+  .period-summary {
+    display: grid;
+    width: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    border-right: 0;
+    border-bottom: 1px solid #ebeef5;
   }
 
-  .un-handle-content {
-    padding: 20px 40px;
+  .period-item + .period-item {
+    margin-top: 0;
   }
 
-  .un-handle-item {
-    border-bottom: 1px solid #EBEEF5;
-    padding: 10px;
+  .statistics-header .el-date-editor {
+    width: 100%;
   }
-
-  .overview-layout {
-    margin-top: 20px;
-  }
-
-  .overview-item-value {
-    font-size: 24px;
-    text-align: center;
-  }
-
-  .overview-item-title {
-    margin-top: 10px;
-    text-align: center;
-  }
-
-  .out-border {
-    border: 1px solid #DCDFE6;
-  }
-
-  .statistics-layout {
-    margin-top: 20px;
-    border: 1px solid #DCDFE6;
-  }
-  .mine-layout {
-    position: absolute;
-    right: 140px;
-    top: 107px;
-    width: 250px;
-    height: 235px;
-  }
-  .address-content{
-    padding: 20px;
-    font-size: 18px
-  }
+}
 </style>

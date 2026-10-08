@@ -11,4 +11,34 @@
         GROUP BY DATE(create_time)
         ORDER BY DATE(create_time)
     </select>
+
+    <select id="getSummary" resultType="com.fsb.pojo.VO.DashboardSummaryVO">
+        SELECT
+            COUNT(CASE WHEN o.create_time &gt;= CURDATE() THEN 1 END) AS today_order_count,
+            COALESCE(SUM(CASE WHEN o.create_time &gt;= CURDATE() AND o.status IN (1, 2, 3) THEN o.total_amount ELSE 0 END), 0) AS today_sales_amount,
+            COALESCE(SUM(CASE WHEN o.create_time &gt;= DATE_SUB(CURDATE(), INTERVAL 1 DAY)
+                                   AND o.create_time &lt; CURDATE()
+                                   AND o.status IN (1, 2, 3) THEN o.total_amount ELSE 0 END), 0) AS yesterday_sales_amount,
+            COUNT(CASE WHEN o.status = 0 THEN 1 END) AS pending_payment_count,
+            COUNT(CASE WHEN o.status = 1 THEN 1 END) AS pending_delivery_count,
+            COUNT(CASE WHEN o.status = 2 THEN 1 END) AS shipped_count,
+            COUNT(CASE WHEN o.status = 3 THEN 1 END) AS completed_count,
+            COUNT(CASE WHEN o.create_time &gt;= DATE_FORMAT(CURDATE(), '%Y-%m-01') THEN 1 END) AS month_order_count,
+            COUNT(CASE WHEN o.create_time &gt;= DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY) THEN 1 END) AS week_order_count,
+            COALESCE(SUM(CASE WHEN o.create_time &gt;= DATE_FORMAT(CURDATE(), '%Y-%m-01')
+                                   AND o.status IN (1, 2, 3) THEN o.total_amount ELSE 0 END), 0) AS month_sales_amount,
+            COALESCE(SUM(CASE WHEN o.create_time &gt;= DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY)
+                                   AND o.status IN (1, 2, 3) THEN o.total_amount ELSE 0 END), 0) AS week_sales_amount,
+            (SELECT COUNT(*) FROM return_apply WHERE status = 0) AS pending_return_count,
+            (SELECT COUNT(*) FROM product WHERE is_deleted = 0) AS total_product_count,
+            (SELECT COUNT(*) FROM product WHERE is_deleted = 0 AND publish_status = 1) AS published_product_count,
+            (SELECT COUNT(*) FROM product WHERE is_deleted = 0 AND (publish_status = 0 OR publish_status IS NULL)) AS unpublished_product_count,
+            (SELECT COUNT(*) FROM product WHERE is_deleted = 0 AND COALESCE(stock, 0) &lt;= 10) AS low_stock_product_count,
+            (SELECT COUNT(*) FROM user) AS total_user_count,
+            (SELECT COUNT(*) FROM user WHERE create_time &gt;= CURDATE()) AS today_user_count,
+            (SELECT COUNT(*) FROM user WHERE create_time &gt;= DATE_SUB(CURDATE(), INTERVAL 1 DAY)
+                                          AND create_time &lt; CURDATE()) AS yesterday_user_count,
+            (SELECT COUNT(*) FROM user WHERE create_time &gt;= DATE_FORMAT(CURDATE(), '%Y-%m-01')) AS month_user_count
+        FROM `order` o
+    </select>
 </mapper>

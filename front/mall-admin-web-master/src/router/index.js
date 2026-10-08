@@ -36,14 +36,13 @@ export const constantRouterMap = [
     path: '/admin',
     component: Layout,
     redirect: '/admin/home',
-    hidden: true,
+    name: 'dashboard',
     meta: { title: '首页', icon: 'home', roles: ['ADMIN'] },
     children: [
       {
         path: 'home',
         name: 'home',
         component: () => import('@/views/home/index'),
-        hidden: true,
         meta: { title: '仪表盘', icon: 'dashboard', roles: ['ADMIN'] }
       }
     ]

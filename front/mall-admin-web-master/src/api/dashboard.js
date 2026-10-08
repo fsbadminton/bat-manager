@@ -9,3 +9,10 @@ export function fetchOrderChart(params) {
     params: params
   })
 }
+
+export function fetchDashboardSummary() {
+  return request({
+    url: '/admin/dashboard/summary',
+    method: 'get'
+  })
+}

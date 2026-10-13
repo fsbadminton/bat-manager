@@ -286,7 +286,10 @@
         <el-button type="primary" @click="handleMarkOrder">确 定</el-button>
       </span>
     </el-dialog>
-    <logistics-dialog v-model="logisticsDialogVisible"></logistics-dialog>
+    <logistics-dialog
+      v-model="logisticsDialogVisible"
+      :records="logisticsRecords">
+    </logistics-dialog>
   </div>
 </template>
 <script>
@@ -323,7 +326,8 @@
         closeInfo:{adminNote:null,id:null},
         markOrderDialogVisible:false,
         markInfo:{adminNote:null},
-        logisticsDialogVisible:false
+        logisticsDialogVisible:false,
+        logisticsRecords:[]
       }
     },
     created() {
@@ -440,6 +444,25 @@
       }
     },
     methods: {
+      buildLogisticsRecords(order) {
+        const records = []
+        if (order.createTime) {
+          records.push({ name: '订单已提交', time: order.createTime })
+        }
+        if (order.status >= 1) {
+          records.push({ name: '商家已接单，等待发货', time: order.updateTime || order.createTime || '' })
+        }
+        if (order.deliveryTime) {
+          records.push({ name: `商家已发货（${order.deliveryCompany || '物流公司待补充'} ${order.deliverySn || ''}）`, time: order.deliveryTime })
+        }
+        if (order.status === 3) {
+          records.push({ name: '用户已确认收货', time: order.updateTime || order.deliveryTime || '' })
+        }
+        if (records.length === 0) {
+          records.push({ name: '暂无物流信息', time: '' })
+        }
+        return records
+      },
       viewReturnApplyDetail() {
         if (!this.order.returnApplyId) return
         this.$router.push({ path: '/admin/oms/returnApplyDetail', query: { id: this.order.returnApplyId } })
@@ -665,6 +688,7 @@
         });
       },
       showLogisticsDialog(){
+        this.logisticsRecords=this.buildLogisticsRecords(this.order);
         this.logisticsDialogVisible=true;
       }
     }

@@ -179,7 +179,10 @@
         <el-button type="primary" @click="handleCloseOrderConfirm">确 定</el-button>
       </span>
     </el-dialog>
-    <logistics-dialog v-model="logisticsDialogVisible"></logistics-dialog>
+    <logistics-dialog
+      v-model="logisticsDialogVisible"
+      :records="logisticsRecords">
+    </logistics-dialog>
   </div>
 </template>
 <script>
@@ -268,7 +271,8 @@
             value: 3
           }
         ],
-        logisticsDialogVisible:false
+        logisticsDialogVisible:false,
+        logisticsRecords:[]
       }
     },
     created() {
@@ -376,7 +380,27 @@
         })
       },
       handleViewLogistics(index, row){
+        this.logisticsRecords=this.buildLogisticsRecords(row);
         this.logisticsDialogVisible=true;
+      },
+      buildLogisticsRecords(order) {
+        const records = []
+        if (order.createTime) {
+          records.push({ name: '订单已提交', time: order.createTime })
+        }
+        if (order.status >= 1) {
+          records.push({ name: '商家已接单，等待发货', time: order.updateTime || order.createTime || '' })
+        }
+        if (order.deliveryTime) {
+          records.push({ name: `商家已发货（${order.deliveryCompany || '物流公司待补充'} ${order.deliverySn || ''}）`, time: order.deliveryTime })
+        }
+        if (order.status === 3) {
+          records.push({ name: '用户已确认收货', time: order.updateTime || order.deliveryTime || '' })
+        }
+        if (records.length === 0) {
+          records.push({ name: '暂无物流信息', time: '' })
+        }
+        return records
       },
       handleDeleteOrder(index, row){
         let ids=[];

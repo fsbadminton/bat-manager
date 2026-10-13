@@ -22,7 +22,7 @@ public interface OrderMapper {
     void insert(Order order);
 
 
-    @Select("select * from `order` where member_username = #{username}")
+    @Select("select * from `order` where member_username = #{username} order by create_time desc, id desc")
     Page<Order> listUserPageQuery(@Param("username") String username, @Param("dto") OrderPageQueryDTO dto);
 
 

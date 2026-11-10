@@ -6,11 +6,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.beans.factory.annotation.Value;
 
 @Component
 public class AuthInterceptor implements HandlerInterceptor {
 
     private final JwtUtil jwtUtil;
+
+    @Value("${ai.internal-token:bat-manager-ai-local-token}")
+    private String aiInternalToken;
 
     public AuthInterceptor(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
@@ -19,6 +23,14 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String uri = request.getRequestURI();
+
+        if (uri.startsWith("/internal/ai/")) {
+            String suppliedToken = request.getHeader("X-AI-Service-Token");
+            if (suppliedToken == null || !suppliedToken.equals(aiInternalToken)) {
+                throw new AuthException(401, "Invalid AI service token");
+            }
+            return true;
+        }
 
         if (isWhitelisted(uri)) {
             return true;

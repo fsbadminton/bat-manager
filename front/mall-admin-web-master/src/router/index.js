@@ -149,7 +149,7 @@ export const asyncRouterMap = [
   },
   {
     path: '/client',
-    component: Layout,
+    component: ClientLayout,
     redirect: '/client/products',
     name: 'user',
     meta: { title: '用户', icon: 'ums-admin' },

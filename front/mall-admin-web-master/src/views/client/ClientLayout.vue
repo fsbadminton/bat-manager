@@ -20,16 +20,18 @@
       </div>
     </header>
     <app-main />
+    <customer-service-chat />
   </div>
 </template>
 
 <script>
 import { AppMain } from '@/views/layout/components'
 import { getUsername } from '@/utils/auth'
+import CustomerServiceChat from '@/components/CustomerServiceChat'
 
 export default {
   name: 'ClientLayout',
-  components: { AppMain },
+  components: { AppMain, CustomerServiceChat },
   computed: {
     username() {
       return getUsername('USER') || '用户'

@@ -1,0 +1,41 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: bat-manager-mysql-dev
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: batnew
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-bat-manager-local}
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - bat-manager-mysql-data:/var/lib/mysql
+      # The dump runs first, followed by audit and AI ticket migrations.
+      - ./database/batnew.sql:/docker-entrypoint-initdb.d/01-batnew.sql:ro
+      - ./database/migrations/20261111_identity_binding_audit.sql:/docker-entrypoint-initdb.d/02-identity-binding-audit.sql:ro
+      - ./database/migrations/20261112_ai_support_ticket.sql:/docker-entrypoint-initdb.d/03-ai-support-ticket.sql:ro
+      - ./database/migrations/20261113_ai_support_ticket_reply.sql:/docker-entrypoint-initdb.d/04-ai-support-ticket-reply.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    container_name: bat-manager-redis-dev
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - bat-manager-redis-data:/data
+    command: ["redis-server", "--appendonly", "yes"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  bat-manager-mysql-data:
+  bat-manager-redis-data:

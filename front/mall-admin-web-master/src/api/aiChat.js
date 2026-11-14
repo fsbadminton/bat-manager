@@ -1,6 +1,26 @@
 import request from '@/utils/request'
 import { getToken } from '@/utils/auth'
 
+export function getAiConversation(limit = 50) {
+  return request({
+    url: '/user/ai/conversation',
+    method: 'get',
+    params: { limit },
+    timeout: 10000,
+    silent: true
+  })
+}
+
+export function getAiDrawings(limit = 20) {
+  return request({
+    url: '/user/ai/drawings',
+    method: 'get',
+    params: { limit },
+    timeout: 10000,
+    silent: true
+  })
+}
+
 export function sendAiMessage(message, conversationId) {
   return request({
     url: '/user/ai/chat',

@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { streamAiMessage } from '@/api/aiChat'
+import { getAiConversation, streamAiMessage } from '@/api/aiChat'
 
 export default {
   name: 'CustomerServiceChat',
@@ -54,6 +54,7 @@ export default {
       loading: false,
       draft: '',
       conversationId: '',
+      historyLoaded: false,
       messages: [
         { role: 'assistant', content: '您好，我是 AI 客服，可以帮您查询球拍商品、订单、优惠券和售后流程。' }
       ]
@@ -62,7 +63,30 @@ export default {
   methods: {
     open() {
       this.opened = true
+      this.loadHistory()
       this.scrollToBottom()
+    },
+    async loadHistory() {
+      if (this.historyLoaded) return
+      try {
+        const response = await getAiConversation(50)
+        const conversation = response && response.data ? response.data : null
+        if (!conversation) return
+        this.conversationId = conversation.conversationId || ''
+        const history = (conversation.messages || [])
+          .filter(item => item.direction === 'user' || item.direction === 'assistant')
+          .map(item => ({
+            role: item.direction,
+            content: item.content || (item.status === 'failed' ? '客服处理失败，请重新提问。' : ''),
+            streaming: item.status === 'pending'
+          }))
+        if (history.length) this.messages = history
+      } catch (error) {
+        // The local welcome message remains usable when history is unavailable.
+      } finally {
+        this.historyLoaded = true
+        this.$nextTick(this.scrollToBottom)
+      }
     },
     send() {
       const message = this.draft.trim()
@@ -129,11 +153,11 @@ export default {
             codeLines = []
           }
           inCode = !inCode
-          return
+          continue
         }
         if (inCode) {
           codeLines.push(line)
-          return
+          continue
         }
         const heading = line.match(/^\s*(#{1,3})\s+(.+)$/)
         const bullet = line.match(/^\s*[-*]\s+(.+)$/)

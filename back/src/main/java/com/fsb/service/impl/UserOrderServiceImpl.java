@@ -6,6 +6,7 @@ import com.fsb.Mapper.ProductMapper;
 import com.fsb.Mapper.ReturnApplyMapper;
 import com.fsb.Service.CouponService;
 import com.fsb.Service.UserOrderService;
+import com.fsb.exception.AuthException;
 import com.fsb.pojo.DTO.OrderPageQueryDTO;
 import com.fsb.pojo.DTO.UserOrderCreateDTO;
 import com.fsb.pojo.DTO.UserOrderUpdateDTO;
@@ -235,7 +236,7 @@ public class UserOrderServiceImpl implements UserOrderService {
     private Order getOwnedOrder(Long orderId, String username) {
         Order order = orderMapper.getById(orderId);
         if (order == null || order.getMemberUsername() == null || !order.getMemberUsername().equals(username)) {
-            throw new RuntimeException("订单不存在");
+            throw new AuthException(404, "NOT_FOUND: 订单不存在");
         }
         return order;
     }

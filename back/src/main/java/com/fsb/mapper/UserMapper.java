@@ -18,6 +18,9 @@ public interface UserMapper {
     @Select("select * from user where email = #{email}")
     User getByEmail(String email);
 
+    @Select("select * from user where id = #{id}")
+    User getById(@Param("id") Long id);
+
     @Insert("insert into user(username, password, email, nickname, phone, role, status, is_registered, create_time) " +
             "values(#{username}, #{password}, #{email}, #{nickname}, #{phone}, #{role}, #{status}, #{isRegistered}, #{createTime})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
@@ -26,4 +29,3 @@ public interface UserMapper {
     @Update("update user set password=#{password}, update_time=now() where id=#{id}")
     void updatePassword(@Param("id") Long id, @Param("password") String password);
 }
-

@@ -190,6 +190,18 @@ export const asyncRouterMap = [
         name: 'userComments',
         component: () => import('@/views/user/userComments'),
         meta: { title: '评论' }
+      },
+      {
+        path: 'identity-bindings',
+        name: 'userIdentityBindings',
+        component: () => import('@/views/user/userIdentityBindings'),
+        meta: { title: '平台绑定' }
+      },
+      {
+        path: 'support-tickets',
+        name: 'userSupportTickets',
+        component: () => import('@/views/user/userSupportTickets'),
+        meta: { title: '我的客服工单' }
       }
     ]
   },
@@ -225,6 +237,12 @@ export const asyncRouterMap = [
         name: 'returnApply',
         component: () => import('@/views/oms/apply/index'),
         meta: { title: '退货申请处理', icon: 'order-return' }
+      },
+      {
+        path: 'supportTickets',
+        name: 'supportTickets',
+        component: () => import('@/views/oms/supportTicket/index'),
+        meta: { title: '客服工单', icon: 'order-return' }
       },
       {
         path: 'returnReason',
@@ -353,6 +371,19 @@ export const asyncRouterMap = [
         hidden: true
       }
     ]
+  },
+  {
+    path: '/identity',
+    component: Layout,
+    redirect: '/identity/bindings',
+    name: 'identityAdmin',
+    meta: { title: '用户', icon: 'ums-admin' },
+    children: [{
+      path: 'bindings',
+      name: 'identityBindingsAdmin',
+      component: () => import('@/views/identity/adminBindings'),
+      meta: { title: '平台账号绑定', icon: 'ums-admin' }
+    }]
   },
   { path: '*', redirect: '/404', hidden: true }
 ]

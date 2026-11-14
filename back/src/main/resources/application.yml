@@ -4,7 +4,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${DB_URL:jdbc:mysql://localhost:3306/batnew}
     username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:123456}
+    password: ${DB_PASSWORD:}
   #Redis配置
   data:
     redis:
@@ -19,12 +19,17 @@ spring:
     bucket-name: bat-manager
 
 jwt:
-  secret: ${JWT_SECRET:bat-manager-local-secret-key-2026-0123456789}
+  secret: ${JWT_SECRET:}
   expiration-millis: ${JWT_EXPIRATION_MILLIS:604800000}
 
 ai:
   adapter-url: ${AI_ADAPTER_URL:http://127.0.0.1:8091}
-  internal-token: ${AI_INTERNAL_TOKEN:bat-manager-ai-local-token}
+  internal-token: ${AI_INTERNAL_TOKEN:}
+  context-secret: ${AI_CONTEXT_SECRET:}
+  adapter-connect-timeout-ms: ${AI_ADAPTER_CONNECT_TIMEOUT_MS:3000}
+  adapter-read-timeout-ms: ${AI_ADAPTER_READ_TIMEOUT_MS:120000}
+  max-concurrent-requests: ${AI_MAX_CONCURRENT_REQUESTS:64}
+  concurrency-lease-seconds: ${AI_CONCURRENCY_LEASE_SECONDS:60}
 
 #Mybatis配置
 mybatis:

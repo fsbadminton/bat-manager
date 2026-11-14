@@ -1,6 +1,7 @@
 package com.fsb.result;
 
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
 
@@ -9,10 +10,12 @@ import java.io.Serializable;
  * @param <T>
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Result<T> implements Serializable {
 
     private Integer code; //编码：1成功，0和其它数字为失败
     private String msg; //错误信息
+    private String errorCode; //稳定的机器可读错误码（仅失败时返回）
     private T data; //数据
 
     public static <T> Result<T> success() {
@@ -39,6 +42,12 @@ public class Result<T> implements Serializable {
         Result<T> result = new Result<T>();
         result.msg = msg;
         result.code = code;
+        return result;
+    }
+
+    public static <T> Result<T> fail(Integer code, String msg, String errorCode) {
+        Result<T> result = fail(code, msg);
+        result.errorCode = errorCode;
         return result;
     }
 

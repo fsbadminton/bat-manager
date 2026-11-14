@@ -12,7 +12,9 @@
         <el-menu-item index="/client/orders">我的订单</el-menu-item>
         <el-menu-item index="/client/coupons">我的优惠券</el-menu-item>
         <el-menu-item index="/client/returns">我的退货</el-menu-item>
+        <el-menu-item index="/client/support-tickets">客服工单</el-menu-item>
         <el-menu-item index="/client/comments">我的评价</el-menu-item>
+        <el-menu-item index="/client/identity-bindings">平台绑定</el-menu-item>
       </el-menu>
       <div class="client-account">
         <span class="client-user" :title="username">{{ username }}</span>

@@ -1,4 +1,4 @@
-package com.fsb.service;
+package com.fsb.Service;
 
 import com.fsb.pojo.DTO.AiChatRequest;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;

@@ -116,7 +116,7 @@
 </template>
 
 <script>
-import { listUserProducts, listUserBrands, createUserOrder } from '@/api/userLogin'
+import { listUserProducts, listUserBrands, listUserCategories, createUserOrder } from '@/api/userLogin'
 import { listMyCoupons } from '@/api/userCoupon'
 import { hasPermission } from '@/utils/permission'
 
@@ -150,6 +150,7 @@ export default {
     }
   },
   created() {
+    this.loadCategoryOptions()
     this.getProducts()
     this.loadBrandOptions()
   },
@@ -213,8 +214,6 @@ export default {
           const outer = res && res.data ? res.data : res
           const data = outer && outer.data ? outer.data : outer
           this.productList = data.records || data.list || data.items || []
-          // 用户端不再调用管理员分类接口，避免弹出“重新登录”提示
-          this.rebuildCategoryOptions(this.productList)
           this.totalProducts = data.total || data.totalCount || data.totalElements || 0
         })
         .catch(() => {
@@ -255,19 +254,19 @@ export default {
           this.brandOptions = []
         })
     },
-    rebuildCategoryOptions(products) {
-      const list = Array.isArray(products) ? products : []
-      const map = new Map()
-      for (let i = 0; i < list.length; i++) {
-        const p = list[i] || {}
-        const value = p.categoryId || p.category || p.categoryName
-        if (value === undefined || value === null || value === '') continue
-        const label = p.categoryName || `分类${value}`
-        if (!map.has(String(value))) {
-          map.set(String(value), { label, value })
-        }
-      }
-      this.productCateOptions = Array.from(map.values())
+    loadCategoryOptions() {
+      listUserCategories()
+        .then(response => {
+          const outer = response && response.data ? response.data : response
+          const data = outer && outer.data ? outer.data : outer
+          const list = Array.isArray(data) ? data : (data && (data.records || data.list)) || []
+          this.productCateOptions = list
+            .filter(item => item && item.id !== undefined && item.id !== null && item.name)
+            .map(item => ({ label: item.name, value: item.id }))
+        })
+        .catch(() => {
+          this.productCateOptions = []
+        })
     },
     openOrderDialog(row) {
       if (!this.canCreateOrder) return

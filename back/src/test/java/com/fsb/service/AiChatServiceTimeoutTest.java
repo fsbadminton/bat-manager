@@ -3,7 +3,7 @@ package com.fsb.service;
 import com.fsb.auth.AiContextSignature;
 import com.fsb.exception.AuthException;
 import com.fsb.pojo.DTO.AiChatRequest;
-import com.fsb.service.impl.AiChatServiceImpl;
+import com.fsb.Service.impl.AiChatServiceImpl;
 import com.sun.net.httpserver.HttpServer;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;

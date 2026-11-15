@@ -286,12 +286,13 @@
         <el-button type="primary" @click="handleMarkOrder">确 定</el-button>
       </span>
     </el-dialog>
-    <logistics-dialog v-model="logisticsDialogVisible"></logistics-dialog>
+    <logistics-dialog v-model="logisticsDialogVisible" :records="logisticsRecords"></logistics-dialog>
   </div>
 </template>
 <script>
   import {getOrderDetail,updateReceiverInfo,updateMoneyInfo,closeOrder,updateOrderNote,deleteOrder} from '@/api/order';
   import LogisticsDialog from '@/views/oms/order/components/logisticsDialog';
+  import {buildOrderLogisticsRecords} from '@/utils/orderLogistics';
   import {formatDate} from '@/utils/date';
   import VDistpicker from 'v-distpicker';
   const defaultReceiverInfo = {
@@ -323,7 +324,8 @@
         closeInfo:{adminNote:null,id:null},
         markOrderDialogVisible:false,
         markInfo:{adminNote:null},
-        logisticsDialogVisible:false
+        logisticsDialogVisible:false,
+        logisticsRecords: []
       }
     },
     created() {
@@ -665,6 +667,7 @@
         });
       },
       showLogisticsDialog(){
+        this.logisticsRecords = buildOrderLogisticsRecords(this.order);
         this.logisticsDialogVisible=true;
       }
     }

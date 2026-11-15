@@ -10,7 +10,7 @@ import com.fsb.pojo.DTO.AiMessagePersistRequest;
 import com.fsb.pojo.VO.AiMessageVO;
 import com.fsb.pojo.VO.AiConversationVO;
 import com.fsb.result.Result;
-import com.fsb.service.AiConversationService;
+import com.fsb.Service.AiConversationService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

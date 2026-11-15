@@ -181,8 +181,14 @@
         return formatDate(date, 'yyyy-MM-dd')
       },
       formatStatus(endTime){
+        if(endTime == null || endTime === '' || endTime === 'N/A'){
+          return '未过期';
+        }
         let now = new Date().getTime();
         let endDate = new Date(endTime);
+        if(Number.isNaN(endDate.getTime())){
+          return '未过期';
+        }
         if(endDate>now){
           return '未过期'
         }else{
@@ -250,4 +256,3 @@
     width: 203px;
   }
 </style>
-

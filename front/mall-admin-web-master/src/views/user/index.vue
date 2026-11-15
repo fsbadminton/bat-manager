@@ -221,15 +221,14 @@
 
 <script>
 import request from '@/utils/request'
-import { listUserProducts, listUserBrands, createUserOrder, listUserOrders, getUserOrderDetail, updateUserOrder, addUserReview, updateUserReview, deleteUserReview, listUserReviews } from '@/api/userLogin'
-import { fetchCategoryList } from '@/api/productCate'
+import { listUserProducts, listUserBrands, listUserCategories, createUserOrder, listUserOrders, getUserOrderDetail, updateUserOrder, addUserReview, updateUserReview, deleteUserReview, listUserReviews } from '@/api/userLogin'
 
 export default {
   name: 'UserDashboard',
   data() {
     return {
       activeTab: 'products',
-      listQuery: { keyword: null, pageNum: 1, pageSize: 5, productCategoryId: null, brandId: null },
+      listQuery: { name: null, pageNum: 1, pageSize: 5, categoryId: null, brandId: null },
       productList: [],
       totalProducts: 0,
       loadingProducts: false,
@@ -317,7 +316,7 @@ export default {
     .catch(() => { this.loadingProducts = false; });
     },
     resetProductFilters() {
-      this.listQuery = { keyword: null, pageNum: 1, pageSize: 5, productCategoryId: null, brandId: null }
+      this.listQuery = { name: null, pageNum: 1, pageSize: 5, categoryId: null, brandId: null }
       this.getProducts()
     },
     handleProductSizeChange(val) {
@@ -344,7 +343,7 @@ export default {
       })
     },
     loadCategoryOptions() {
-      fetchCategoryList({ pageNum: 1, pageSize: 100 }).then(response => {
+      listUserCategories().then(response => {
         let list = []
         if (response && response.data) {
           if (Array.isArray(response.data)) list = response.data
@@ -353,8 +352,9 @@ export default {
         this.productCateOptions = []
         for (let i = 0; i < list.length; i++) {
           const item = list[i]
-          if (typeof item === 'number' || typeof item === 'string') this.productCateOptions.push({ label: `分类${item}`, value: Number(item) || item })
-          else this.productCateOptions.push({ label: item.name || item.label, value: item.id || item.value })
+          if (item && item.id !== undefined && item.id !== null && item.name) {
+            this.productCateOptions.push({ label: item.name, value: item.id })
+          }
         }
       })
     },

@@ -1,8 +1,8 @@
-package com.fsb.service.impl;
+package com.fsb.Service.impl;
 
 import com.fsb.pojo.DTO.AiChatRequest;
 import com.fsb.auth.AiContextSignature;
-import com.fsb.service.AiChatService;
+import com.fsb.Service.AiChatService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;

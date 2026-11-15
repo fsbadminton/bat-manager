@@ -179,12 +179,13 @@
         <el-button type="primary" @click="handleCloseOrderConfirm">确 定</el-button>
       </span>
     </el-dialog>
-    <logistics-dialog v-model="logisticsDialogVisible"></logistics-dialog>
+    <logistics-dialog v-model="logisticsDialogVisible" :records="logisticsRecords"></logistics-dialog>
   </div>
 </template>
 <script>
   import {fetchList,closeOrder,deleteOrder} from '@/api/order'
   import {formatDate} from '@/utils/date';
+  import {buildOrderLogisticsRecords} from '@/utils/orderLogistics';
   import LogisticsDialog from '@/views/oms/order/components/logisticsDialog';
   const defaultListQuery = {
     pageNum: 1,
@@ -268,7 +269,8 @@
             value: 3
           }
         ],
-        logisticsDialogVisible:false
+        logisticsDialogVisible:false,
+        logisticsRecords: []
       }
     },
     created() {
@@ -376,6 +378,7 @@
         })
       },
       handleViewLogistics(index, row){
+        this.logisticsRecords = buildOrderLogisticsRecords(row);
         this.logisticsDialogVisible=true;
       },
       handleDeleteOrder(index, row){

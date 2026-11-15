@@ -4,7 +4,7 @@ import com.fsb.Mapper.SupportTicketMapper;
 import com.fsb.exception.AuthException;
 import com.fsb.pojo.DTO.AiTicketCreateRequest;
 import com.fsb.pojo.entity.SupportTicket;
-import com.fsb.service.impl.AiSupportTicketServiceImpl;
+import com.fsb.Service.impl.AiSupportTicketServiceImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

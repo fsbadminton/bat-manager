@@ -1,4 +1,4 @@
-package com.fsb.service.impl;
+package com.fsb.Service.impl;
 
 import com.fsb.Mapper.AiConversationMapper;
 import com.fsb.exception.AuthException;
@@ -8,7 +8,7 @@ import com.fsb.pojo.VO.AiDrawingVO;
 import com.fsb.pojo.VO.AiMessageVO;
 import com.fsb.pojo.entity.AiConversation;
 import com.fsb.pojo.entity.AiMessage;
-import com.fsb.service.AiConversationService;
+import com.fsb.Service.AiConversationService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -71,6 +71,16 @@ public class BrandServiceImpl implements BrandService {
      */
     @Override
     public void delete(Long id) {
+        Brand brand = brandMapper.getById(id);
+        if (brand == null) {
+            throw new IllegalArgumentException("品牌不存在");
+        }
+
+        // Products reference brands by name in the current schema. Keep the brand
+        // while any non-deleted product still points to it, regardless of sale status.
+        if (brandMapper.countRelatedProducts(brand.getName()) > 0) {
+            throw new IllegalArgumentException("删除失败，请先解绑该品牌对应的球拍");
+        }
         brandMapper.delete(id);
     }
 

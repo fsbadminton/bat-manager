@@ -32,6 +32,12 @@ public interface BrandMapper {
     @Delete("DELETE FROM brand WHERE id = #{id}")
     void delete(Long id);
 
+    /**
+     * Count non-deleted rackets that still reference this brand by name.
+     */
+    @Select("SELECT COUNT(*) FROM product WHERE brand_name = #{brandName} AND is_deleted = 0")
+    int countRelatedProducts(@Param("brandName") String brandName);
+
 
     @Select("SELECT * FROM brand WHERE id = #{id}")
     Brand getById(Long id);

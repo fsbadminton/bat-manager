@@ -195,7 +195,7 @@
         this.multipleSelection = val;
       },
       handleUpdate(index, row) {
-        this.$router.push({path: '/pms/updateBrand', query: {id: row.id}})
+        this.$router.push({ name: 'updateBrand', query: { id: row.id } })
       },
       handleDelete(index, row) {
         this.$confirm('是否要删除该品牌', '提示', {
@@ -210,6 +210,13 @@
               duration: 1000
             });
             this.getList();
+          }).catch(error => {
+            // request.js already displays API error messages. Keep this catch so a
+            // failed delete never falls through as a successful operation.
+            const data = error && error.response ? error.response.data : error
+            if (!data || !(data.msg || data.message)) {
+              this.$message.error('删除失败，请先解绑该品牌对应的球拍')
+            }
           });
         });
       },
@@ -317,7 +324,7 @@
         });
       },
       addBrand() {
-        this.$router.push({path: '/pms/addBrand'})
+        this.$router.push({ name: 'addBrand' })
       }
     }
   }
@@ -326,5 +333,3 @@
 
 
 </style>
-
-

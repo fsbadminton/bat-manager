@@ -1,4 +1,4 @@
-package com.fsb.service.impl;
+package com.fsb.Service.impl;
 
 import com.fsb.Mapper.SupportTicketMapper;
 import com.fsb.pojo.DTO.AiTicketCreateRequest;

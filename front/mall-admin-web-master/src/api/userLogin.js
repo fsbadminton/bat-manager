@@ -27,6 +27,13 @@ export function listUserBrands(params) {
   })
 }
 
+export function listUserCategories() {
+  return request({
+    url: '/user/product/categories',
+    method: 'get'
+  })
+}
+
 export function createUserOrder(data) {
   return request({
     url: '/user/order/create',
